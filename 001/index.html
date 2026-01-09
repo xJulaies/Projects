@@ -18,24 +18,62 @@
     <section>
       <div class="navbar bg-neutral-900 shadow-sm">
         <div class="flex grow">
-          <a class="btn btn-ghost text-xl">
+          <a
+            class="btn btn-ghost text-xl hover:border-1 hover:border-white hover:bg-neutral-900 focus:outline-none focus:ring-0 focus:border-1 focus:border-white"
+          >
             <img
               class="h-full"
               src="https://wallpapers.com/images/high/amazon-logo-black-background-xb9pdemosnjfz9ej.png"
               alt=""
             />
           </a>
-
-          <div class="flex grow">
-            <select class="bg-gray-300 rounded-l-box">
+          <div
+            class="flex flex-col btn btn-ghost h-10 p-1 text-white hover:border-1 hover:border-white hover:bg-neutral-900 focus:outline-none focus:ring-0 focus:border-1 focus:border-white"
+          >
+            <p class="text-xs">Deliver to</p>
+            <div class="flex items-center gap-1">
+              <i class="fa-solid fa-location-dot"></i>
+              <p class="font-bold">Germany</p>
+            </div>
+          </div>
+          <div class="flex items-center w-full">
+            <select class="bg-gray-300 w-auto max-w-xs h-10 ml-2 rounded-l-box">
               <option>All</option>
+              <!-- <option>All Departments</option>
+              <option>Arts & Crafts</option>
+              <option>Automotive</option>
+              <option>Baby</option>
+              <option>Beauty & Personal Care</option>
+              <option>Books</option>
+              <option>Boys' Fashion</option>
+              <option>Computers</option>
+              <option>Deals</option>
+              <option>Digital Music</option>
+              <option>Electronics</option>
+              <option>Girls' Fashion</option>
+              <option>Health & Household</option>
+              <option>Home & Kitchen</option>
+              <option>Industrial & Scientific</option>
+              <option>Kindle Store</option>
+              <option>Luggage</option>
+              <option>Men's Fashion</option>
+              <option>Movies & TV</option>
+              <option>Music, CDs & Vinyl</option>
+              <option>Pet Supplies</option>
+              <option>Prime Video</option>
+              <option>Software</option>
+              <option>Sports Outdoors</option>
+              <option>Tools Home Improvement</option>
+              <option>Toys Games</option>
+              <option>Video Games</option>
+              <option>Women's Fashion</option> -->
             </select>
             <input
               type="text"
               placeholder="Search Amazon"
-              class="input rounded-none w-full"
+              class="input rounded-none grow"
             />
-            <div class="content-center bg-yellow-400 p-2 rounded-r-box">
+            <div class="content-center bg-orange-300 p-2 rounded-r-box">
               <i class="fa-solid fa-magnifying-glass"></i>
             </div>
           </div>
