@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="night">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,6 +9,7 @@
       type="text/css"
     />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="src/javascript/toggle_theme.js" defer></script>
     <link
       href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css"
       rel="stylesheet"
@@ -18,14 +19,10 @@
   </head>
   <body>
     <header class="sticky top-0 z-50">
-      <div class="navbar bg-indigo-300 shadow-sm">
+      <div class="navbar bg-base-300 shadow-sm">
         <div class="navbar-start">
           <div class="dropdown">
-            <div
-              tabindex="0"
-              role="button"
-              class="btn btn-ghost lg:hidden bg-slate-900"
-            >
+            <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5"
@@ -43,7 +40,7 @@
             </div>
             <ul
               tabindex="-1"
-              class="menu menu-sm dropdown-content bg-indigo-300 rounded-box z-1 mt-3 w-52 p-2 shadow text-slate-900"
+              class="menu menu-sm dropdown-content rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
               <li>
                 <a>News</a>
@@ -77,16 +74,16 @@
             <img
               src="src/assets/bdoblack.png"
               alt="Black Desert Online Logo"
-              class="w-24"
+              class="w-24 logo"
             />
           </a>
         </div>
         <div class="navbar-center hidden lg:flex">
-          <ul class="menu menu-horizontal px-1 text-slate-900 gap-2">
+          <ul class="menu menu-horizontal px-1 gap-2">
             <li>
               <details>
-                <summary class="bg-slate-900 text-indigo-200">News</summary>
-                <ul class="p-2 bg-indigo-300 w-40 z-1">
+                <summary class="">News</summary>
+                <ul class="p-2 w-40 z-1">
                   <li>
                     <a href="src/assets/link/patchlight.html">Patchnotes</a>
                   </li>
@@ -97,8 +94,8 @@
             </li>
             <li>
               <details>
-                <summary class="bg-slate-900 text-indigo-200">Overview</summary>
-                <ul class="p-2 bg-indigo-300 w-40 z-1">
+                <summary class="">Overview</summary>
+                <ul class="p-2 w-40 z-1">
                   <li><a>Features</a></li>
                   <li><a>Classes</a></li>
                   <li><a>Guides</a></li>
@@ -107,8 +104,8 @@
             </li>
             <li>
               <details>
-                <summary class="bg-slate-900 text-indigo-200">Shop</summary>
-                <ul class="p-2 bg-indigo-300 w-40 z-1">
+                <summary class="">Shop</summary>
+                <ul class="p-2 w-40 z-1">
                   <li><a>Bundles</a></li>
                   <li><a>Coins</a></li>
                   <li><a>Merch</a></li>
@@ -117,8 +114,8 @@
             </li>
             <li>
               <details>
-                <summary class="bg-slate-900 text-indigo-200">Wiki</summary>
-                <ul class="p-2 bg-indigo-300 w-40 z-1">
+                <summary class="">Wiki</summary>
+                <ul class="p-2 w-40 z-1">
                   <li><a>Monsters</a></li>
                   <li><a>Systems</a></li>
                   <li><a>Quest & Story</a></li>
@@ -133,12 +130,13 @@
             placeholder="Search"
             class="input input-bordered w-24 md:w-auto"
           />
-          <a href="src/assets/link/dark.html"
-            ><img
-              class="w-8"
+          <button class="toggle-theme-btn">
+            <img
+              class="w-8 theme-icon"
               src="src/assets/darkmode.png"
               alt="dark half moon"
-          /></a>
+            />
+          </button>
           <a class="btn">Log in</a>
         </div>
       </div>
