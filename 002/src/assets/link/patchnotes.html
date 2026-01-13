@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="night">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,6 +9,7 @@
       type="text/css"
     />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="/002/src/javascript/toggle_theme.js" defer></script>
     <link
       href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css"
       rel="stylesheet"
@@ -18,14 +19,10 @@
   </head>
   <body>
     <header class="sticky top-0 z-50">
-      <div class="navbar bg-indigo-300 shadow-sm">
+      <div class="navbar bg-base-300 shadow-sm">
         <div class="navbar-start">
           <div class="dropdown">
-            <div
-              tabindex="0"
-              role="button"
-              class="btn btn-ghost lg:hidden bg-slate-900"
-            >
+            <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5"
@@ -43,12 +40,14 @@
             </div>
             <ul
               tabindex="-1"
-              class="menu menu-sm dropdown-content bg-indigo-300 rounded-box z-1 mt-3 w-52 p-2 shadow text-slate-900"
+              class="menu menu-sm dropdown-content rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
               <li>
                 <a>News</a>
                 <ul class="p-2">
-                  <li><a>Patchnotes</a></li>
+                  <li>
+                    <a href="/002/src/assets/link/patchnotes.html">Patchnotes</a>
+                  </li>
                   <li><a>Announcements</a></li>
                   <li><a>Events</a></li>
                 </ul>
@@ -71,22 +70,22 @@
               </li>
             </ul>
           </div>
-          <a href="/Tailwind_projects/002/light.html">
+          <a href="/002/index.html">
             <img
-              src="/Tailwind_projects/002/src/assets/bdoblack.png"
+              src="/002/src/assets/bdoblack.png"
               alt="Black Desert Online Logo"
-              class="w-24"
+              class="w-24 logo-img"
             />
           </a>
         </div>
         <div class="navbar-center hidden lg:flex">
-          <ul class="menu menu-horizontal px-1 text-slate-900 gap-2">
+          <ul class="menu menu-horizontal px-1 gap-2">
             <li>
               <details>
-                <summary class="bg-slate-900 text-indigo-200">News</summary>
-                <ul class="p-2 bg-indigo-300 w-40 z-1">
+                <summary class="">News</summary>
+                <ul class="p-2 w-40 z-1">
                   <li>
-                    <a href="src/assets/link/patchlight.html">Patchnotes</a>
+                    <a href="/002/src/assets/link/patchnotes.html">Patchnotes</a>
                   </li>
                   <li><a>Announcements</a></li>
                   <li><a>Events</a></li>
@@ -95,8 +94,8 @@
             </li>
             <li>
               <details>
-                <summary class="bg-slate-900 text-indigo-200">Overview</summary>
-                <ul class="p-2 bg-indigo-300 w-40 z-1">
+                <summary class="">Overview</summary>
+                <ul class="p-2 w-40 z-1">
                   <li><a>Features</a></li>
                   <li><a>Classes</a></li>
                   <li><a>Guides</a></li>
@@ -105,8 +104,8 @@
             </li>
             <li>
               <details>
-                <summary class="bg-slate-900 text-indigo-200">Shop</summary>
-                <ul class="p-2 bg-indigo-300 w-40 z-1">
+                <summary class="">Shop</summary>
+                <ul class="p-2 w-40 z-1">
                   <li><a>Bundles</a></li>
                   <li><a>Coins</a></li>
                   <li><a>Merch</a></li>
@@ -115,8 +114,8 @@
             </li>
             <li>
               <details>
-                <summary class="bg-slate-900 text-indigo-200">Wiki</summary>
-                <ul class="p-2 bg-indigo-300 w-40 z-1">
+                <summary class="">Wiki</summary>
+                <ul class="p-2 w-40 z-1">
                   <li><a>Monsters</a></li>
                   <li><a>Systems</a></li>
                   <li><a>Quest & Story</a></li>
@@ -131,19 +130,20 @@
             placeholder="Search"
             class="input input-bordered w-24 md:w-auto"
           />
-          <a href="/Tailwind_projects/002/src/assets/link/patchdark.html"
-            ><img
-              class="w-8"
-              src="/Tailwind_projects/002/src/assets/darkmode.png"
+          <button class="toggle-theme-btn">
+            <img
+              class="w-8 theme-icon"
+              src="/002/src/assets/darkmode.png"
               alt="dark half moon"
-          /></a>
+            />
+          </button>
           <a class="btn">Log in</a>
         </div>
       </div>
     </header>
-    <main class="bg-indigo-300">
+    <main>
       <a href="">
-        <div role="alert" class="alert rounded-none flex justify-center">
+        <div role="alert" class="alert flex justify-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -165,7 +165,24 @@
           >
         </div></a
       >
-      <div class="card w-130 bg-indigo-300 text-slate-900 card-lg shadow-sm">
+      <div
+        class="hero min-h-screen"
+        style="
+          background-image: url(https://s1.pearlcdn.com/NAEU/Upload/Manager/MetaTag/88e6db403e820251218102309286.jpg?v=639032961509082420);
+        "
+      >
+        <div class="hero-overlay"></div>
+        <div class="hero-content text-neutral-content text-center">
+          <div class="max-w-md">
+            <h1 class="mb-5 text-5xl font-bold">New Class - Seraph</h1>
+            <p class="mb-5 italic text-xl">
+              "Enough prayers... Let my sword answer!"
+            </p>
+            <button class="btn btn-primary">Play now!</button>
+          </div>
+        </div>
+      </div>
+       <div class="card w-130 bg-bas-300 card-lg shadow-sm">
         <div class="card-body">
           <h2 class="card-title">Patchnotes from 09.01.2026</h2>
           <h3>Big masive wall of Patchnotes</h3>
@@ -186,7 +203,7 @@
           <div class="justify-end card-actions"></div>
         </div>
       </div>
-      <div class="card w-130 bg-indigo-300 text-slate-900 card-lg shadow-sm">
+      <div class="card w-130 bg-bas-300 card-lg shadow-sm">
         <div class="card-body">
           <h2 class="card-title">Patchnotes from 01.01.2025</h2>
           <h3>Big masive wall of Patchnotes</h3>
@@ -207,5 +224,7 @@
         </div>
       </div>
     </main>
+    </main>
   </body>
 </html>
+
