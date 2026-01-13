@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script
+      src="/Tailwind_projects/002/src/javascript/toggle_theme.js"
+      defer
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <header class="sticky top-0 z-50">
+      <div class="navbar bg-base-300 shadow-sm">
+        <div class="navbar-start">
+          <div class="dropdown">
+            <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
+            </div>
+            <ul
+              tabindex="-1"
+              class="menu menu-sm bg-base-300 dropdown-content rounded-box z-1 mt-3 w-52 p-2 shadow"
+            >
+              <li>
+                <a>News</a>
+                <ul class="p-2">
+                  <li>
+                    <a
+                      href="/Tailwind_projects/002/src/assets/link/patchnotes.html"
+                      >Patchnotes</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/Tailwind_projects/002/src/assets/link/announcements.html"
+                      >Announcements</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/Tailwind_projects/002/src/assets/link/patchnotes.html"
+                      >Events</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a>Overview</a>
+                <ul class="p-2">
+                  <li>
+                    <a
+                      href="/Tailwind_projects/002/src/assets/link/patchnotes.html"
+                      >Features</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/Tailwind_projects/002/src/assets/link/patchnotes.html"
+                      >Classes</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/Tailwind_projects/002/src/assets/link/patchnotes.html"
+                      >Guides</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="/Tailwind_projects/002/src/assets/link/patchnotes.html"
+                  >Shop</a
+                >
+                <ul class="p-2">
+                  <li>
+                    <a
+                      href="/Tailwind_projects/002/src/assets/link/bundles.html"
+                      >Bundles</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/Tailwind_projects/002/src/assets/link/patchnotes.html"
+                      >Coins</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/Tailwind_projects/002/src/assets/link/patchnotes.html"
+                      >Merch</a
+                    >
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <a href="/Tailwind_projects/002/index.html">
+            <img
+              src="/Tailwind_projects/002/src/assets/images/bdoblack.png"
+              alt="Black Desert Online Logo"
+              class="w-24 logo-img"
+            />
+          </a>
+        </div>
+        <div class="navbar-center hidden lg:flex">
+          <ul class="menu menu-horizontal px-1 gap-2">
+            <li>
+              <details>
+                <summary class="">News</summary>
+                <ul class="p-2 w-40 z-1">
+                  <li>
+                    <a
+                      href="/Tailwind_projects/002/src/assets/link/patchnotes.html"
+                      >Patchnotes</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/Tailwind_projects/002/src/assets/link/patchnotes.html"
+                      >Announcements</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/Tailwind_projects/002/src/assets/link/patchnotes.html"
+                      >Events</a
+                    >
+                  </li>
+                </ul>
+              </details>
+            </li>
+            <li>
+              <details>
+                <summary class="">Overview</summary>
+                <ul class="p-2 w-40 z-1">
+                  <li>
+                    <a
+                      href="/Tailwind_projects/002/src/assets/link/patchnotes.html"
+                      >Features</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/Tailwind_projects/002/src/assets/link/patchnotes.html"
+                      >Classes</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/Tailwind_projects/002/src/assets/link/patchnotes.html"
+                      >Guides</a
+                    >
+                  </li>
+                </ul>
+              </details>
+            </li>
+            <li>
+              <details>
+                <summary class="">Shop</summary>
+                <ul class="p-2 w-40 z-1">
+                  <li>
+                    <a
+                      href="/Tailwind_projects/002/src/assets/link/bundles.html"
+                      >Bundles</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/Tailwind_projects/002/src/assets/link/patchnotes.html"
+                      >Coins</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/Tailwind_projects/002/src/assets/link/patchnotes.html"
+                      >Merch</a
+                    >
+                  </li>
+                </ul>
+              </details>
+            </li>
+            <li>
+              <details>
+                <summary class="">Wiki</summary>
+                <ul class="p-2 w-40 z-1">
+                  <li>
+                    <a
+                      href="/Tailwind_projects/002/src/assets/link/patchnotes.html"
+                      >Monsters</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/Tailwind_projects/002/src/assets/link/patchnotes.html"
+                      >Systems</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/Tailwind_projects/002/src/assets/link/patchnotes.html"
+                      >Quest & Story</a
+                    >
+                  </li>
+                </ul>
+              </details>
+            </li>
+          </ul>
+        </div>
+        <div class="navbar-end gap-2">
+          <input
+            type="text"
+            placeholder="Search"
+            class="input input-bordered w-24 md:w-auto"
+          />
+          <button class="toggle-theme-btn">
+            <img
+              class="w-8 theme-icon"
+              src="/Tailwind_projects/002/src/assets/images/darkmode.png"
+              alt="dark half moon"
+            />
+          </button>
+          <a class="btn">Log in</a>
+        </div>
+      </div>
+    </header>
+    <main>
+      <a href="/Tailwind_projects/002/src/assets/link/bundles.html">
+        <div role="alert" class="alert flex justify-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            class="h-6 w-6 shrink-0 stroke-current"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            ></path>
+          </svg>
+          <span class="text-2xl flex gap-4 items-center"
+            >On Sale: Traveler Edition
+            <div class="badge badge-accent border-red-900 border-3">
+              90% OFF
+            </div></span
+          >
+        </div></a
+      >
+      <section
+        class="flex flex-wrap justify-center gap-8 mx-16 md:mx-32 px-16 py-64 bg-[url(/Tailwind_projects/002/src/assets/images/treasure.png)] bg-auto md:bg-cover"
+      >
+        <div class="card w-96 bg-base-100 shadow-sm">
+          <div class="card-body">
+            <span class="badge badge-xs badge-warning">For Newbies</span>
+            <div class="flex justify-between">
+              <h2 class="text-3xl font-bold">Explorer Edition</h2>
+              <span class="text-xl">$19.99</span>
+            </div>
+            <ul class="mt-6 flex flex-col gap-2 text-xs">
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-4 me-2 inline-block text-success"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span>Value Pack (15 days)</span>
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-4 me-2 inline-block text-success"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span>Blessing of Kamasylvia (15 days)</span>
+              </li>
+
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-4 me-2 inline-block text-success"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span>Book of old Moon (15 days)</span>
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-4 me-2 inline-block text-success"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span>[Event] Classic Outfitbox</span>
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-4 me-2 inline-block text-success"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span>1000 Pearls</span>
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-4 me-2 inline-block text-success"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span>[Title] Explorer</span>
+              </li>
+              <li class="opacity-50">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-4 me-2 inline-block text-base-content/50"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span class="line-through">Choose your Tier 4 Petbox</span>
+              </li>
+              <li class="opacity-50">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-4 me-2 inline-block text-base-content/50"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span class="line-through">Inventory +16 Expansion Coupon</span>
+              </li>
+              <li class="opacity-50">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-4 me-2 inline-block text-base-content/50"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span class="line-through"
+                  >[Event]Choose your Horse Emblem (Dream)</span
+                >
+              </li>
+              <li class="opacity-50">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-4 me-2 inline-block text-base-content/50"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span class="line-through">Choose your Horse Gear Set</span>
+              </li>
+            </ul>
+            <div class="mt-6">
+              <button class="btn btn-primary btn-block">Buy now!</button>
+            </div>
+          </div>
+        </div>
+        <div class="card w-96 bg-base-100 shadow-sm">
+          <div class="card-body">
+            <span class="badge badge-xs badge-warning">Most Popular</span>
+            <div class="flex justify-between">
+              <h2 class="text-3xl font-bold">Traveler Edition</h2>
+              <span class="text-xl line-through">$39.99</span>
+              <span class="text-2xl rounded-full text-yellow-400">$3.99</span>
+            </div>
+            <ul class="mt-6 flex flex-col gap-2 text-xs">
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-4 me-2 inline-block text-success"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span>Value Pack (15 days)</span>
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-4 me-2 inline-block text-success"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span>Blessing of Kamasylvia (15 days)</span>
+              </li>
+
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-4 me-2 inline-block text-success"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span>Book of old Moon (15 days)</span>
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-4 me-2 inline-block text-success"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span>[Event] Classic Outfitbox</span>
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-4 me-2 inline-block text-success"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span>2000 Pearls</span>
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-4 me-2 inline-block text-success"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span>[Title] Traveler</span>
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-4 me-2 inline-block text-success"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span>Choose your Tier 4 Petbox</span>
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-4 me-2 inline-block text-success"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span>Inventory +16 Expansion Coupon</span>
+              </li>
+              <li class="opacity-50">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-4 me-2 inline-block text-base-content/50"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span class="line-through"
+                  >[Event] Choose your Horse Emblem (Dream)</span
+                >
+              </li>
+              <li class="opacity-50">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-4 me-2 inline-block text-base-content/50"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span class="line-through">Choose your Horse Gear Set</span>
+              </li>
+            </ul>
+            <div class="mt-6">
+              <button class="btn btn-primary btn-block">Buy now!</button>
+            </div>
+          </div>
+        </div>
+        <div class="card w-96 bg-base-100 shadow-sm">
+          <div class="card-body">
+            <span class="badge badge-xs badge-warning">Best Value</span>
+            <div class="flex justify-between">
+              <h2 class="text-3xl font-bold">Adventurer Edition</h2>
+              <span class="text-xl">$59.99</span>
+            </div>
+            <ul class="mt-6 flex flex-col gap-2 text-xs">
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-4 me-2 inline-block text-success"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span>Value Pack (15 days)</span>
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-4 me-2 inline-block text-success"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span>Blessing of Kamasylvia (15 days)</span>
+              </li>
+
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-4 me-2 inline-block text-success"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span>Book of old Moon (15 days)</span>
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-4 me-2 inline-block text-success"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span>[Event] Classic Outfitbox</span>
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-4 me-2 inline-block text-success"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span>4000 Pearls</span>
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-4 me-2 inline-block text-success"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span>[Title] Adventurer</span>
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-4 me-2 inline-block text-success"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span>Choose your Tier 4 Petbox</span>
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-4 me-2 inline-block text-success"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span>Inventory +16 Expansion Coupon</span>
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-4 me-2 inline-block text-success"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span>[Event] Choose your Horse Emblem (Dream)</span>
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-4 me-2 inline-block text-success"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <span>Choose your Horse Gear Set</span>
+              </li>
+            </ul>
+            <div class="mt-6">
+              <button class="btn btn-primary btn-block">Buy now!</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
