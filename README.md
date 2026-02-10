@@ -1,3 +1,5 @@
-# Tailwind_projects
+# Projects
 
-Practice DaisyUI-Tailwind
+Practice
+- DaisyUI/Tailwind
+- javascript
