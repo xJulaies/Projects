@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="simpleCalc.js" defer></script>
+    <script src="Calc.js" defer></script>
+  </head>
+  <body>
+    <header class="flex justify-center">
+      <h1>My Calculator</h1>
+    </header>
+    <section class="flex justify-center p-8 text-2xl">
+      <div
+        class="calculator flex flex-wrap justify-center p-2 w-94 h-162 bg-slate-600"
+      >
+        <div
+          id="history"
+          class="flex justify-end pr-2 w-86 h-10 bg-blue-100 text-xl"
+        ></div>
+        <div
+          class="output flex items-center justify-end pr-2 w-86 h-15 text-4xl bg-blue-100"
+          id="display"
+        ></div>
+        <div class="numpad flex flex-wrap justify-center p-2 gap-2 text-center">
+          <div class="w-20 h-20 bg-blue-300 flex items-center justify-center">
+            <button class="w-20 h-20">%</button>
+          </div>
+          <div class="w-20 h-20 bg-blue-300 flex items-center justify-center">
+            <button class="w-20 h-20">CE</button>
+          </div>
+          <div class="w-20 h-20 bg-blue-300 flex items-center justify-center">
+            <button class="w-20 h-20">C</button>
+          </div>
+          <div class="w-20 h-20 bg-blue-300 flex items-center justify-center">
+            <button class="w-20 h-20">Del</button>
+          </div>
+          <div class="w-20 h-20 bg-blue-300 flex items-center justify-center">
+            <button class="w-20 h-20">1/x</button>
+          </div>
+          <div class="w-20 h-20 bg-blue-300 flex items-center justify-center">
+            <button class="w-20 h-20">x²</button>
+          </div>
+          <div class="w-20 h-20 bg-blue-300 flex items-center justify-center">
+            <button class="w-20 h-20">√x</button>
+          </div>
+          <div class="w-20 h-20 bg-indigo-300 flex items-center justify-center">
+            <button class="w-20 h-20">/</button>
+          </div>
+          <div class="w-20 h-20 bg-blue-200 flex items-center justify-center">
+            <button class="w-20 h-20">7</button>
+          </div>
+          <div class="w-20 h-20 bg-blue-200 flex items-center justify-center">
+            <button class="w-20 h-20">8</button>
+          </div>
+          <div class="w-20 h-20 bg-blue-200 flex items-center justify-center">
+            <button class="w-20 h-20">9</button>
+          </div>
+          <div class="w-20 h-20 bg-indigo-300 flex items-center justify-center">
+            <button class="w-20 h-20">*</button>
+          </div>
+          <div class="w-20 h-20 bg-blue-200 flex items-center justify-center">
+            <button class="w-20 h-20">4</button>
+          </div>
+          <div class="w-20 h-20 bg-blue-200 flex items-center justify-center">
+            <button class="w-20 h-20">5</button>
+          </div>
+          <div class="w-20 h-20 bg-blue-200 flex items-center justify-center">
+            <button class="w-20 h-20">6</button>
+          </div>
+          <div class="w-20 h-20 bg-indigo-300 flex items-center justify-center">
+            <button class="w-20 h-20">-</button>
+          </div>
+          <div class="w-20 h-20 bg-blue-200 flex items-center justify-center">
+            <button class="w-20 h-20">1</button>
+          </div>
+          <div class="w-20 h-20 bg-blue-200 flex items-center justify-center">
+            <button class="w-20 h-20">2</button>
+          </div>
+          <div class="w-20 h-20 bg-blue-200 flex items-center justify-center">
+            <button class="w-20 h-20">3</button>
+          </div>
+          <div class="w-20 h-20 bg-indigo-300 flex items-center justify-center">
+            <button class="w-20 h-20">+</button>
+          </div>
+          <div class="w-20 h-20 bg-blue-200 flex items-center justify-center">
+            <button class="w-20 h-20">+/-</button>
+          </div>
+          <div class="w-20 h-20 bg-blue-200 flex items-center justify-center">
+            <button class="w-20 h-20">0</button>
+          </div>
+          <div class="w-20 h-20 bg-blue-200 flex items-center justify-center">
+            <button class="w-20 h-20">,</button>
+          </div>
+          <div class="w-20 h-20 bg-gray-300 flex items-center justify-center">
+            <button class="w-20 h-20">=</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
