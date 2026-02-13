@@ -38,6 +38,5 @@ export function createNavbar() {
       });
     }
     navbarElement.append(li);
-    console.log("navbar test");
   });
 }
