@@ -4,6 +4,7 @@ import { userRouter } from "./features/users/users.routes";
 import { createAnswer } from "./lib/createAnswer";
 import { createError, TCreateError } from "./lib/createError";
 import connectDB from "./config/database.config";
+import { taskRouter } from "./features/todo/todo.routes";
 
 connectDB();
 
@@ -15,6 +16,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/api", userRouter);
+app.use("/api", taskRouter);
 
 app.use((req, res, next) => {
   next(createError(404, "Not here, not found"));

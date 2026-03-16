@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { UserModel } from "./users.model";
-import { IUser } from "./users.model";
+import { UserModel, IUser } from "./users.model";
 import { createAnswer } from "../../lib/createAnswer";
 import { createError } from "../../lib/createError";
 
@@ -12,9 +11,9 @@ export const GET_AllUsers = async (
   try {
     const userData: IUser[] = await UserModel.find();
 
-    res.status(200).json(createAnswer(200, "hier sind alle User", [userData]));
+    res.status(200).json(createAnswer(200, "All user data", [userData]));
   } catch (error) {
-    next(createError);
+    next(createError(500, "Cannot load user data"));
   }
 };
 
@@ -46,9 +45,7 @@ export const POST_NewUser = async (
 
     res
       .status(201)
-      .json(
-        createAnswer(201, "Neuer Benutzer erfolgreich angelegt", [newUserData]),
-      );
+      .json(createAnswer(201, "New user successfully created", [newUserData]));
   } catch (error) {
     next(createError(500, "cannot create User"));
   }
@@ -62,7 +59,6 @@ export const PUT_UpdateUser = async (
   try {
     const { email } = req.params;
     const updateData = req.body;
-    console.log(`Update Email: ${email}`, updateData);
 
     const updatedUser = await UserModel.findOneAndUpdate(
       { email },
@@ -78,7 +74,7 @@ export const PUT_UpdateUser = async (
     }
     res
       .status(200)
-      .json(createAnswer(200, "User erfolgreich aktualisiert", [updatedUser]));
+      .json(createAnswer(200, "User successfully updated", [updatedUser]));
   } catch (error) {
     next(createError(500, "update failed"));
   }
