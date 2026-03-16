@@ -4,4 +4,6 @@ Practice
 
 - DaisyUI/Tailwind
 - javascript
-  -Frontend/Backend
+  - Frontend/Backend
+- typescript
+  - Backend
