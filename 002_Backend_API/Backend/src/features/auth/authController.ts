@@ -74,6 +74,7 @@ export const POST_loginController = async (req: Request, res: Response) => {
       ]),
     );
   } catch (error) {
+    console.error("POST_loginController error:", error);
     return res.status(500).json(createAnswer(500, "internal server error", []));
   }
 };
