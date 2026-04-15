@@ -10,4 +10,4 @@ Features:
 - Neon Datenbank mit Prisma initialisiert
 - Funktionales Frontend um Features in eigener UI zu testen.
 
-Fokus auf sauberer Struktur, sinnvolle Auslagerung.
+Fokus auf sauberer Struktur, sinnvolle Auslagerung. Agentic Coding.
