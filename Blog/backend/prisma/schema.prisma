@@ -13,43 +13,30 @@ datasource db {
   
 }
 
-model User {
-  id          String      @id @default(cuid())
-  clerkId     String      @unique
-  username    String      @unique
-  email       String      @unique
-  createdAt   DateTime    @default(now())
-
-  posts       Post[]
-  comments    Comment[]
-}
-
 model Post {
-  id          String      @id @default(cuid())
-  title       String
-  content     String 
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-  
-  authorId    String
-  author      User        @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  id             String    @id @default(cuid())
+  title          String
+  content        String
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  authorClerkId  String
+  authorUsername String
 
-  comments      Comment[]
+  comments       Comment[]
 
-@@index([authorId])
-
+  @@index([authorClerkId])
 }
 
 model Comment {
-  id          String      @id @default(cuid())
-  text        String
-  createdAt   DateTime    @default(now())
-  postId      String
-  authorId    String
-
-  post        Post        @relation(fields: [postId], references: [id], onDelete: Cascade)
-  author      User        @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  id             String    @id @default(cuid())
+  text           String
+  createdAt      DateTime  @default(now())
+  postId         String
+  authorClerkId  String
+  authorUsername String
   
+  post           Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
+
   @@index([postId])
-  @@index([authorId])
+  @@index([authorClerkId])
 }
