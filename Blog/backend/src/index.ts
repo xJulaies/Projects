@@ -4,6 +4,8 @@ import { createAnswer } from "./lib/createAnswer";
 import { createError, TCreateError } from "./lib/createError";
 import { postRouter } from "./features/posts/posts.routes";
 import { clerkMiddleware } from "@clerk/express";
+import { commentRouter } from "./features/comments/comments.routes";
+import { userRouter } from "./features/users/users.routes";
 
 const app = express();
 const BASE_URL = settings.BASE_URL;
@@ -19,6 +21,8 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use(`${BASE_URL}/posts`, postRouter);
+app.use(`${BASE_URL}`, commentRouter);
+app.use(`${BASE_URL}/users`, userRouter);
 
 app.use((req, res, next) => {
   return next(createError(404, "Not here, not found"));

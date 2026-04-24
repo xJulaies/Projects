@@ -31,7 +31,7 @@ export const POST_post: RequestHandler = async (req, res, next) => {
       },
     });
 
-    return res.status(201).json(post);
+    res.status(201).json(createAnswer(201, "Post created", [post]));
   } catch (error) {
     return next(createError(500, "Failed to create post"));
   }

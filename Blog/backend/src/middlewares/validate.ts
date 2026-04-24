@@ -21,8 +21,13 @@ export function validator(
 ): RequestHandler {
   return (req, _res, next) => {
     try {
-      const parsedData = zodSchema.parse(req[target]);
-      req[target] = parsedData;
+      if (target === "headers") {
+        zodSchema.parse(req.headers);
+      } else {
+        const parsedData = zodSchema.parse(req[target]);
+        req[target] = parsedData;
+      }
+
       next();
     } catch (error: unknown) {
       if (error instanceof ZodError) {

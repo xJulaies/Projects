@@ -1,5 +1,5 @@
 import { z } from "zod";
 
-export const userIdParamsSchema = z.object({
-  id: z.string().min(1, "User id is required"),
+export const usernameParamsSchema = z.object({
+  username: z.string().min(1, "Username is required"),
 });

@@ -1,39 +1,51 @@
-// import { RequestHandler } from "express";
-// import { createAnswer } from "../../lib/createAnswer";
-// import { createError } from "../../lib/createError";
-// import { prisma } from "../../database";
-// import { TuserIdParams } from "../../lib/types/types";
+import { RequestHandler } from "express";
+import { prisma } from "../../database";
+import { createAnswer } from "../../lib/createAnswer";
+import { createError } from "../../lib/createError";
+import { TUsernameParams } from "../../lib/types/types";
 
-// export const GET_AllUsers: RequestHandler = async (_req, res, next) => {
-//   try {
-//     const users = await prisma.user.findMany();
+export const GET_PostsByUsername: RequestHandler<TUsernameParams> = async (
+  req,
+  res,
+  next,
+) => {
+  try {
+    const { username } = req.params;
 
-//     res.status(200).json(createAnswer(200, "All user data", users));
-//   } catch (error) {
-//     next(createError(500, "Cannot load user data"));
-//   }
-// };
+    const posts = await prisma.post.findMany({
+      where: { authorUsername: username },
+      orderBy: { createdAt: "desc" },
+    });
 
-// export const GET_UsersById: RequestHandler<TuserIdParams> = async (
-//   req,
-//   res,
-//   next,
-// ) => {
-//   try {
-//     const { id } = req.params;
+    res.status(200).json(createAnswer(200, "Posts by username", posts));
+  } catch (error) {
+    next(createError(500, "Cannot load posts by username"));
+  }
+};
 
-//     const user = await prisma.user.findUnique({
-//       where: { id },
-//     });
+export const GET_CommentsByUsername: RequestHandler<TUsernameParams> = async (
+  req,
+  res,
+  next,
+) => {
+  try {
+    const { username } = req.params;
 
-//     if (!user) {
-//       return next(createError(404, "User not found"));
-//     }
+    const comments = await prisma.comment.findMany({
+      where: { authorUsername: username },
+      include: {
+        post: {
+          select: {
+            id: true,
+            title: true,
+          },
+        },
+      },
+      orderBy: { createdAt: "desc" },
+    });
 
-//     res.status(200).json(createAnswer(200, "User by ID", [user]));
-//   } catch (error) {
-//     next(createError(500, "Cannot load user data"));
-//   }
-// };
-
-// export const POST_User: RequestHandler = async (req, res, next) => {};
+    res.status(200).json(createAnswer(200, "Comments by username", comments));
+  } catch (error) {
+    next(createError(500, "Cannot load comments by username"));
+  }
+};
