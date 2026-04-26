@@ -172,13 +172,13 @@ async function loadProfile(username) {
 
 function buildPostCard(post, compact = false) {
   return `
-    <article class="rounded-card border border-stone-900/8 bg-paper-strong p-5 shadow-soft transition-transform duration-300 hover:-translate-y-1">
+    <article class="rounded-card border border-stone-900/8 bg-paper-strong p-4 shadow-soft transition-transform duration-300 hover:-translate-y-1 sm:p-5">
       <a class="grid gap-2" href="#post/${post.id}">
         <p class="text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-accent">${escapeHtml(post.authorUsername)}</p>
-        <h3 class="font-display text-[1.35rem] leading-[1.05] text-ink ${compact ? "line-clamp-2" : ""}">
+        <h3 class="font-display text-[1.2rem] leading-[1.08] text-ink sm:text-[1.35rem] ${compact ? "line-clamp-2" : ""}">
           ${escapeHtml(post.title)}
         </h3>
-        <p class="text-[0.98rem] leading-7 text-stone-700 ${compact ? "line-clamp-3" : ""}">
+        <p class="text-[0.95rem] leading-6 text-stone-700 sm:text-[0.98rem] sm:leading-7 ${compact ? "line-clamp-3" : ""}">
           ${escapeHtml(post.content)}
         </p>
       </a>
@@ -194,14 +194,14 @@ function buildPostCard(post, compact = false) {
 
 function buildCommentItem(comment, withPost = false) {
   return `
-    <article class="rounded-[1.2rem] border border-stone-900/8 bg-paper-strong p-5 shadow-soft">
+    <article class="rounded-[1.2rem] border border-stone-900/8 bg-paper-strong p-4 shadow-soft sm:p-5">
       <div class="mb-3 flex flex-wrap items-center justify-between gap-3 text-sm text-muted">
         <button class="font-medium text-accent-deep hover:underline" data-profile-link="${escapeHtml(comment.authorUsername)}" type="button">
           @${escapeHtml(comment.authorUsername)}
         </button>
         <span>${formatDate(comment.createdAt)}</span>
       </div>
-      <p class="text-[0.98rem] leading-7 text-stone-700">${escapeHtml(comment.text)}</p>
+      <p class="text-[0.95rem] leading-6 text-stone-700 sm:text-[0.98rem] sm:leading-7">${escapeHtml(comment.text)}</p>
       ${
         withPost && comment.post
           ? `<a class="mt-4 inline-block text-sm font-medium text-accent-deep hover:underline" href="#post/${comment.post.id}">Zum Post: ${escapeHtml(comment.post.title)}</a>`
@@ -215,14 +215,14 @@ function renderSidebar(clerk) {
   const signedIn = clerk?.isSignedIn;
 
   return `
-    <aside class="sticky top-6 self-start rounded-shell border border-stone-900/10 bg-[rgba(255,252,246,0.92)] p-7 shadow-float backdrop-blur xl:min-h-[calc(100vh-3rem)]">
+    <aside class="min-w-0 self-start rounded-shell border border-stone-900/10 bg-[rgba(255,252,246,0.92)] p-5 shadow-float backdrop-blur sm:p-6 xl:sticky xl:top-6 xl:min-h-[calc(100vh-3rem)] xl:p-7">
       <div class="space-y-5">
         <div class="space-y-3">
           <p class="text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-accent">Blog</p>
-          <h1 class="font-display text-5xl leading-[0.92] text-ink">
+          <h1 class="font-display text-[2.6rem] leading-[0.92] text-ink sm:text-[3.25rem] xl:text-5xl">
             Stories, Kommentare und Profile in einer klaren Oberfläche.
           </h1>
-          <p class="text-[0.98rem] leading-7 text-muted">
+          <p class="text-[0.95rem] leading-6 text-muted sm:text-[0.98rem] sm:leading-7">
             Das Frontend spricht mit dem Clerk-geschützten Backend und zeigt Feed,
             Detailseiten und Profile in einer einfachen Struktur.
           </p>
@@ -238,7 +238,7 @@ function renderSidebar(clerk) {
           ${signedIn ? `<div id="user-button-slot" class="min-h-0"></div>` : ""}
         </div>
 
-        <nav class="grid gap-2 text-sm font-semibold text-accent-deep">
+        <nav class="grid gap-2 text-sm font-semibold text-accent-deep sm:grid-cols-2 xl:grid-cols-1">
           <a class="rounded-full bg-accent-soft px-4 py-3 transition-colors hover:bg-orange-200" href="#">Alle Posts</a>
           ${
             signedIn && clerk.user?.username
@@ -254,9 +254,9 @@ function renderSidebar(clerk) {
 function renderComposer(clerk) {
   if (!clerk?.isSignedIn) {
     return `
-      <section class="rounded-panel border border-stone-900/8 bg-white/70 p-6 shadow-soft">
-        <h2 class="font-display text-3xl text-ink">Neuen Post schreiben</h2>
-        <p class="mt-3 text-[0.98rem] leading-7 text-muted">
+      <section class="min-w-0 rounded-panel border border-stone-900/8 bg-white/70 p-5 shadow-soft sm:p-6">
+        <h2 class="font-display text-[2rem] text-ink sm:text-3xl">Neuen Post schreiben</h2>
+        <p class="mt-3 text-[0.95rem] leading-6 text-muted sm:text-[0.98rem] sm:leading-7">
           Melde dich an, um eigene Posts zu erstellen.
         </p>
       </section>
@@ -264,11 +264,11 @@ function renderComposer(clerk) {
   }
 
   return `
-    <section class="rounded-panel border border-stone-900/8 bg-[rgba(255,252,246,0.94)] p-6 shadow-soft">
+    <section class="min-w-0 rounded-panel border border-stone-900/8 bg-[rgba(255,252,246,0.94)] p-5 shadow-soft sm:p-6">
       <div class="mb-6 flex flex-wrap items-start justify-between gap-4">
         <div>
           <p class="text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-accent">Create</p>
-          <h2 class="font-display text-3xl text-ink">Neuen Post schreiben</h2>
+          <h2 class="font-display text-[2rem] text-ink sm:text-3xl">Neuen Post schreiben</h2>
         </div>
         <span class="rounded-full bg-accent-soft px-3 py-2 text-xs font-bold uppercase tracking-[0.15em] text-accent-deep">
           ${escapeHtml(clerk.user?.username || "user")}
@@ -284,7 +284,7 @@ function renderComposer(clerk) {
           <span>Inhalt</span>
           <textarea class="min-h-36 rounded-2xl border border-stone-900/12 bg-white px-4 py-3 text-base font-normal leading-7 text-stone-900 outline-none transition focus:border-accent focus:ring-4 focus:ring-orange-100" name="content" rows="5" maxlength="10000" placeholder="Was möchtest du teilen?" required></textarea>
         </label>
-        <button class="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-accent to-accent-deep px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:brightness-105 disabled:cursor-progress disabled:opacity-70" type="submit" ${state.submittingPost ? "disabled" : ""}>
+        <button class="inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-accent to-accent-deep px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:brightness-105 disabled:cursor-progress disabled:opacity-70 sm:w-auto" type="submit" ${state.submittingPost ? "disabled" : ""}>
           ${state.submittingPost ? "Speichert..." : "Post veröffentlichen"}
         </button>
       </form>
@@ -299,20 +299,20 @@ function renderHomeView(clerk) {
         clerk?.isSignedIn
           ? renderComposer(clerk)
           : `
-            <section class="rounded-panel border border-stone-900/8 bg-[rgba(255,252,246,0.94)] p-6 shadow-soft">
-              <div class="flex min-h-[42rem] flex-col justify-between gap-10">
+            <section class="min-w-0 rounded-panel border border-stone-900/8 bg-[rgba(255,252,246,0.94)] p-5 shadow-soft sm:p-6">
+              <div class="flex min-h-[36rem] flex-col justify-between gap-8 sm:min-h-[42rem] sm:gap-10">
                 <div class="max-w-md space-y-4">
                   <p class="text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-accent">Sign in</p>
-                  <h2 class="font-display text-4xl leading-tight text-ink">
+                  <h2 class="font-display text-[2.2rem] leading-tight text-ink sm:text-4xl">
                     Melde dich an, um selbst zu schreiben und mitzudiskutieren.
                   </h2>
-                  <p class="text-[0.98rem] leading-7 text-muted">
+                  <p class="text-[0.95rem] leading-6 text-muted sm:text-[0.98rem] sm:leading-7">
                     Lesen ist öffentlich. Sobald du eingeloggt bist, kannst du eigene Posts
                     veröffentlichen, Kommentare schreiben und dein Profil direkt aus dem Feed aufrufen.
                   </p>
                 </div>
 
-                <div class="mx-auto flex min-h-[26rem] w-full max-w-xl items-center justify-center rounded-[1.6rem] border border-stone-900/8 bg-white/40 p-6">
+                <div class="mx-auto flex min-h-[22rem] w-full max-w-xl items-center justify-center rounded-[1.6rem] border border-stone-900/8 bg-white/40 p-3 sm:min-h-[26rem] sm:p-6">
                   <div id="auth-slot" class="w-full min-h-0"></div>
                 </div>
               </div>
@@ -320,11 +320,11 @@ function renderHomeView(clerk) {
           `
       }
 
-      <section class="rounded-panel border border-stone-900/8 bg-[rgba(255,252,246,0.94)] p-6 shadow-soft">
+      <section class="min-w-0 rounded-panel border border-stone-900/8 bg-[rgba(255,252,246,0.94)] p-5 shadow-soft sm:p-6">
         <div class="mb-6 flex flex-wrap items-start justify-between gap-4">
           <div>
             <p class="text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-accent">Feed</p>
-            <h2 class="font-display text-3xl text-ink">Aktuelle Posts</h2>
+            <h2 class="font-display text-[2rem] text-ink sm:text-3xl">Aktuelle Posts</h2>
           </div>
           <span class="rounded-full bg-accent-soft px-3 py-2 text-xs font-bold uppercase tracking-[0.15em] text-accent-deep">
             ${state.posts.length} Einträge
@@ -355,12 +355,12 @@ function renderPostView(clerk) {
   }
 
   return `
-    <section class="grid gap-6">
-      <section class="rounded-panel border border-stone-900/8 bg-[rgba(255,252,246,0.94)] p-6 shadow-soft">
+    <section class="min-w-0 grid gap-6">
+      <section class="min-w-0 rounded-panel border border-stone-900/8 bg-[rgba(255,252,246,0.94)] p-5 shadow-soft sm:p-6">
         <a class="mb-5 inline-flex text-sm font-semibold text-accent-deep hover:underline" href="#">Zurück zum Feed</a>
         <p class="text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-accent">${escapeHtml(post.authorUsername)}</p>
-        <h2 class="mt-2 font-display text-5xl leading-[0.95] text-ink">${escapeHtml(post.title)}</h2>
-        <p class="mt-6 whitespace-pre-wrap text-[1.02rem] leading-8 text-stone-700">${escapeHtml(post.content)}</p>
+        <h2 class="mt-2 font-display text-[2.6rem] leading-[0.95] text-ink sm:text-5xl">${escapeHtml(post.title)}</h2>
+        <p class="mt-6 whitespace-pre-wrap text-[0.98rem] leading-7 text-stone-700 sm:text-[1.02rem] sm:leading-8">${escapeHtml(post.content)}</p>
         <div class="mt-6 flex flex-wrap items-center justify-between gap-3 text-sm text-muted">
           <button class="font-medium text-accent-deep hover:underline" data-profile-link="${escapeHtml(post.authorUsername)}" type="button">
             @${escapeHtml(post.authorUsername)}
@@ -369,11 +369,11 @@ function renderPostView(clerk) {
         </div>
       </section>
 
-      <section class="rounded-panel border border-stone-900/8 bg-[rgba(255,252,246,0.94)] p-6 shadow-soft">
+      <section class="min-w-0 rounded-panel border border-stone-900/8 bg-[rgba(255,252,246,0.94)] p-5 shadow-soft sm:p-6">
         <div class="mb-6 flex flex-wrap items-start justify-between gap-4">
           <div>
             <p class="text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-accent">Comments</p>
-            <h2 class="font-display text-3xl text-ink">Diskussion</h2>
+            <h2 class="font-display text-[2rem] text-ink sm:text-3xl">Diskussion</h2>
           </div>
           <span class="rounded-full bg-accent-soft px-3 py-2 text-xs font-bold uppercase tracking-[0.15em] text-accent-deep">
             ${state.comments.length} Kommentare
@@ -388,7 +388,7 @@ function renderPostView(clerk) {
                   <span>Kommentar</span>
                   <textarea class="min-h-32 rounded-2xl border border-stone-900/12 bg-white px-4 py-3 text-base font-normal leading-7 text-stone-900 outline-none transition focus:border-accent focus:ring-4 focus:ring-orange-100" name="text" rows="4" maxlength="2000" placeholder="Schreib deine Antwort..." required></textarea>
                 </label>
-                <button class="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-accent to-accent-deep px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:brightness-105 disabled:cursor-progress disabled:opacity-70" type="submit" ${state.submittingComment ? "disabled" : ""}>
+                <button class="inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-accent to-accent-deep px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:brightness-105 disabled:cursor-progress disabled:opacity-70 sm:w-auto" type="submit" ${state.submittingComment ? "disabled" : ""}>
                   ${state.submittingComment ? "Speichert..." : "Kommentar senden"}
                 </button>
               </form>
@@ -418,21 +418,21 @@ function renderProfileView() {
   }
 
   return `
-    <section class="grid gap-6">
-      <section class="rounded-panel border border-stone-900/8 bg-[rgba(255,252,246,0.94)] p-6 shadow-soft">
+    <section class="min-w-0 grid gap-6">
+      <section class="min-w-0 rounded-panel border border-stone-900/8 bg-[rgba(255,252,246,0.94)] p-5 shadow-soft sm:p-6">
         <a class="mb-5 inline-flex text-sm font-semibold text-accent-deep hover:underline" href="#">Zurück zum Feed</a>
         <p class="text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-accent">Profil</p>
-        <h2 class="mt-2 font-display text-5xl leading-[0.95] text-ink">@${escapeHtml(profile.username)}</h2>
-        <p class="mt-5 max-w-2xl text-[0.98rem] leading-7 text-muted">
+        <h2 class="mt-2 font-display text-[2.6rem] leading-[0.95] text-ink sm:text-5xl">@${escapeHtml(profile.username)}</h2>
+        <p class="mt-5 max-w-2xl text-[0.95rem] leading-6 text-muted sm:text-[0.98rem] sm:leading-7">
           Alle veröffentlichten Posts und Kommentare dieses Users an einem Ort.
         </p>
       </section>
 
-      <section class="rounded-panel border border-stone-900/8 bg-[rgba(255,252,246,0.94)] p-6 shadow-soft">
+      <section class="min-w-0 rounded-panel border border-stone-900/8 bg-[rgba(255,252,246,0.94)] p-5 shadow-soft sm:p-6">
         <div class="mb-6 flex flex-wrap items-start justify-between gap-4">
           <div>
             <p class="text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-accent">Posts</p>
-            <h2 class="font-display text-3xl text-ink">Veröffentlichungen</h2>
+            <h2 class="font-display text-[2rem] text-ink sm:text-3xl">Veröffentlichungen</h2>
           </div>
           <span class="rounded-full bg-accent-soft px-3 py-2 text-xs font-bold uppercase tracking-[0.15em] text-accent-deep">
             ${profile.posts.length} Posts
@@ -446,11 +446,11 @@ function renderProfileView() {
         }
       </section>
 
-      <section class="rounded-panel border border-stone-900/8 bg-[rgba(255,252,246,0.94)] p-6 shadow-soft">
+      <section class="min-w-0 rounded-panel border border-stone-900/8 bg-[rgba(255,252,246,0.94)] p-5 shadow-soft sm:p-6">
         <div class="mb-6 flex flex-wrap items-start justify-between gap-4">
           <div>
             <p class="text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-accent">Comments</p>
-            <h2 class="font-display text-3xl text-ink">Beiträge in Diskussionen</h2>
+            <h2 class="font-display text-[2rem] text-ink sm:text-3xl">Beiträge in Diskussionen</h2>
           </div>
           <span class="rounded-full bg-accent-soft px-3 py-2 text-xs font-bold uppercase tracking-[0.15em] text-accent-deep">
             ${profile.comments.length} Kommentare
@@ -486,9 +486,9 @@ function renderApp() {
   const clerk = state.clerk;
 
   app.innerHTML = `
-    <div class="mx-auto grid min-h-screen w-full max-w-[1320px] gap-6 px-4 py-6 xl:grid-cols-[360px_minmax(0,1fr)]">
+    <div class="mx-auto grid min-h-screen w-full max-w-[1320px] gap-4 px-3 py-4 sm:gap-6 sm:px-4 sm:py-6 xl:grid-cols-[360px_minmax(0,1fr)]">
       ${renderSidebar(clerk)}
-      <main class="grid content-start gap-6">
+      <main class="min-w-0 grid content-start gap-6">
         ${state.error ? `<div class="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-800">${escapeHtml(state.error)}</div>` : ""}
         ${renderContent()}
       </main>
