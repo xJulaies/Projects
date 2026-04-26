@@ -1,4 +1,5 @@
 import express, { json, NextFunction, Request, Response } from "express";
+import cors from "cors";
 import { settings } from "./config/settings";
 import { createAnswer } from "./lib/createAnswer";
 import { createError, TCreateError } from "./lib/createError";
@@ -11,6 +12,12 @@ const app = express();
 const BASE_URL = settings.BASE_URL;
 
 app.use(json());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  }),
+);
 app.use(clerkMiddleware());
 
 app.get("/", (req: Request, res: Response) => {
