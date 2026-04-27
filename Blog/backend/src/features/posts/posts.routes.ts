@@ -25,25 +25,25 @@ export const postRouter = Router();
 
 postRouter.post(
   "/",
+  requireUser,
   validatorHeaders(authorizationHeaderSchema),
   validatorBody(createPostBodySchema),
-  requireUser,
   POST_post,
 );
 postRouter.patch(
   "/:postId",
 
+  requireUser,
   validatorParams(postIdParamsSchema),
   validatorHeaders(authorizationHeaderSchema),
   validatorBody(updatePostBodySchema),
-  requireUser,
   PATCH_PostById,
 );
 postRouter.delete(
   "/:postId",
+  requireUser,
   validatorParams(postIdParamsSchema),
   validatorHeaders(authorizationHeaderSchema),
-  requireUser,
   DELETE_PostById,
 );
 

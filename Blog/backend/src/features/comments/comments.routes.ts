@@ -25,27 +25,27 @@ export const commentRouter = Router();
 
 commentRouter.post(
   "/posts/:postId/comments",
+  requireUser,
   validatorParams(postIdParamsSchema),
   validatorHeaders(authorizationHeaderSchema),
   validatorBody(createCommentBodySchema),
-  requireUser,
   POST_comment,
 );
 
 commentRouter.patch(
   "/comments/:commentId",
+  requireUser,
   validatorParams(commentIdParamsSchema),
   validatorHeaders(authorizationHeaderSchema),
   validatorBody(updateCommentBodySchema),
-  requireUser,
   PATCH_commentById,
 );
 
 commentRouter.delete(
   "/comments/:commentId",
+  requireUser,
   validatorParams(commentIdParamsSchema),
   validatorHeaders(authorizationHeaderSchema),
-  requireUser,
   DELETE_commentById,
 );
 
@@ -55,4 +55,3 @@ commentRouter.get(
   validatorParams(postIdParamsSchema),
   GET_commentByPostId,
 );
-
