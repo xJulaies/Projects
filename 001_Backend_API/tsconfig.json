@@ -7,7 +7,7 @@
 
     "module": "commonjs",
     "target": "ESnext",
-    "moduleResolution": "node",
+
     "types": [],
     // For nodejs:
     // "lib": ["esnext"],
