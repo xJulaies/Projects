@@ -1,0 +1,58 @@
+import type { TCurrencyProductCards } from "../../types/product.types";
+
+export const products: TCurrencyProductCards[] = [
+  {
+    name: "product 1",
+    description: "description product 1",
+    price: "9,99€",
+    category: "cups",
+    initialStock: 10,
+    imageURL: "/assets/images/cup1.product.background.png",
+    alt: "a teacup with an imprinted fantasy castle.",
+  },
+  {
+    name: "product 2",
+    description: "description product 2",
+    price: "19,99€",
+    category: "clothes",
+    initialStock: 10,
+    imageURL: "",
+    alt: "placeholder",
+  },
+  {
+    name: "product 3",
+    description: "description product 3",
+    price: "14.99€",
+    category: "clothes",
+    initialStock: 10,
+    imageURL: "",
+    alt: "placeholder",
+  },
+  {
+    name: "product 4",
+    description: "description product 4",
+    price: "24,99€",
+    category: "figurine",
+    initialStock: 10,
+    imageURL: "",
+    alt: "placeholder",
+  },
+  {
+    name: "product 5",
+    description: "description product 5",
+    price: "39,99€",
+    category: "figurine",
+    initialStock: 10,
+    imageURL: "",
+    alt: "placeholder",
+  },
+  {
+    name: "product 6",
+    description: "description product 6",
+    price: "22,99€",
+    category: "clothes",
+    initialStock: 10,
+    imageURL: "",
+    alt: "placeholder",
+  },
+];
