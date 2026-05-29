@@ -1,4 +1,6 @@
-export function PublicHero() {
+import type { PublicHeroProps } from "../../types/button.types";
+
+export function PublicHero({ onGetStartedClick }: PublicHeroProps) {
   return (
     <div
       className="hero min-h-screen"
@@ -13,7 +15,9 @@ export function PublicHero() {
           <p className="mb-5">
             Interested in learning React? So am I and it's great to have you!
           </p>
-          <button className="btn btn-primary">Get Started</button>
+          <button onClick={onGetStartedClick} className="btn btn-primary">
+            Get Started
+          </button>
         </div>
       </div>
     </div>
