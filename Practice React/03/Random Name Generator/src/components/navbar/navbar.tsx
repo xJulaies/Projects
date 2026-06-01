@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 export function PublicNavbar() {
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const [isDarkTheme, setIsDarkTheme] = useState(true);
 
   useEffect(() => {
     document.documentElement.setAttribute(
