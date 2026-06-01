@@ -1,73 +1,35 @@
-# React + TypeScript + Vite
+# Random Name Generator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Kleine React- und TypeScript-Übungsapp zum Arbeiten mit Komponenten, Props, State und einfachen Utility-Funktionen.
 
-Currently, two official plugins are available:
+## Projektidee
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Die App zeigt eine Liste von Namen an und kann per Button einen zufälligen Namen aus dieser Liste auswählen. Der aktuell ausgewählte Name wird im Generator-Bereich angezeigt.
 
-## React Compiler
+## Umgesetzte Inhalte
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Vite React App mit TypeScript
+- Styling mit Tailwind CSS und DaisyUI
+- Namensliste als ausgelagerte Datenquelle
+- Utility-Funktion `getRandomName` für die Zufallsauswahl
+- State in `RandomizeName` für den aktuell angezeigten Namen
+- Ausgelagerte Komponenten für Button, Namensanzeige und alle Namen
+- Grid-Layout für die komplette Namensliste
 
-## Expanding the ESLint configuration
+## Wichtige Dateien
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- `src/components/randomNameGenerator/names.ts`: Liste aller Namen
+- `src/components/randomNameGenerator/randomize.ts`: Zufallslogik
+- `src/components/randomNameGenerator/randomNameGenerator.tsx`: Generator mit State
+- `src/components/randomNameGenerator/randomize.button.tsx`: Button-Komponente
+- `src/components/randomNameGenerator/display.name.tsx`: Anzeige des ausgewählten Namens
+- `src/components/DisplayAllNames/all.names.tsx`: Grid mit allen Namen
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Commands
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
+npm run build
+npm run lint
 ```
