@@ -1,12 +1,8 @@
-import { useState } from "react";
-
 import { DisplayAllNames } from "./components/DisplayAllNames/all.names";
 import { RandomizeName } from "./components/randomNameGenerator/randomNameGenerator";
 import { PublicNavbar } from "./components/navbar/navbar";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
       <PublicNavbar />
