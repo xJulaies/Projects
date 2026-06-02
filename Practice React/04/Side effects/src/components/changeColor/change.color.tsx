@@ -25,7 +25,7 @@ export function ChangeColor() {
         setBoxColor("bg-yellow-300");
         break;
     }
-  });
+  }, [selectedColor]);
 
   function handleChangeColorButton(color: TColor) {
     console.log(`button to change color to ${color} clicked!`);
