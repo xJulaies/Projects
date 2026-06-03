@@ -12,7 +12,14 @@ const PORT = settings.PORT;
 
 const app = express();
 
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  }),
+);
+
 app.use(json());
+app.use("/card-images", express.static("public/card-images"));
 
 app.use(`${BASE_URL}/cards`, cardsRouter);
 

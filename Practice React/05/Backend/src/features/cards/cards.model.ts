@@ -1,6 +1,20 @@
-import { model, Schema } from "mongoose";
+import { model, Schema, HydratedDocument } from "mongoose";
 
-const cardSchema = new Schema(
+export interface ICard {
+  ygoId: number;
+  type: string;
+  name: string;
+  description: string;
+  race?: string;
+  attribute?: string;
+  atk?: number;
+  def?: number;
+  level?: number;
+  originalImageUrl: string;
+  imagePath?: string;
+}
+
+const cardSchema = new Schema<ICard>(
   {
     ygoId: {
       type: Number,
@@ -47,4 +61,5 @@ const cardSchema = new Schema(
   },
 );
 
-export const cardModel = model("Card", cardSchema);
+export type TCardDocument = HydratedDocument<ICard>;
+export const cardModel = model<ICard>("Card", cardSchema);
