@@ -6,6 +6,7 @@ import type { TCardDocument } from "./cards.model";
 
 export async function handleImages(card: TCardDocument) {
   if (!card.imagePath) {
+    console.log(`Downloading image for ${card.name}`);
     const image = await fetch(card.originalImageUrl);
     if (!image.ok) {
       throw createError(500, "Unable to fetch image");
@@ -27,5 +28,6 @@ export async function handleImages(card: TCardDocument) {
 
     return card;
   }
+  console.log(`Using local image for ${card.name}`);
   return card;
 }

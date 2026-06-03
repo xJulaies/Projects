@@ -13,9 +13,31 @@ export const GET_CardsByName: RequestHandler<TCardNameParams> = async (
 ) => {
   try {
     const { cardName } = req.params;
-    const cards = await cardModel.find({
+    const { page } = req.query;
+    const currentPage = page ? Number(page) : 1;
+    const currentLimit = 10;
+    const skip = (currentPage - 1) * currentLimit;
+
+    if (
+      Number.isNaN(currentPage) ||
+      currentPage < 1 ||
+      !Number.isInteger(currentPage)
+    ) {
+      return next(createError(400, "Invalid page query"));
+    }
+
+    const searchQuery = {
       name: new RegExp(cardName, "i"),
-    });
+    };
+
+    const totalCards = await cardModel.countDocuments(searchQuery);
+
+    const hasMore = currentPage * currentLimit < totalCards;
+
+    const cards = await cardModel
+      .find(searchQuery)
+      .skip(skip)
+      .limit(currentLimit);
 
     if (cards.length === 0) {
       return next(createError(404, "No cards found"));
@@ -28,9 +50,17 @@ export const GET_CardsByName: RequestHandler<TCardNameParams> = async (
     }
     await checkImage(cards);
 
-    return res
-      .status(200)
-      .json(createAnswer(200, "All card data by name", cards));
+    return res.status(200).json(
+      createAnswer(200, "All card data by name", [
+        {
+          cards,
+          page: currentPage,
+          limit: currentLimit,
+          totalCards,
+          hasMore,
+        },
+      ]),
+    );
   } catch (error) {
     return next(createError(500, "Cannot load card data"));
   }
