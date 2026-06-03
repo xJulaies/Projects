@@ -1,4 +1,4 @@
-import type { TStatusCode } from "../../types/errorTypes";
+import type { TStatusCode } from "../../types/error.types";
 
 export type TCreateError = Error & { status: TStatusCode };
 

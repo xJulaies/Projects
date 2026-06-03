@@ -1,4 +1,4 @@
-import { TStatusCode } from "../../types/errorTypes";
+import { TStatusCode } from "../../types/error.types";
 
 export const createAnswer = (
   status: TStatusCode,
