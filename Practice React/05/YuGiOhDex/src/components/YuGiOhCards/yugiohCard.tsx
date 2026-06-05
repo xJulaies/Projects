@@ -1,4 +1,4 @@
-export function PokeCard() {
+export function YuGiOhCard() {
   return (
     <>
       <div className="card bg-base-100 w-96 shadow-sm">

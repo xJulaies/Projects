@@ -1,3 +1,3 @@
 import type { ReactNode } from "react";
 
-export type TBublicLayoutProps = { children: ReactNode };
+export type TPublicLayoutProps = { children: ReactNode };
