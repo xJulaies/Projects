@@ -5,9 +5,11 @@ import type { TPublicLayoutProps } from "../../types/public.layouts.types";
 export function PublicLayout({ children }: TPublicLayoutProps) {
   return (
     <>
-      <PublicNavbar />
-      {children}
-      <PublicFooter />
+      <div className="flex flex-col min-h-screen">
+        <PublicNavbar />
+        {children}
+        <PublicFooter />
+      </div>
     </>
   );
 }

@@ -1,23 +1,40 @@
-export function YuGiOhCard() {
+import type { TCardProps } from "../../types/card.types";
+import { hasValue } from "../../lib/cards/getCardDetails.helper";
+
+export function YuGiOhCard({
+  name,
+  type,
+  description,
+  imagePath,
+  atk,
+  def,
+  level,
+  attribute,
+  race,
+}: TCardProps) {
   return (
     <>
-      <div className="card bg-base-100 w-96 shadow-sm">
-        <figure className="px-10 pt-10">
+      <div className="card bg-base-200 w-72 shadow-sm">
+        <figure className="px-6 pt-6 h-80 flex items-start justify-center">
           <img
-            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-            alt="Shoes"
-            className="rounded-xl"
+            src={`http://localhost:3000${imagePath}`}
+            alt={`An image of the yugioh card ${name}`}
+            className="rounded-xl w-52"
           />
         </figure>
         <div className="card-body items-center text-center">
-          <h2 className="card-title">Card Title</h2>
-          <p>
-            A card component has a figure, a body part, and inside body there
-            are title and actions parts
+          <h2 className="card-title text-center min-h-8 text-2xl">{name}</h2>
+          <p className="text-sm h-32 overflow-y-auto px-2 text-left">
+            {description}
           </p>
-          <div className="card-actions">
-            <button className="btn btn-primary">Buy Now</button>
-          </div>
+          <ul className="mt-auto text-sm">
+            <li>Type: {type}</li>
+            {hasValue(race) && <li>Race: {race}</li>}
+            {hasValue(attribute) && <li>Attribute: {attribute}</li>}
+            {hasValue(level) && <li>Level: {level}</li>}
+            {hasValue(atk) && <li>ATK: {atk}</li>}
+            {hasValue(def) && <li>DEF: {def}</li>}
+          </ul>
         </div>
       </div>
     </>

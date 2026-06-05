@@ -14,7 +14,7 @@ export function CardSearchBar({ onSearch }: TOnSearch) {
 
   function handleSubmitSearch(event: TSearchSubmitEvent) {
     event.preventDefault();
-    onSearch(searchInput);
+    onSearch({cardName: searchInput});
   }
 
   return (
