@@ -1,4 +1,4 @@
-import type { TCardName } from "./card.types";
+export type TCardName = { cardName: string };
 
 export type TCardSearch = {
   cardName: string;

@@ -1,14 +1,14 @@
-import { Header } from "../header/header";
+import { PublicHero } from "../hero/public.hero";
 import { CardSearchBar } from "../cardSearch/cardSearchBar";
 import { getCard } from "../../lib/api/getCard";
 import { YuGiOhCard } from "../YuGiOhCards/yugiohCard";
 import { ShowMoreBtn } from "../cardSearch/showMore";
-
-import type { TCardProps, TCardName } from "../../types/card.types";
+import type { TCardName } from "../../types/search.types";
+import type { TCard } from "../../types/card.types";
 import { useState } from "react";
 
 export function CardLayout() {
-  const [cards, setCards] = useState<TCardProps[]>([]);
+  const [cards, setCards] = useState<TCard[]>([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(false);
   const [currentCardName, setCurrentCardName] = useState("");
@@ -33,7 +33,7 @@ export function CardLayout() {
   }
   return (
     <>
-      <Header text="look up any card you want!" title="Yu-Gi-Oh Dex" />
+      <PublicHero />
       <CardSearchBar onSearch={handleSearch} />
       <div className="mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
         {cards.map((card) => (

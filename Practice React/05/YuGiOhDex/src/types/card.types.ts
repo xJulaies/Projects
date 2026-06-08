@@ -1,6 +1,4 @@
-export type TCardName = { cardName: string };
-
-export type TCardProps = {
+export type TCard = {
   ygoId: number;
   name: string;
   type: string;
@@ -14,3 +12,5 @@ export type TCardProps = {
 };
 
 export type TCardValue = string | number | undefined;
+
+export type TDisplayRandomCardProps = { card: TCard };

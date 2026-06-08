@@ -1,4 +1,4 @@
-import type { TCardProps } from "../../types/card.types";
+import type { TCard } from "../../types/card.types";
 import { hasValue } from "../../lib/cards/getCardDetails.helper";
 
 export function YuGiOhCard({
@@ -11,7 +11,7 @@ export function YuGiOhCard({
   level,
   attribute,
   race,
-}: TCardProps) {
+}: TCard) {
   return (
     <>
       <div className="card bg-base-200 w-72 shadow-sm">

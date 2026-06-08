@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Header } from "../header/header";
 import type { TOnSearch } from "../../types/search.types";
 import type {
   TSearchInputChangeEvent,
@@ -14,11 +15,12 @@ export function CardSearchBar({ onSearch }: TOnSearch) {
 
   function handleSubmitSearch(event: TSearchSubmitEvent) {
     event.preventDefault();
-    onSearch({cardName: searchInput});
+    onSearch({ cardName: searchInput });
   }
 
   return (
     <>
+      <Header text="look up any card you want!" title="Yu-Gi-Oh card finder" />
       <form
         onSubmit={handleSubmitSearch}
         className="flex flex-col items-center p-4 m-4"
