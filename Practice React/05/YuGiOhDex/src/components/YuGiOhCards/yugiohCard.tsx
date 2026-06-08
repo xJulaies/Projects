@@ -15,7 +15,7 @@ export function YuGiOhCard({
   return (
     <>
       <div className="card bg-base-200 w-72 shadow-sm">
-        <figure className="px-6 pt-6 h-80 flex items-start justify-center">
+        <figure className="px-6 pt-6 flex items-start justify-center">
           <img
             src={`http://localhost:3000${imagePath}`}
             alt={`An image of the yugioh card ${name}`}
