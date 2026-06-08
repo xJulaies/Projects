@@ -66,7 +66,32 @@ export const GET_CardsByName: RequestHandler<TCardNameParams> = async (
   }
 };
 
-export const POST_Cards: RequestHandler = async (req, res, next) => {
+export const GET_RandomCard: RequestHandler = async (_req, res, next) => {
+  try {
+    const totalCards = await cardModel.countDocuments();
+
+    if (totalCards === 0) {
+      return next(createError(404, "No cards found"));
+    }
+
+    const randomIndex = Math.floor(Math.random() * totalCards);
+    const card = await cardModel.findOne().skip(randomIndex);
+
+    if (!card) {
+      return next(createError(404, "No random card found"));
+    }
+
+    await handleImages(card);
+
+    return res
+      .status(200)
+      .json(createAnswer(200, "Random card successfully loaded", [card]));
+  } catch (error) {
+    return next(createError(500, "Cannot load random card"));
+  }
+};
+
+export const POST_Cards: RequestHandler = async (_req, res, next) => {
   try {
     const response = await fetch(
       "https://db.ygoprodeck.com/api/v7/cardinfo.php",
