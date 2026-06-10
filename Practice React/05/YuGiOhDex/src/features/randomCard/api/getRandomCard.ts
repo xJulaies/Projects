@@ -9,5 +9,6 @@ export async function getRandomCard() {
     return result;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 }

@@ -4,14 +4,21 @@ import type { TCard } from "../../../types/card.types";
 
 export function useRandomCard() {
   const [card, setCard] = useState<TCard | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     async function loadRandomCard() {
-      const result = await getRandomCard();
+      try {
+        setError(false);
 
-      if (!result) return;
-
-      setCard(result.data[0]);
+        const result = await getRandomCard();
+        setCard(result.data[0]);
+      } catch (error) {
+        setError(true);
+      } finally {
+        setIsLoading(false);
+      }
     }
     loadRandomCard();
 
@@ -23,5 +30,5 @@ export function useRandomCard() {
       clearInterval(intervalId);
     };
   }, []);
-  return { card };
+  return { card, isLoading, error };
 }

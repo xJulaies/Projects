@@ -1,8 +1,22 @@
 import { DisplayRandomCard } from "../../molecules/DisplayRandomCard/displayRandomCard.mol";
 import { useRandomCard } from "../../../hooks/useRandomCard";
+import { RandomCardError } from "../../atoms/RandomCardError/randomCardError.atm";
+import { RandomCardSkeleton } from "../../atoms/RandomCardSkeleton/randomCardSkeleton.atm";
 
 export function RandomCard() {
-  const { card } = useRandomCard();
+  const { card, isLoading, error } = useRandomCard();
 
-  return <>{card && <DisplayRandomCard card={card} />}</>;
+  if (isLoading) {
+    return <RandomCardSkeleton />;
+  }
+
+  if (error) {
+    return <RandomCardError />;
+  }
+
+  if (!card) {
+    return null;
+  }
+
+  return <DisplayRandomCard card={card} />;
 }
