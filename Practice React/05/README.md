@@ -30,6 +30,9 @@ Das Projekt ist bewusst als Lernprojekt aufgebaut: Frontend und Backend sind get
 - Backend-Suche über MongoDB
 - Zufällige Karte über eine eigene Backend-Route
 - Hero Section mit automatisch wechselnden Random Cards
+- Frontend-Routing mit TanStack Router
+- Startseite `/` mit Hero Section und Button zur Suche
+- Suchseite `/search` für Kartensuche und Suchergebnisse
 - Import der Kartendaten aus der YGOPRODeck API
 - Lokales Lazy-Caching von Kartenbildern
 - Statische Auslieferung gespeicherter Bilder über Express
@@ -119,11 +122,16 @@ Dadurch werden Bilder nicht bei jedem Suchvorgang erneut von der externen API ge
         +-- layouts/
         |   +-- organisms/
         |   +-- templates/
+        +-- routes/
+        |   +-- __root.tsx
+        |   +-- index.tsx
+        |   +-- search.tsx
         +-- shared/
         |   +-- components/
         |   |   +-- molecules/
         |   +-- lib/
         +-- types/
+        +-- routeTree.gen.ts
 ```
 
 ## Backend
@@ -225,6 +233,8 @@ Das Frontend basiert auf React, TypeScript, Vite, Tailwind CSS und DaisyUI.
 
 Die Frontend-Struktur kombiniert Feature-based Architecture mit Atomic Design. Fachliche Bereiche wie `cards`, `search`, `randomCard` und `hero` liegen unter `src/features`. Innerhalb dieser Features werden UI-Komponenten nach Atomic Design in `atoms`, `molecules` und `organisms` sortiert. Wiederverwendbare, feature-unabhängige Komponenten liegen unter `src/shared`.
 
+Das Frontend nutzt TanStack Router für clientseitiges Routing. Die App läuft weiterhin über eine einzelne `index.html`, aber TanStack Router entscheidet im React-Code, welche Route angezeigt wird.
+
 ### Datei-Flags
 
 Zur besseren Suche in VS Code werden Dateisuffixe als kleine Flags genutzt:
@@ -250,12 +260,18 @@ header.types.ts
 
 ### Wichtige Dateien
 
-- `src/App.tsx`: Bindet das Public Layout und den Hauptinhalt ein.
+- `src/App.tsx`: Erstellt den TanStack Router und rendert den `RouterProvider`.
+- `src/routeTree.gen.ts`: Automatisch generierter TanStack Route Tree. Diese Datei gehört ins Git-Repository und sollte nicht manuell bearbeitet werden.
+- `src/routes/__root.tsx`: Root Route mit `Outlet` für untergeordnete Seiten.
+- `src/routes/index.tsx`: Startseite `/` mit Public Layout und Hero Section.
+- `src/routes/search.tsx`: Suchseite `/search` mit Public Layout und Card Layout.
 - `src/layouts/templates/PublicLayout/public.layout.tpl.tsx`: Basislayout mit Navbar, Main-Bereich und Footer.
 - `src/layouts/templates/CardLayout/cardLayout.tpl.tsx`: Steuert Suche, Karten-State, Pagination und Rendering.
 - `src/layouts/organisms/PublicNavbar/public.navbar.org.tsx`: Öffentliche Navbar mit Theme Toggle.
 - `src/layouts/organisms/PublicFooter/public.footer.org.tsx`: Footer des Public Layouts.
 - `src/features/hero/components/organisms/PublicHero/public.hero.org.tsx`: Hero Section mit zentralem Text und zwei automatisch wechselnden Random Cards.
+- `src/features/hero/components/atoms/public.hero.btn.atm.tsx`: Hero Button, der per TanStack `Link` auf `/search` navigiert.
+- `src/features/hero/components/atoms/public.hero.btn.types.ts`: Props-Type für den Hero Button.
 - `src/features/search/components/molecules/CardSearchBar/cardSearchBar.mol.tsx`: Suchformular mit Input.
 - `src/features/search/components/atoms/ShowMoreButton/showMore.btn.atm.tsx`: Button für weitere Suchergebnisse.
 - `src/features/cards/components/molecules/YuGiOhCard/yugiohCard.mol.tsx`: Einzelne Kartenanzeige.
@@ -270,6 +286,14 @@ header.types.ts
 
 ### Datenfluss im Frontend
 
+1. `App.tsx` erstellt den TanStack Router mit dem generierten `routeTree`.
+2. `RouterProvider` rendert die aktuell passende Route.
+3. `__root.tsx` stellt den Root-Rahmen mit `Outlet` bereit.
+4. `/` rendert die Startseite mit `PublicHero`.
+5. `/search` rendert die Suchseite mit `CardLayout`.
+
+### Datenfluss der Kartensuche
+
 1. User gibt einen Kartennamen in die Searchbar ein.
 2. `CardSearchBar` gibt den Suchwert an `CardLayout` weiter.
 3. `CardLayout` ruft `getCard` auf.
@@ -278,6 +302,21 @@ header.types.ts
 6. Das Grid rendert für jede Karte eine `YuGiOhCard`.
 7. Wenn `hasMore` true ist, wird der `ShowMoreBtn` angezeigt.
 8. Beim Klick auf `Show more` wird die nächste Seite geladen und an die bestehenden Karten angehängt.
+
+### Routing
+
+Aktuell gibt es zwei Frontend-Routen:
+
+```txt
+/       Startseite mit Hero Section und Random Cards
+/search Kartensuche mit Searchbar, Grid und Show-more-Button
+```
+
+Der Button in der Hero Section verwendet TanStack Router `Link` und navigiert zur Suchseite:
+
+```txt
+Get started -> /search
+```
 
 ### Datenfluss der Random Cards
 
@@ -296,6 +335,7 @@ header.types.ts
 - React 19
 - TypeScript
 - Vite
+- TanStack Router
 - Tailwind CSS
 - DaisyUI
 
@@ -383,6 +423,8 @@ Funktioniert bereits:
 - Bilder werden beim ersten Anzeigen lokal gespeichert.
 - Bereits gespeicherte Bilder werden wiederverwendet.
 - Die Hero Section zeigt automatisch wechselnde Random Cards.
+- TanStack Router steuert die Startseite `/` und die Suchseite `/search`.
+- Der Hero Button navigiert ohne vollständigen Page Reload zur Suchseite.
 - Frontend rendert Suchergebnisse als Karten.
 - `Show more` lädt weitere Ergebnisse.
 - Theme Toggle funktioniert.
@@ -395,6 +437,7 @@ Noch mögliche nächste Schritte:
 - Suche toleranter machen, z.B. `Blue eyes` auch für `Blue-Eyes`.
 - Detailansicht für einzelne Karten bauen.
 - Hero Section und Random Cards optisch weiter verfeinern.
+- Weitere Routen für Deckbuilder, Login und Kartendetails ergänzen.
 - Button/Links in Navbar mit echten Funktionen verbinden.
 - API-URL im Frontend in eine Config oder `.env` auslagern.
 - Geplanten Deckbuilder vorbereiten.
@@ -408,6 +451,8 @@ Dieses Projekt übt besonders:
 - Props und Callback-Funktionen einsetzen
 - State für Suchergebnisse und Pagination verwenden
 - Custom Hooks einsetzen, um State- und Effect-Logik aus Komponenten auszulagern
+- Clientseitiges Routing mit TanStack Router verwenden
+- Generated Files wie `routeTree.gen.ts` verstehen und korrekt versionieren
 - TypeScript Types für Props, Events und API-Parameter auslagern
 - Express-Routen strukturieren
 - MongoDB-Dokumente mit Mongoose speichern und aktualisieren
