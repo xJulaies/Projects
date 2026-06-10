@@ -1,5 +1,6 @@
 import { Header } from "../../../../../shared/components/molecules/Header/header.mol";
 import { RandomCard } from "../../../../randomCard/components/organisms/RandomCard/randomCard.org";
+import { GetStartedBtn } from "../../atoms/public.hero.btn.atm";
 
 export function PublicHero() {
   return (
@@ -14,6 +15,7 @@ export function PublicHero() {
               text="Explore the vast Universe of Yu-Gi-Oh!"
               title="Yu-Gi-Oh Dex"
             />
+            <GetStartedBtn text="Get started" />
           </div>
           <aside className="flex justify-center">
             <RandomCard />

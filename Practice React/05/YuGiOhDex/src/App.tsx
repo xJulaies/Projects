@@ -1,15 +1,23 @@
 import "./App.css";
-import { PublicLayout } from "./layouts/templates/PublicLayout/public.layout.tpl";
-import { CardLayout } from "./layouts/templates/CardLayout/cardLayout.tpl";
+
+// Import the generated route tree
+import { routeTree } from "./routeTree.gen";
+import { createRouter, RouterProvider } from "@tanstack/react-router";
+
+// Create a new router instance
+const router = createRouter({ routeTree });
+
+// Register the router instance for type safety
+declare module "@tanstack/react-router" {
+  interface Register {
+    router: typeof router;
+  }
+}
 
 function App() {
   return (
     <>
-      <PublicLayout>
-        <main className="flex-1">
-          <CardLayout />
-        </main>
-      </PublicLayout>
+      <RouterProvider router={router} />
     </>
   );
 }

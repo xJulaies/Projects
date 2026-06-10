@@ -1,4 +1,3 @@
-import { PublicHero } from "../../../features/hero/components/organisms/PublicHero/public.hero.org";
 import { CardSearchBar } from "../../../features/search/components/molecules/CardSearchBar/cardSearchBar.mol";
 import { getCard } from "../../../features/search/api/getCard";
 import { YuGiOhCard } from "../../../features/cards/components/molecules/YuGiOhCard/yugiohCard.mol";
@@ -33,7 +32,6 @@ export function CardLayout() {
   }
   return (
     <>
-      <PublicHero />
       <CardSearchBar onSearch={handleSearch} />
       <div className="mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
         {cards.map((card) => (

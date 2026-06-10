@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "@tanstack/react-router";
 
 export function PublicNavbar() {
   const [isDarkTheme, setIsDarkTheme] = useState(true);
@@ -53,7 +54,9 @@ export function PublicNavbar() {
           </div>
         </div>
         <div className="navbar-center">
-          <a className="btn btn-ghost text-xl">YGODEX</a>
+          <Link to="/" className="btn btn-ghost text-xl">
+            YGODEX
+          </Link>
         </div>
         <div className="navbar-end">
           <label className="swap swap-rotate btn btn-ghost btn-circle">
