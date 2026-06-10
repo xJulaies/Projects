@@ -21,5 +21,8 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+  "include": [
+    "src",
+    "src/features/randomCard/components/molecules/DisplayRandomCard/DisplayRandomCard.tsx"
+  ]
 }

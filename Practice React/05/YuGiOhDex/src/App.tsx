@@ -1,6 +1,6 @@
 import "./App.css";
-import { PublicLayout } from "./components/layouts/public.layout";
-import { CardLayout } from "./components/layouts/card.layout";
+import { PublicLayout } from "./layouts/templates/PublicLayout/public.layout.tpl";
+import { CardLayout } from "./layouts/templates/CardLayout/cardLayout.tpl";
 
 function App() {
   return (

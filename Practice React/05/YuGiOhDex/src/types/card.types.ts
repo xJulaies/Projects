@@ -12,5 +12,3 @@ export type TCard = {
 };
 
 export type TCardValue = string | number | undefined;
-
-export type TDisplayRandomCardProps = { card: TCard };
