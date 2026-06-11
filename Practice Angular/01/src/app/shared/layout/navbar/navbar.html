@@ -1,0 +1,42 @@
+<nav class="bg-surface px-6 py-4 text-surface-content">
+  <div class="flex items-center justify-between">
+    <a href="#" class="text-lg font-semibold">Angular Practice</a>
+
+    <div class="relative sm:hidden">
+      <app-button label="Menu" (clicked)="toggleMobileMenu()"></app-button>
+
+      @if (isMobileMenuOpen()) {
+        <div
+          class="absolute left-0 top-full z-20 mt-2 w-48 rounded-md bg-surface-muted py-2 shadow-lg"
+        >
+          <a href="#" class="block px-4 py-2 text-sm hover:bg-surface-hover">Dashboard</a>
+          <a href="#" class="block px-4 py-2 text-sm hover:bg-surface-hover">Team</a>
+          <a href="#" class="block px-4 py-2 text-sm hover:bg-surface-hover">Projects</a>
+        </div>
+      }
+    </div>
+
+    <div class="hidden gap-4 sm:flex">
+      <a href="#" class="hover:text-primary">Dashboard</a>
+      <a href="#" class="hover:text-primary">Team</a>
+      <a href="#" class="hover:text-primary">Projects</a>
+    </div>
+    <div>
+      <app-button label="Theme" (clicked)="toggleTheme()"></app-button>
+    </div>
+
+    <div class="relative">
+      <app-button label="Profile" (clicked)="toggleProfileMenu()"></app-button>
+
+      @if (isProfileMenuOpen()) {
+        <div
+          class="absolute right-0 top-full z-10 mt-2 w-48 rounded-md bg-surface-muted py-2 shadow-lg"
+        >
+          <a href="#" class="block px-4 py-2 text-sm hover:bg-surface-hover">Your profile</a>
+          <a href="#" class="block px-4 py-2 text-sm hover:bg-surface-hover">Settings</a>
+          <a href="#" class="block px-4 py-2 text-sm hover:bg-surface-hover">Sign out</a>
+        </div>
+      }
+    </div>
+  </div>
+</nav>

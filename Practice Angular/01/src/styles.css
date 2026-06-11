@@ -1,0 +1,45 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import 'tailwindcss';
+
+@theme inline {
+  --color-primary: var(--theme-primary);
+  --color-primary-hover: var(--theme-primary-hover);
+  --color-primary-content: var(--theme-primary-content);
+  --color-base: var(--theme-base);
+  --color-base-content: var(--theme-base-content);
+  --color-surface: var(--theme-surface);
+  --color-surface-muted: var(--theme-surface-muted);
+  --color-surface-hover: var(--theme-surface-hover);
+  --color-surface-content: var(--theme-surface-content);
+  --color-body: var(--theme-body);
+}
+
+:root,
+[data-theme='dark'] {
+  color-scheme: dark;
+  --theme-primary: #6366f1;
+  --theme-primary-hover: #818cf8;
+  --theme-primary-content: #ffffff;
+  --theme-base: #030712;
+  --theme-base-content: #f9fafb;
+  --theme-surface: #111827;
+  --theme-surface-muted: #1f2937;
+  --theme-surface-hover: #374151;
+  --theme-surface-content: #ffffff;
+  --theme-body: #d1d5db;
+}
+
+[data-theme='light'] {
+  color-scheme: light;
+  --theme-primary: #64748b;
+  --theme-primary-hover: #475569;
+  --theme-primary-content: #ffffff;
+  --theme-base: #f6f7f9;
+  --theme-base-content: #1f2937;
+  --theme-surface: #eef1f5;
+  --theme-surface-muted: #e4e8ee;
+  --theme-surface-hover: #d8dee8;
+  --theme-surface-content: #1f2937;
+  --theme-body: #526070;
+}
