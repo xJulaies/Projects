@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ImpressumImpressumRouteImport } from './routes/_impressum/impressum'
+import { Route as AboutAboutRouteImport } from './routes/_about/about'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ImpressumImpressumRoute = ImpressumImpressumRouteImport.update({
+  id: '/_impressum/impressum',
+  path: '/impressum',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutAboutRoute = AboutAboutRouteImport.update({
+  id: '/_about/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutAboutRoute
+  '/impressum': typeof ImpressumImpressumRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutAboutRoute
+  '/impressum': typeof ImpressumImpressumRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_about/about': typeof AboutAboutRoute
+  '/_impressum/impressum': typeof ImpressumImpressumRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/about' | '/impressum'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/about' | '/impressum'
+  id: '__root__' | '/' | '/_about/about' | '/_impressum/impressum'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutAboutRoute: typeof AboutAboutRoute
+  ImpressumImpressumRoute: typeof ImpressumImpressumRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_impressum/impressum': {
+      id: '/_impressum/impressum'
+      path: '/impressum'
+      fullPath: '/impressum'
+      preLoaderRoute: typeof ImpressumImpressumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_about/about': {
+      id: '/_about/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutAboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutAboutRoute: AboutAboutRoute,
+  ImpressumImpressumRoute: ImpressumImpressumRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

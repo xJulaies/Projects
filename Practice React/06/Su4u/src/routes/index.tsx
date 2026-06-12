@@ -1,9 +1,14 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router";
+import { PublicLayout } from "../shared/templates/publicLayout/public.layout.tpl";
 
-export const Route = createFileRoute('/')({
+export const Route = createFileRoute("/")({
   component: RouteComponent,
-})
+});
 
 function RouteComponent() {
-  return <div>Hello "/"!</div>
+  return (
+    <PublicLayout>
+      <main></main>
+    </PublicLayout>
+  );
 }
