@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { PublicLayout } from "../layouts/templates/PublicLayout/public.layout.tpl";
-import { CardLayout } from "../layouts/templates/CardLayout/cardLayout.tpl";
+import { PublicLayout } from "../../layouts/templates/PublicLayout/public.layout.tpl";
+import { CardLayout } from "../../layouts/templates/CardLayout/cardLayout.tpl";
 
-export const Route = createFileRoute("/search")({
+export const Route = createFileRoute("/_search/search")({
   component: RouteComponent,
 });
 
