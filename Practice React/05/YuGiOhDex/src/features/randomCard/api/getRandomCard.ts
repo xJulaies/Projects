@@ -1,6 +1,8 @@
+import { getApiUrl } from "../../../shared/lib/api.config";
+
 export async function getRandomCard() {
   try {
-    const response = await fetch(`http://localhost:3000/api/cards/random`);
+    const response = await fetch(getApiUrl("/api/cards/random"));
 
     if (!response.ok) {
       throw new Error("Could not fetch Data");

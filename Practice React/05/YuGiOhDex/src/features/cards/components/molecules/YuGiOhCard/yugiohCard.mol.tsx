@@ -1,5 +1,6 @@
 import type { TCard } from "../../../../../types/card.types";
 import { hasValue } from "../../../lib/getCardDetails.helper";
+import { getApiUrl } from "../../../../../shared/lib/api.config";
 
 export function YuGiOhCard({
   name,
@@ -17,7 +18,7 @@ export function YuGiOhCard({
       <div className="card bg-base-200 w-72 shadow-sm">
         <figure className="px-6 pt-6 flex items-start justify-center">
           <img
-            src={`http://localhost:3000${imagePath}`}
+            src={getApiUrl(imagePath)}
             alt={`An image of the yugioh card ${name}`}
             className="rounded-xl w-52"
           />
