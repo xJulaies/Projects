@@ -1,6 +1,6 @@
 export type TSectionProps = {
   content: string;
-  imageUrl: string;
+  imageUrl?: string;
   sectionClassName: string;
   contentClassName: string;
   textClassName: string;

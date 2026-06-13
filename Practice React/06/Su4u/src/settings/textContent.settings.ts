@@ -21,4 +21,8 @@ export const textContentSettings = {
   hero: {
     text: "Explore the World of the most famous logic puzzle Sudoku!",
   },
+
+  about: {
+    text: "Su4u is a small Sudoku learning project built with React and TypeScript. The goal of this project is to practice component-based frontend development, routing, theming, reusable layouts, and clean project structure.\n\nThe app introduces Sudoku, explains the basic rules, and gives a short overview of the game's history. It is also a practice project for working with Vite, Tailwind CSS, TanStack Router, custom hooks, and feature-based architecture.\n\nThis project is part of my personal learning journey as a web developer.",
+  },
 };

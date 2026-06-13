@@ -1,4 +1,5 @@
 import { ReturnHomeButton } from "../../atoms/home-button/home.btn.atm";
+import { DisplayIcon } from "../../atoms/icon/icon.atm";
 import { ChangeThemeBtn } from "./../../atoms/navbar/theme.btn.atm";
 import { NavbarLink } from "../../atoms/navbar/public.navbarLink.atm";
 import { useTheme } from "../../lib/hooks/useTheme";
@@ -26,7 +27,10 @@ export function PublicNavbar() {
           </details>
         </div>
         <div className="justify-self-center">
-          <ReturnHomeButton text="Su4u" />
+          <div className="flex items-center">
+            <DisplayIcon IconClassName="h-14" />
+            <ReturnHomeButton text="Su4u" />
+          </div>
         </div>
         <div className="justify-self-end">
           <ChangeThemeBtn theme={theme} onClick={handleThemeBtn} />
