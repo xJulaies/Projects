@@ -7,21 +7,31 @@ export function HistorySection({
   sectionClassName,
   contentClassName,
   textClassName,
-  imageWrapperClassName = "justify-self-end",
+  reverse,
 }: TSectionProps) {
+  const textElement = (
+    <DisplayTextContent content={content} className={textClassName} />
+  );
+
+  const imageElement = imageUrl ? (
+    <div>
+      <img src={imageUrl} alt="" className="max-w-sm rounded-lg object-cover" />
+    </div>
+  ) : null;
+
   return (
     <section className={sectionClassName}>
       <div className={contentClassName}>
-        <DisplayTextContent content={content} className={textClassName} />
-
-        {imageUrl && (
-          <div className={imageWrapperClassName}>
-            <img
-              src={imageUrl}
-              alt=""
-              className="max-w-sm rounded-lg object-cover"
-            />
-          </div>
+        {reverse ? (
+          <>
+            {imageElement}
+            {textElement}
+          </>
+        ) : (
+          <>
+            {textElement}
+            {imageElement}
+          </>
         )}
       </div>
     </section>

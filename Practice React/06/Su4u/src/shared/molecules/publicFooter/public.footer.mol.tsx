@@ -4,9 +4,9 @@ import { DisplayIcon } from "../../atoms/icon/icon.atm";
 export function PublicFooter() {
   return (
     <footer className="border-t border-border bg-surface">
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-12 text-sm text-text-muted">
+      <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-8 text-sm text-text-muted">
         <div className="flex items-center">
-          <DisplayIcon IconClassName="h-20" />
+          <DisplayIcon IconClassName="h-24" />
           <span>© 2026 Su4u. A React learning project built by xJulaies.</span>
         </div>
         <nav className="flex gap-4">

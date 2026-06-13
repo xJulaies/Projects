@@ -1,15 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { PublicLayout } from "../../shared/templates/publicLayout/public.layout.tpl";
-import { Header } from "../../shared/atoms/headers/header.atm";
+import { ImpressumLayout } from "../../features/impressum/components/templates/impressum.layout.tpl";
 
 export const Route = createFileRoute("/_impressum/impressum")({
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  return (
-    <PublicLayout>
-      <Header title="Impressum" />
-    </PublicLayout>
-  );
+  return <ImpressumLayout />;
 }
