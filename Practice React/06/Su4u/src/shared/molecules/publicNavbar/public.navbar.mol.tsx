@@ -12,7 +12,7 @@ export function PublicNavbar() {
   }
 
   return (
-    <header className="border-b border-border bg-surface">
+    <header className="surface-wave border-b border-border bg-surface">
       <nav className="grid grid-cols-3 items-center px-4 py-3">
         <div className="justify-self-start">
           <details className="relative">

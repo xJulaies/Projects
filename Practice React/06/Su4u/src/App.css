@@ -98,3 +98,23 @@ body {
   background: var(--theme-base);
   color: var(--theme-text);
 }
+
+.surface-wave {
+  background:
+    radial-gradient(
+      circle at 15% 30%,
+      color-mix(in srgb, var(--theme-accent) 45%, transparent),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 70% 20%,
+      color-mix(in srgb, var(--theme-primary) 50%, transparent),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 80%,
+      color-mix(in srgb, var(--theme-secondary) 35%, transparent),
+      transparent 26%
+    ),
+    linear-gradient(90deg, var(--theme-surface), var(--theme-surface-muted));
+}
