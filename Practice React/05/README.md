@@ -6,7 +6,15 @@ Dieses Projekt ist ein privates Lernprojekt und dient ausschließlich zum Üben 
 
 Yu-Gi-Oh Dex ist ein Fullstack-Übungsprojekt mit React, TypeScript, Express und MongoDB. Die App sucht Yu-Gi-Oh Karten, zeigt passende Ergebnisse als Karten-Grid an und speichert Kartendaten sowie lokal gecachte Kartenbilder über ein eigenes Backend.
 
-Das Projekt ist bewusst als Lernprojekt aufgebaut: Frontend und Backend sind getrennt, die API-Kommunikation läuft über eigene Routen, und externe Bilder werden nicht dauerhaft direkt vom Frontend geladen.
+Das Projekt ist bewusst als Lernprojekt aufgebaut: Frontend und Backend sind getrennt, die externe API wird nicht direkt aus dem Frontend angesprochen, und Kartenbilder werden erst dann lokal gespeichert, wenn sie wirklich angezeigt werden.
+
+## Live Preview
+
+Die Frontend-App kann hier angesehen werden:
+
+https://xjulaies.github.io/Projects/Practice%20React/05/YuGiOhDex/docs/
+
+Hinweis: Die Live Preview zeigt nur das statisch gehostete Frontend. Die Backend-Funktionalität, also Suche, Random Cards, Datenbankzugriff und lokales Bild-Caching, läuft aktuell lokal auf meinem Rechner und ist in der GitHub-Pages-Version nicht verfügbar.
 
 ## Vorschau
 
@@ -25,21 +33,23 @@ Das Projekt ist bewusst als Lernprojekt aufgebaut: Frontend und Backend sind get
 ## Features
 
 - Suche nach Yu-Gi-Oh Karten über eine React-Suchleiste
-- Anzeige mehrerer Suchergebnisse als responsive Karten
+- Anzeige mehrerer Suchergebnisse als responsives Karten-Grid
 - Pagination mit `Show more` Button
 - Backend-Suche über MongoDB
-- Zufällige Karte über eine eigene Backend-Route
-- Hero Section mit automatisch wechselnden Random Cards
-- Frontend-Routing mit TanStack Router
-- Startseite `/` mit Hero Section und Button zur Suche
-- Suchseite `/search` für Kartensuche und Suchergebnisse
 - Import der Kartendaten aus der YGOPRODeck API
 - Lokales Lazy-Caching von Kartenbildern
 - Statische Auslieferung gespeicherter Bilder über Express
+- Zufällige Karte über eine eigene Backend-Route
+- Hero Section mit automatisch wechselnden Random Cards
+- Loading- und Error-State für Random Cards
+- Frontend-Routing mit TanStack Router
+- Startseite `/` mit Hero Section und Button zur Suche
+- Suchseite `/search` für Kartensuche und Suchergebnisse
+- Zentrale API-Konfiguration im Frontend über `shared/lib/api.config.ts`
 - Dark/Light Theme Toggle mit DaisyUI
-- Getrennte Komponenten für Layout, Navbar, Footer, Searchbar, Cards und Show-More-Button
 - Custom Hook `useRandomCard` für automatische Random-Card-Logik
-- Typisierte Props und Events mit TypeScript
+- Typisierte Props, Events und API-Parameter mit TypeScript
+- Feature-based Architecture kombiniert mit Atomic Design
 
 ## Geplante Features
 
@@ -47,28 +57,31 @@ Das Projekt ist bewusst als Lernprojekt aufgebaut: Frontend und Backend sind get
 - Deckbuilder, mit dem eigene Kartendecks zusammengestellt werden können
 - Login-System, damit Benutzer eigene Decks speichern und später wieder laden können
 - Detailansicht für einzelne Karten
-- Fehler- und Ladezustände im Frontend, zum Beispiel bei leeren Suchergebnissen
+- Verbesserte Fehler- und Ladezustände für die Kartensuche
+- Tolerantere Suche, zum Beispiel `Blue eyes` für `Blue-Eyes`
+- API-Errorhandling im Frontend weiter vereinheitlichen
 
 ## Grundidee
 
 Das Frontend fragt nicht direkt die externe Yu-Gi-Oh API ab. Stattdessen spricht es das eigene Backend an.
 
-Der Ablauf:
+Der Ablauf der Suche:
 
 1. Das Frontend sendet eine Suche an das Backend.
 2. Das Backend sucht passende Karten in MongoDB.
 3. Für die gefundenen Karten prüft das Backend, ob bereits ein lokales Bild gespeichert ist.
-4. Falls kein lokales Bild vorhanden ist, wird es einmalig von der externen API geladen und lokal gespeichert.
+4. Falls kein lokales Bild vorhanden ist, wird es einmalig heruntergeladen und lokal gespeichert.
 5. Das Backend gibt die Karten inklusive lokalem `imagePath` ans Frontend zurück.
-6. Das Frontend zeigt die Karten mit Bildern, Beschreibung und Details an.
+6. Das Frontend zeigt die Karten mit Bild, Beschreibung und Details an.
 
-Zusätzlich gibt es eine Random-Card-Funktion:
+Der Ablauf der Random Cards:
 
 1. Das Frontend ruft eine eigene Random-Route im Backend auf.
 2. Das Backend wählt eine zufällige Karte aus MongoDB aus.
 3. Auch diese Karte durchläuft das lokale Bild-Caching.
-4. Im Frontend lädt der Custom Hook `useRandomCard` automatisch eine Karte und aktualisiert sie in einem Intervall.
-5. Die Hero Section zeigt links und rechts je eine zufällige Karte an.
+4. Im Frontend lädt der Custom Hook `useRandomCard` automatisch eine Karte.
+5. Nach einem Intervall wird eine neue zufällige Karte geladen.
+6. Die Hero Section zeigt links und rechts jeweils eine Random Card an.
 
 Dadurch werden Bilder nicht bei jedem Suchvorgang erneut von der externen API geladen.
 
@@ -88,6 +101,8 @@ Dadurch werden Bilder nicht bei jedem Suchvorgang erneut von der externen API ge
 |   |   |       +-- image.service.ts
 |   |   +-- lib/
 |   |   |   +-- handleError/
+|   |   |       +-- createAnswer.ts
+|   |   |       +-- createError.ts
 |   |   +-- types/
 |   |   +-- db.ts
 |   |   +-- index.ts
@@ -105,10 +120,12 @@ Dadurch werden Bilder nicht bei jedem Suchvorgang erneut von der externen API ge
         |   |   +-- lib/
         |   +-- hero/
         |   |   +-- components/
+        |   |       +-- atoms/
         |   |       +-- organisms/
         |   +-- randomCard/
         |   |   +-- api/
         |   |   +-- components/
+        |   |   |   +-- atoms/
         |   |   |   +-- molecules/
         |   |   |   +-- organisms/
         |   |   +-- hooks/
@@ -125,11 +142,12 @@ Dadurch werden Bilder nicht bei jedem Suchvorgang erneut von der externen API ge
         +-- routes/
         |   +-- __root.tsx
         |   +-- index.tsx
-        |   +-- search.tsx
+        |   +-- _search/
+        |       +-- search.tsx
         +-- shared/
         |   +-- components/
-        |   |   +-- molecules/
         |   +-- lib/
+        |       +-- api.config.ts
         +-- types/
         +-- routeTree.gen.ts
 ```
@@ -143,9 +161,11 @@ Das Backend basiert auf Express, TypeScript und Mongoose.
 - `src/index.ts`: Startet Express, aktiviert CORS, JSON-Parsing, Static Files und Error Handling.
 - `src/db.ts`: Baut die Verbindung zu MongoDB auf.
 - `src/features/cards/cards.routes.ts`: Definiert die Cards-Routen.
-- `src/features/cards/cards.controller.ts`: Enthält Import- und Suchlogik.
+- `src/features/cards/cards.controller.ts`: Enthält Import-, Such- und Random-Card-Logik.
 - `src/features/cards/cards.model.ts`: Definiert das Mongoose Card Model.
 - `src/features/cards/image.service.ts`: Lädt Kartenbilder bei Bedarf herunter und speichert sie lokal.
+- `src/lib/handleError/createAnswer.ts`: Erstellt einheitliche API-Antworten.
+- `src/lib/handleError/createError.ts`: Erstellt Fehlerobjekte für das Error Handling.
 
 ### API-Routen
 
@@ -156,6 +176,8 @@ POST http://localhost:3000/api/cards/import
 ```
 
 Diese Route lädt die Kartendaten von der YGOPRODeck API und speichert oder aktualisiert sie in MongoDB. Bilder werden dabei noch nicht heruntergeladen.
+
+Die Route nutzt `upsert`, damit Karten beim erneuten Import aktualisiert werden können, ohne doppelt angelegt zu werden.
 
 #### Karten suchen
 
@@ -220,7 +242,7 @@ Beispielhafte Antwortstruktur:
 Die Bilder werden lazy gespeichert:
 
 - Beim Import wird nur die externe Bild-URL in MongoDB gespeichert.
-- Beim Suchen prüft `image.service.ts`, ob `imagePath` vorhanden ist.
+- Beim Suchen oder Laden einer zufälligen Karte prüft `image.service.ts`, ob `imagePath` vorhanden ist.
 - Falls nicht, wird das Bild heruntergeladen.
 - Das Bild wird in `Backend/public/card-images/` gespeichert.
 - Danach wird der lokale Pfad in MongoDB gespeichert.
@@ -229,11 +251,9 @@ Dadurch werden externe Bildanfragen reduziert.
 
 ## Frontend
 
-Das Frontend basiert auf React, TypeScript, Vite, Tailwind CSS und DaisyUI.
+Das Frontend basiert auf React, TypeScript, Vite, Tailwind CSS, DaisyUI und TanStack Router.
 
-Die Frontend-Struktur kombiniert Feature-based Architecture mit Atomic Design. Fachliche Bereiche wie `cards`, `search`, `randomCard` und `hero` liegen unter `src/features`. Innerhalb dieser Features werden UI-Komponenten nach Atomic Design in `atoms`, `molecules` und `organisms` sortiert. Wiederverwendbare, feature-unabhängige Komponenten liegen unter `src/shared`.
-
-Das Frontend nutzt TanStack Router für clientseitiges Routing. Die App läuft weiterhin über eine einzelne `index.html`, aber TanStack Router entscheidet im React-Code, welche Route angezeigt wird.
+Die Frontend-Struktur kombiniert Feature-based Architecture mit Atomic Design. Fachliche Bereiche wie `cards`, `search`, `randomCard` und `hero` liegen unter `src/features`. Innerhalb dieser Features werden UI-Komponenten nach Atomic Design in `atoms`, `molecules` und `organisms` sortiert. Wiederverwendbare, feature-unabhängige Komponenten und Hilfsfunktionen liegen unter `src/shared`.
 
 ### Datei-Flags
 
@@ -256,6 +276,7 @@ cardSearchBar.mol.tsx
 public.hero.org.tsx
 cardLayout.tpl.tsx
 header.types.ts
+getCardDetails.helper.ts
 ```
 
 ### Wichtige Dateien
@@ -264,19 +285,21 @@ header.types.ts
 - `src/routeTree.gen.ts`: Automatisch generierter TanStack Route Tree. Diese Datei gehört ins Git-Repository und sollte nicht manuell bearbeitet werden.
 - `src/routes/__root.tsx`: Root Route mit `Outlet` für untergeordnete Seiten.
 - `src/routes/index.tsx`: Startseite `/` mit Public Layout und Hero Section.
-- `src/routes/search.tsx`: Suchseite `/search` mit Public Layout und Card Layout.
+- `src/routes/_search/search.tsx`: Suchseite `/search` mit Public Layout und Card Layout.
+- `src/shared/lib/api.config.ts`: Zentrale API-Base-URL für Frontend-Requests.
 - `src/layouts/templates/PublicLayout/public.layout.tpl.tsx`: Basislayout mit Navbar, Main-Bereich und Footer.
 - `src/layouts/templates/CardLayout/cardLayout.tpl.tsx`: Steuert Suche, Karten-State, Pagination und Rendering.
 - `src/layouts/organisms/PublicNavbar/public.navbar.org.tsx`: Öffentliche Navbar mit Theme Toggle.
 - `src/layouts/organisms/PublicFooter/public.footer.org.tsx`: Footer des Public Layouts.
 - `src/features/hero/components/organisms/PublicHero/public.hero.org.tsx`: Hero Section mit zentralem Text und zwei automatisch wechselnden Random Cards.
 - `src/features/hero/components/atoms/public.hero.btn.atm.tsx`: Hero Button, der per TanStack `Link` auf `/search` navigiert.
-- `src/features/hero/components/atoms/public.hero.btn.types.ts`: Props-Type für den Hero Button.
 - `src/features/search/components/molecules/CardSearchBar/cardSearchBar.mol.tsx`: Suchformular mit Input.
 - `src/features/search/components/atoms/ShowMoreButton/showMore.btn.atm.tsx`: Button für weitere Suchergebnisse.
 - `src/features/cards/components/molecules/YuGiOhCard/yugiohCard.mol.tsx`: Einzelne Kartenanzeige.
 - `src/features/randomCard/components/organisms/RandomCard/randomCard.org.tsx`: Container-Komponente für die zufällige Karte.
 - `src/features/randomCard/components/molecules/DisplayRandomCard/displayRandomCard.mol.tsx`: Reine Anzeige-Komponente für eine zufällige Karte.
+- `src/features/randomCard/components/atoms/RandomCardSkeleton/randomCardSkeleton.atm.tsx`: Ladezustand für Random Cards.
+- `src/features/randomCard/components/atoms/RandomCardError/randomCardError.atm.tsx`: Fehlerzustand für Random Cards.
 - `src/features/randomCard/hooks/useRandomCard.ts`: Custom Hook, der eine zufällige Karte lädt und regelmäßig aktualisiert.
 - `src/features/search/api/getCard.ts`: API-Helper für die Kartensuche.
 - `src/features/randomCard/api/getRandomCard.ts`: API-Helper für die Random-Card-Route.
@@ -284,39 +307,34 @@ header.types.ts
 - `src/shared/components/molecules/Header/header.mol.tsx`: Wiederverwendbare Header-Komponente.
 - `src/types/card.types.ts`: Globaler Domain-Type für Karten.
 
-### Datenfluss im Frontend
-
-1. `App.tsx` erstellt den TanStack Router mit dem generierten `routeTree`.
-2. `RouterProvider` rendert die aktuell passende Route.
-3. `__root.tsx` stellt den Root-Rahmen mit `Outlet` bereit.
-4. `/` rendert die Startseite mit `PublicHero`.
-5. `/search` rendert die Suchseite mit `CardLayout`.
-
-### Datenfluss der Kartensuche
-
-1. User gibt einen Kartennamen in die Searchbar ein.
-2. `CardSearchBar` gibt den Suchwert an `CardLayout` weiter.
-3. `CardLayout` ruft `getCard` auf.
-4. `getCard` fragt das Backend an.
-5. `CardLayout` speichert die erhaltenen Karten im State.
-6. Das Grid rendert für jede Karte eine `YuGiOhCard`.
-7. Wenn `hasMore` true ist, wird der `ShowMoreBtn` angezeigt.
-8. Beim Klick auf `Show more` wird die nächste Seite geladen und an die bestehenden Karten angehängt.
-
 ### Routing
 
-Aktuell gibt es zwei Frontend-Routen:
+Aktuell gibt es zwei sichtbare Frontend-Routen:
 
 ```txt
 /       Startseite mit Hero Section und Random Cards
 /search Kartensuche mit Searchbar, Grid und Show-more-Button
 ```
 
-Der Button in der Hero Section verwendet TanStack Router `Link` und navigiert zur Suchseite:
+TanStack Router arbeitet mit einer einzigen `index.html`. Die Route entscheidet im React-Code, welche Seite gerendert wird.
+
+Der Button in der Hero Section verwendet TanStack Router `Link`:
 
 ```txt
 Get started -> /search
 ```
+
+### Datenfluss der Kartensuche
+
+1. User gibt einen Kartennamen in die Searchbar ein.
+2. `CardSearchBar` gibt den Suchwert an `CardLayout` weiter.
+3. `CardLayout` ruft `getCard` auf.
+4. `getCard` baut die URL über `getApiUrl` aus `shared/lib/api.config.ts`.
+5. Das Backend sucht in MongoDB und prüft die Bilder.
+6. `CardLayout` speichert die erhaltenen Karten im State.
+7. Das Grid rendert für jede Karte eine `YuGiOhCard`.
+8. Wenn `hasMore` true ist, wird der `ShowMoreBtn` angezeigt.
+9. Beim Klick auf `Show more` wird die nächste Seite geladen und an die bestehenden Karten angehängt.
 
 ### Datenfluss der Random Cards
 
@@ -324,9 +342,10 @@ Get started -> /search
 2. `RandomCard` nutzt den Custom Hook `useRandomCard`.
 3. `useRandomCard` ruft `getRandomCard` auf.
 4. `getRandomCard` fragt `GET /api/cards/random` im Backend an.
-5. Die geladene Karte wird im Hook-State gespeichert.
-6. `RandomCard` gibt die Karte an `DisplayRandomCard` weiter.
-7. Nach 10 Sekunden lädt der Hook automatisch eine neue zufällige Karte.
+5. Während des ersten Ladens wird `RandomCardSkeleton` angezeigt.
+6. Bei einem Fehler wird `RandomCardError` angezeigt.
+7. Bei Erfolg wird die Karte an `DisplayRandomCard` übergeben.
+8. Nach 10 Sekunden lädt der Hook automatisch eine neue zufällige Karte.
 
 ## Technologien
 
@@ -372,7 +391,7 @@ Die `.env` im Backend sollte ungefähr so aussehen:
 ```env
 PORT=3000
 BASE_URL=/api
-MONGODB_URL=mongodb://localhost:27017/yugiohdex
+MONGODB_URL=mongodb+srv://<username>:<password>@<cluster-url>/yugiohdex
 ```
 
 Wenn der Server läuft, sollte in der Konsole stehen:
@@ -394,6 +413,18 @@ Das Frontend läuft normalerweise unter:
 
 ```txt
 http://localhost:5173
+```
+
+Optional kann die Backend-URL im Frontend über eine Vite-Variable gesetzt werden:
+
+```env
+VITE_API_URL=http://localhost:3000
+```
+
+Ohne diese Variable nutzt das Frontend automatisch:
+
+```txt
+http://localhost:3000
 ```
 
 ## Erste Nutzung
@@ -423,25 +454,44 @@ Funktioniert bereits:
 - Bilder werden beim ersten Anzeigen lokal gespeichert.
 - Bereits gespeicherte Bilder werden wiederverwendet.
 - Die Hero Section zeigt automatisch wechselnde Random Cards.
+- Random Cards haben Loading- und Error-Zustände.
 - TanStack Router steuert die Startseite `/` und die Suchseite `/search`.
 - Der Hero Button navigiert ohne vollständigen Page Reload zur Suchseite.
 - Frontend rendert Suchergebnisse als Karten.
 - `Show more` lädt weitere Ergebnisse.
 - Theme Toggle funktioniert.
 - Footer bleibt unten im Layout.
+- API-URLs werden zentral über `getApiUrl` gebaut.
 
 Noch mögliche nächste Schritte:
 
-- Fehlerzustand im Frontend anzeigen, wenn keine Karten gefunden werden.
+- Errorhandling der Such-API im Frontend verbessern, damit `getCard` nicht still `undefined` zurückgibt.
+- Fehlerzustand anzeigen, wenn keine Karten gefunden werden.
 - Loading-State während der Suche anzeigen.
-- Suche toleranter machen, z.B. `Blue eyes` auch für `Blue-Eyes`.
+- Suche toleranter machen, zum Beispiel `Blue eyes` auch für `Blue-Eyes`.
 - Detailansicht für einzelne Karten bauen.
 - Hero Section und Random Cards optisch weiter verfeinern.
 - Weitere Routen für Deckbuilder, Login und Kartendetails ergänzen.
 - Button/Links in Navbar mit echten Funktionen verbinden.
-- API-URL im Frontend in eine Config oder `.env` auslagern.
 - Geplanten Deckbuilder vorbereiten.
 - Login und benutzerbezogene Datenstruktur planen.
+
+## Review-Notizen
+
+Der aktuelle Stand ist fachlich sinnvoll aufgebaut:
+
+- Die Trennung zwischen Backend, API-Helpern, Hooks und UI-Komponenten ist nachvollziehbar.
+- Die Kombination aus Feature-Struktur und Atomic Design passt zur wachsenden App.
+- Das Backend kapselt die externe API sauber und schützt das Frontend vor direkten Bild-Requests.
+- Das Lazy-Caching der Bilder ist für dieses Lernprojekt eine gute Lösung.
+- Die zentrale `api.config.ts` ist ein guter Schritt, weil die API-URL nicht mehr überall fest im Code stehen muss.
+
+Ein paar technische Punkte bleiben bewusst als nächste Lernschritte offen:
+
+- `getCard` sollte langfristig ähnlich wie `getRandomCard` Fehler weiterwerfen oder einen klar typisierten Fehlerzustand zurückgeben.
+- `CardLayout` sollte auf Fehler und leere Ergebnisse reagieren können.
+- Die API-Antworten könnten im Frontend noch stärker typisiert werden.
+- Der Random-Card-Hook könnte später zwischen initialem Laden und Hintergrund-Refresh unterscheiden.
 
 ## Lernfokus
 
