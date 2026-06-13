@@ -4,5 +4,6 @@ export type TSectionProps = {
   sectionClassName: string;
   contentClassName: string;
   textClassName: string;
+  imageWrapperClassName?: string;
   reverse?: boolean;
 };

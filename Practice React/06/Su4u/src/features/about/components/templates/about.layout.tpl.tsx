@@ -7,11 +7,11 @@ export function AboutLayout() {
   return (
     <PublicLayout>
       <Header title="About Su4u" />
-      <main className="flex justify-center">
+      <main className="flex justify-center px-4 py-6 md:px-8 md:py-8">
         <AboutSection
           content={textContentSettings.about.text}
-          sectionClassName="p-8"
-          contentClassName="m-4"
+          sectionClassName="w-full max-w-3xl"
+          contentClassName=""
           textClassName="text-primary"
         />
       </main>

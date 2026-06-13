@@ -11,9 +11,10 @@ export function RulesLayout() {
       <RulesSection
         content={textContentSettings.rules.text}
         imageUrl={rulesImage}
-        sectionClassName="px-12 py-3"
-        contentClassName=" mx-auto max-w-6xl  grid grid-cols-2 items-center"
+        sectionClassName="px-4 py-8 md:px-12 md:py-10"
+        contentClassName="mx-auto grid max-w-6xl grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-12"
         textClassName="text-primary"
+        imageWrapperClassName="justify-self-center"
       />
     </PublicLayout>
   );

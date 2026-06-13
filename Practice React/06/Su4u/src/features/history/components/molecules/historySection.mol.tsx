@@ -15,7 +15,11 @@ export function HistorySection({
 
   const imageElement = imageUrl ? (
     <div>
-      <img src={imageUrl} alt="" className="max-w-sm rounded-lg object-cover" />
+      <img
+        src={imageUrl}
+        alt=""
+        className="w-full max-w-sm rounded-lg object-cover"
+      />
     </div>
   ) : null;
 

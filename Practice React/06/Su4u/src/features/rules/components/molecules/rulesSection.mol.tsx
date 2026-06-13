@@ -19,7 +19,7 @@ export function RulesSection({
             <img
               src={imageUrl}
               alt=""
-              className="max-w-lg rounded-lg object-cover"
+              className="w-full max-w-lg rounded-lg object-cover"
             />
           </div>
         )}

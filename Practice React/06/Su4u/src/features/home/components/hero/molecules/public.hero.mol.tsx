@@ -7,12 +7,12 @@ import { textContentSettings } from "../../../../../settings/textContent.setting
 export function PublicHero({ title, backgroundImageUrl }: TPublicHeroProps) {
   return (
     <section
-      className="flex flex-1 items-center bg-cover bg-center px-4 py-16"
+      className="flex flex-1 items-center bg-cover bg-center px-4 py-12 md:py-16"
       style={{
         backgroundImage: `url(${backgroundImageUrl})`,
       }}
     >
-      <div className="ml-[15%] flex flex-col items-center">
+      <div className="mx-auto flex max-w-xl flex-col items-center text-center md:ml-[15%] md:mr-auto">
         <HeroHeader title={title} />
         <DisplayTextContent
           className="text-hero-text"

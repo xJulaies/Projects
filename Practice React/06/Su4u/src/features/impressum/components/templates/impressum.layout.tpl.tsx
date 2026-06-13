@@ -7,13 +7,13 @@ export function ImpressumLayout() {
   return (
     <PublicLayout>
       <Header title="Impressum" />
-      <main className="flex justify-center px-4 py-8">
+      <main className="flex justify-center px-4 py-6 md:py-8">
         <div className="flex w-full max-w-3xl flex-col gap-4">
           {textContentSettings.impressum.sections.map((section) => (
             <ImpressumSection
               key={section.content}
               content={section.content}
-              sectionClassName="rounded-lg bg-surface-muted p-6"
+              sectionClassName="rounded-lg bg-surface-muted p-4 md:p-6"
               contentClassName=""
               textClassName="text-text"
             />
