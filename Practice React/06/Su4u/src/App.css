@@ -7,6 +7,7 @@
   --color-border: var(--theme-border);
   --color-text: var(--theme-text);
   --color-text-muted: var(--theme-text-muted);
+  --color-hero-text: var(--theme-hero-text);
   --color-primary: var(--theme-primary);
   --color-primary-content: var(--theme-primary-content);
   --color-secondary: var(--theme-secondary);
@@ -28,6 +29,7 @@
   --theme-border: #dfc0d1;
   --theme-text: #26131f;
   --theme-text-muted: #6f4a61;
+  --theme-hero-text: #7f1d4f;
 
   --theme-primary: #7f1d4f;
   --theme-primary-content: #fff7fb;
@@ -50,6 +52,7 @@
   --theme-border: #5b294b;
   --theme-text: #fdebf7;
   --theme-text-muted: #d9a9c7;
+  --theme-hero-text: #7f1d4f;
 
   --theme-primary: #f472b6;
   --theme-primary-content: #2a0d20;
@@ -73,6 +76,7 @@
     --theme-border: #5b294b;
     --theme-text: #fdebf7;
     --theme-text-muted: #d9a9c7;
+    --theme-hero-text: #7f1d4f;
 
     --theme-primary: #f472b6;
     --theme-primary-content: #2a0d20;
