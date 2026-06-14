@@ -2,11 +2,15 @@ export type TSudokuValue = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 
 export type TSudokuCell = {
   value: TSudokuValue | null;
+  solutionValue: TSudokuValue | null;
   notes: TSudokuValue[];
   isGiven: boolean;
+  isError: boolean;
 };
 
 export type TSudokuBoard = TSudokuCell[][];
+
+export type TSudokuGrid = (TSudokuValue | null)[][];
 
 export type TSudokuCellPosition = {
   row: number;

@@ -8,10 +8,18 @@ export function SudokuCell({
   rowIndex,
   colIndex,
 }: TSudokuCellProps) {
+  const cellClassName = [
+    styles.cell,
+    isSelected ? styles.selectedCell : "",
+    cell.isError ? styles.errorCell : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
     <button
       type="button"
-      className={isSelected ? `${styles.cell} ${styles.selectedCell}` : styles.cell}
+      className={cellClassName}
       data-row={rowIndex}
       data-col={colIndex}
     >

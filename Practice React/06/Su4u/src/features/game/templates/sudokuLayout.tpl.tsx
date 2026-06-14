@@ -4,12 +4,12 @@ import styles from "../styles/sudoku.module.css";
 import { SudokuNotesToggle } from "../atoms/sudokuNotesToggle.atm";
 import { SudokuNumberPad } from "../molecules/sudokuNumberPad.mol";
 import { GenerateSudokuBtn } from "../atoms/sudokuGenerateBtn.atm";
-import { emptyBoard } from "../test/testBoards";
+import { generateSudokuBoard } from "../lib/sudokuGenerator";
 import type { TSudokuValue } from "../types/sudoku.types";
 import { useState } from "react";
 
 export function SudokuLayout() {
-  const [board, setBoard] = useState(emptyBoard);
+  const [board, setBoard] = useState(() => generateSudokuBoard());
   const [selectedCell, setSelectedCell] = useState<{
     row: number;
     col: number;
@@ -17,11 +17,24 @@ export function SudokuLayout() {
   const [notesMode, setNotesMode] = useState(false);
 
   function handleGenerateBoard() {
-    setBoard(emptyBoard);
+    setBoard(generateSudokuBoard());
     setSelectedCell(null);
+    setNotesMode(false);
   }
 
   function handleCellClick(row: number, col: number) {
+    const clickedCell = board[row][col];
+
+    if (clickedCell.isGiven) {
+      setSelectedCell(null);
+      return;
+    }
+
+    if (selectedCell?.row === row && selectedCell?.col === col) {
+      setSelectedCell(null);
+      return;
+    }
+
     setSelectedCell({ row, col });
   }
 
@@ -31,6 +44,9 @@ export function SudokuLayout() {
 
   function handleNumber(value: TSudokuValue) {
     if (!selectedCell) return;
+
+    const selectedBoardCell = board[selectedCell.row][selectedCell.col];
+    const isCorrectValue = value === selectedBoardCell.solutionValue;
 
     setBoard((currentBoard) =>
       currentBoard.map((row, rowIndex) =>
@@ -51,14 +67,28 @@ export function SudokuLayout() {
             };
           }
 
+          if (cell.isError && cell.value === value) {
+            return {
+              ...cell,
+              value: null,
+              isError: false,
+            };
+          }
+
           return {
             ...cell,
             value,
             notes: [],
+            isGiven: isCorrectValue,
+            isError: !isCorrectValue,
           };
         }),
       ),
     );
+
+    if (isCorrectValue) {
+      setSelectedCell(null);
+    }
   }
 
   return (
@@ -84,7 +114,7 @@ export function SudokuLayout() {
           <aside className={styles.sidePanel}>
             <GenerateSudokuBtn
               onClick={handleGenerateBoard}
-              text="Reset board"
+              text="Generate board"
             />
           </aside>
         </section>
