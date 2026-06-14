@@ -3,6 +3,7 @@ import { SudokuBoard } from "../organisms/sudokuBoard.org";
 import styles from "../styles/sudoku.module.css";
 import { SudokuNotesToggle } from "../atoms/sudokuNotesToggle.atm";
 import { SudokuNumberPad } from "../molecules/sudokuNumberPad.mol";
+import { GenerateSudokuBtn } from "../atoms/sudokuGenerateBtn.atm";
 import { emptyBoard } from "../test/testBoards";
 import type { TSudokuValue } from "../types/sudoku.types";
 import { useState } from "react";
@@ -14,6 +15,11 @@ export function SudokuLayout() {
     col: number;
   } | null>(null);
   const [notesMode, setNotesMode] = useState(false);
+
+  function handleGenerateBoard() {
+    setBoard(emptyBoard);
+    setSelectedCell(null);
+  }
 
   function handleCellClick(row: number, col: number) {
     setSelectedCell({ row, col });
@@ -57,19 +63,30 @@ export function SudokuLayout() {
 
   return (
     <PublicLayout>
-      <main>
-        <section>
-          <section className={styles.layout}>
+      <main className={styles.layout}>
+        <section className={styles.gameShell}>
+          <section className={styles.playArea}>
             <SudokuBoard
               board={board}
               selectedCell={selectedCell}
               onCellClick={handleCellClick}
             />
+
+            <section className={styles.controls}>
+              <SudokuNumberPad onNumberClick={handleNumber} />
+              <SudokuNotesToggle
+                isActive={notesMode}
+                onClick={handleNotesToggle}
+              />
+            </section>
           </section>
-        </section>
-        <section className="flex justify-center gap-8 py-4">
-          <SudokuNumberPad onNumberClick={handleNumber} />
-          <SudokuNotesToggle isActive={notesMode} onClick={handleNotesToggle} />
+
+          <aside className={styles.sidePanel}>
+            <GenerateSudokuBtn
+              onClick={handleGenerateBoard}
+              text="Reset board"
+            />
+          </aside>
         </section>
       </main>
     </PublicLayout>
