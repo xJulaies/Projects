@@ -3,6 +3,8 @@ import { DisplayIcon } from "../../atoms/icon/icon.atm";
 import { ChangeThemeBtn } from "./../../atoms/navbar/theme.btn.atm";
 import { NavbarLink } from "../../atoms/navbar/public.navbarLink.atm";
 import { useTheme } from "../../lib/hooks/useTheme";
+import { SignInLink } from "../../atoms/navbar/signIn";
+import { Show, UserButton } from "@clerk/react";
 
 export function PublicNavbar() {
   const { theme, toggleTheme } = useTheme();
@@ -34,7 +36,15 @@ export function PublicNavbar() {
           </div>
         </div>
         <div className="justify-self-end">
-          <ChangeThemeBtn theme={theme} onClick={handleThemeBtn} />
+          <div className="flex items-center gap-2">
+            <ChangeThemeBtn theme={theme} onClick={handleThemeBtn} />
+            <Show when="signed-out">
+              <SignInLink text="Sign In" />
+            </Show>
+            <Show when="signed-in">
+              <UserButton />
+            </Show>
+          </div>
         </div>
       </nav>
     </header>

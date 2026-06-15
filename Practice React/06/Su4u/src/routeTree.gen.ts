@@ -14,7 +14,10 @@ import { Route as RulesRulesRouteImport } from './routes/_rules/rules'
 import { Route as ImpressumImpressumRouteImport } from './routes/_impressum/impressum'
 import { Route as HistoryHistoryRouteImport } from './routes/_history/history'
 import { Route as GameGameRouteImport } from './routes/_game/game'
+import { Route as DashboardDashboardRouteImport } from './routes/_dashboard/dashboard'
 import { Route as AboutAboutRouteImport } from './routes/_about/about'
+import { Route as SignUpSignUpSplatRouteImport } from './routes/_sign-up/sign-up.$'
+import { Route as SignInSignInSplatRouteImport } from './routes/_sign-in/sign-in.$'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -41,59 +44,107 @@ const GameGameRoute = GameGameRouteImport.update({
   path: '/game',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardDashboardRoute = DashboardDashboardRouteImport.update({
+  id: '/_dashboard/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutAboutRoute = AboutAboutRouteImport.update({
   id: '/_about/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignUpSignUpSplatRoute = SignUpSignUpSplatRouteImport.update({
+  id: '/_sign-up/sign-up/$',
+  path: '/sign-up/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignInSignInSplatRoute = SignInSignInSplatRouteImport.update({
+  id: '/_sign-in/sign-in/$',
+  path: '/sign-in/$',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutAboutRoute
+  '/dashboard': typeof DashboardDashboardRoute
   '/game': typeof GameGameRoute
   '/history': typeof HistoryHistoryRoute
   '/impressum': typeof ImpressumImpressumRoute
   '/rules': typeof RulesRulesRoute
+  '/sign-in/$': typeof SignInSignInSplatRoute
+  '/sign-up/$': typeof SignUpSignUpSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutAboutRoute
+  '/dashboard': typeof DashboardDashboardRoute
   '/game': typeof GameGameRoute
   '/history': typeof HistoryHistoryRoute
   '/impressum': typeof ImpressumImpressumRoute
   '/rules': typeof RulesRulesRoute
+  '/sign-in/$': typeof SignInSignInSplatRoute
+  '/sign-up/$': typeof SignUpSignUpSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_about/about': typeof AboutAboutRoute
+  '/_dashboard/dashboard': typeof DashboardDashboardRoute
   '/_game/game': typeof GameGameRoute
   '/_history/history': typeof HistoryHistoryRoute
   '/_impressum/impressum': typeof ImpressumImpressumRoute
   '/_rules/rules': typeof RulesRulesRoute
+  '/_sign-in/sign-in/$': typeof SignInSignInSplatRoute
+  '/_sign-up/sign-up/$': typeof SignUpSignUpSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/game' | '/history' | '/impressum' | '/rules'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/dashboard'
+    | '/game'
+    | '/history'
+    | '/impressum'
+    | '/rules'
+    | '/sign-in/$'
+    | '/sign-up/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/game' | '/history' | '/impressum' | '/rules'
+  to:
+    | '/'
+    | '/about'
+    | '/dashboard'
+    | '/game'
+    | '/history'
+    | '/impressum'
+    | '/rules'
+    | '/sign-in/$'
+    | '/sign-up/$'
   id:
     | '__root__'
     | '/'
     | '/_about/about'
+    | '/_dashboard/dashboard'
     | '/_game/game'
     | '/_history/history'
     | '/_impressum/impressum'
     | '/_rules/rules'
+    | '/_sign-in/sign-in/$'
+    | '/_sign-up/sign-up/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutAboutRoute: typeof AboutAboutRoute
+  DashboardDashboardRoute: typeof DashboardDashboardRoute
   GameGameRoute: typeof GameGameRoute
   HistoryHistoryRoute: typeof HistoryHistoryRoute
   ImpressumImpressumRoute: typeof ImpressumImpressumRoute
   RulesRulesRoute: typeof RulesRulesRoute
+  SignInSignInSplatRoute: typeof SignInSignInSplatRoute
+  SignUpSignUpSplatRoute: typeof SignUpSignUpSplatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -133,11 +184,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GameGameRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_dashboard/dashboard': {
+      id: '/_dashboard/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_about/about': {
       id: '/_about/about'
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutAboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_sign-up/sign-up/$': {
+      id: '/_sign-up/sign-up/$'
+      path: '/sign-up/$'
+      fullPath: '/sign-up/$'
+      preLoaderRoute: typeof SignUpSignUpSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_sign-in/sign-in/$': {
+      id: '/_sign-in/sign-in/$'
+      path: '/sign-in/$'
+      fullPath: '/sign-in/$'
+      preLoaderRoute: typeof SignInSignInSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -146,10 +218,13 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutAboutRoute: AboutAboutRoute,
+  DashboardDashboardRoute: DashboardDashboardRoute,
   GameGameRoute: GameGameRoute,
   HistoryHistoryRoute: HistoryHistoryRoute,
   ImpressumImpressumRoute: ImpressumImpressumRoute,
   RulesRulesRoute: RulesRulesRoute,
+  SignInSignInSplatRoute: SignInSignInSplatRoute,
+  SignUpSignUpSplatRoute: SignUpSignUpSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
