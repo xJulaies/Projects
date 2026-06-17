@@ -11,13 +11,14 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as EventsIndexRouteImport } from './routes/events/index'
-import { Route as EventsNewRouteImport } from './routes/events/new'
-import { Route as EventsEventIdRouteImport } from './routes/events/$eventId'
+import { Route as LineupIndexRouteImport } from './routes/lineup/index'
+import { Route as LineupNewRouteImport } from './routes/lineup/new'
+import { Route as LineupBandIdRouteImport } from './routes/lineup/$bandId'
 import { Route as TicketsTicketsRouteImport } from './routes/_tickets/tickets'
 import { Route as ImpressumImpressumRouteImport } from './routes/_impressum/impressum'
+import { Route as CalendarCalendarRouteImport } from './routes/_calendar/calendar'
 import { Route as AboutAboutRouteImport } from './routes/_about/about'
-import { Route as EventsEventIdEditRouteImport } from './routes/events/$eventId.edit'
+import { Route as LineupBandIdEditRouteImport } from './routes/lineup/$bandId.edit'
 import { Route as SignUpSignUpSplatRouteImport } from './routes/_sign-up/sign-up.$'
 import { Route as SignInSignInSplatRouteImport } from './routes/_sign-in/sign-in.$'
 import { Route as AuthenticatedDashboardDashboardRouteImport } from './routes/_authenticated/_dashboard/dashboard'
@@ -31,19 +32,19 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EventsIndexRoute = EventsIndexRouteImport.update({
-  id: '/events/',
-  path: '/events/',
+const LineupIndexRoute = LineupIndexRouteImport.update({
+  id: '/lineup/',
+  path: '/lineup/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EventsNewRoute = EventsNewRouteImport.update({
-  id: '/events/new',
-  path: '/events/new',
+const LineupNewRoute = LineupNewRouteImport.update({
+  id: '/lineup/new',
+  path: '/lineup/new',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EventsEventIdRoute = EventsEventIdRouteImport.update({
-  id: '/events/$eventId',
-  path: '/events/$eventId',
+const LineupBandIdRoute = LineupBandIdRouteImport.update({
+  id: '/lineup/$bandId',
+  path: '/lineup/$bandId',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TicketsTicketsRoute = TicketsTicketsRouteImport.update({
@@ -56,15 +57,20 @@ const ImpressumImpressumRoute = ImpressumImpressumRouteImport.update({
   path: '/impressum',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CalendarCalendarRoute = CalendarCalendarRouteImport.update({
+  id: '/_calendar/calendar',
+  path: '/calendar',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutAboutRoute = AboutAboutRouteImport.update({
   id: '/_about/about',
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EventsEventIdEditRoute = EventsEventIdEditRouteImport.update({
+const LineupBandIdEditRoute = LineupBandIdEditRouteImport.update({
   id: '/edit',
   path: '/edit',
-  getParentRoute: () => EventsEventIdRoute,
+  getParentRoute: () => LineupBandIdRoute,
 } as any)
 const SignUpSignUpSplatRoute = SignUpSignUpSplatRouteImport.update({
   id: '/_sign-up/sign-up/$',
@@ -86,96 +92,103 @@ const AuthenticatedDashboardDashboardRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutAboutRoute
+  '/calendar': typeof CalendarCalendarRoute
   '/impressum': typeof ImpressumImpressumRoute
   '/tickets': typeof TicketsTicketsRoute
-  '/events/$eventId': typeof EventsEventIdRouteWithChildren
-  '/events/new': typeof EventsNewRoute
-  '/events/': typeof EventsIndexRoute
+  '/lineup/$bandId': typeof LineupBandIdRouteWithChildren
+  '/lineup/new': typeof LineupNewRoute
+  '/lineup/': typeof LineupIndexRoute
   '/dashboard': typeof AuthenticatedDashboardDashboardRoute
   '/sign-in/$': typeof SignInSignInSplatRoute
   '/sign-up/$': typeof SignUpSignUpSplatRoute
-  '/events/$eventId/edit': typeof EventsEventIdEditRoute
+  '/lineup/$bandId/edit': typeof LineupBandIdEditRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutAboutRoute
+  '/calendar': typeof CalendarCalendarRoute
   '/impressum': typeof ImpressumImpressumRoute
   '/tickets': typeof TicketsTicketsRoute
-  '/events/$eventId': typeof EventsEventIdRouteWithChildren
-  '/events/new': typeof EventsNewRoute
-  '/events': typeof EventsIndexRoute
+  '/lineup/$bandId': typeof LineupBandIdRouteWithChildren
+  '/lineup/new': typeof LineupNewRoute
+  '/lineup': typeof LineupIndexRoute
   '/dashboard': typeof AuthenticatedDashboardDashboardRoute
   '/sign-in/$': typeof SignInSignInSplatRoute
   '/sign-up/$': typeof SignUpSignUpSplatRoute
-  '/events/$eventId/edit': typeof EventsEventIdEditRoute
+  '/lineup/$bandId/edit': typeof LineupBandIdEditRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/_about/about': typeof AboutAboutRoute
+  '/_calendar/calendar': typeof CalendarCalendarRoute
   '/_impressum/impressum': typeof ImpressumImpressumRoute
   '/_tickets/tickets': typeof TicketsTicketsRoute
-  '/events/$eventId': typeof EventsEventIdRouteWithChildren
-  '/events/new': typeof EventsNewRoute
-  '/events/': typeof EventsIndexRoute
+  '/lineup/$bandId': typeof LineupBandIdRouteWithChildren
+  '/lineup/new': typeof LineupNewRoute
+  '/lineup/': typeof LineupIndexRoute
   '/_authenticated/_dashboard/dashboard': typeof AuthenticatedDashboardDashboardRoute
   '/_sign-in/sign-in/$': typeof SignInSignInSplatRoute
   '/_sign-up/sign-up/$': typeof SignUpSignUpSplatRoute
-  '/events/$eventId/edit': typeof EventsEventIdEditRoute
+  '/lineup/$bandId/edit': typeof LineupBandIdEditRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
+    | '/calendar'
     | '/impressum'
     | '/tickets'
-    | '/events/$eventId'
-    | '/events/new'
-    | '/events/'
+    | '/lineup/$bandId'
+    | '/lineup/new'
+    | '/lineup/'
     | '/dashboard'
     | '/sign-in/$'
     | '/sign-up/$'
-    | '/events/$eventId/edit'
+    | '/lineup/$bandId/edit'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/calendar'
     | '/impressum'
     | '/tickets'
-    | '/events/$eventId'
-    | '/events/new'
-    | '/events'
+    | '/lineup/$bandId'
+    | '/lineup/new'
+    | '/lineup'
     | '/dashboard'
     | '/sign-in/$'
     | '/sign-up/$'
-    | '/events/$eventId/edit'
+    | '/lineup/$bandId/edit'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/_about/about'
+    | '/_calendar/calendar'
     | '/_impressum/impressum'
     | '/_tickets/tickets'
-    | '/events/$eventId'
-    | '/events/new'
-    | '/events/'
+    | '/lineup/$bandId'
+    | '/lineup/new'
+    | '/lineup/'
     | '/_authenticated/_dashboard/dashboard'
     | '/_sign-in/sign-in/$'
     | '/_sign-up/sign-up/$'
-    | '/events/$eventId/edit'
+    | '/lineup/$bandId/edit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   AboutAboutRoute: typeof AboutAboutRoute
+  CalendarCalendarRoute: typeof CalendarCalendarRoute
   ImpressumImpressumRoute: typeof ImpressumImpressumRoute
   TicketsTicketsRoute: typeof TicketsTicketsRoute
-  EventsEventIdRoute: typeof EventsEventIdRouteWithChildren
-  EventsNewRoute: typeof EventsNewRoute
-  EventsIndexRoute: typeof EventsIndexRoute
+  LineupBandIdRoute: typeof LineupBandIdRouteWithChildren
+  LineupNewRoute: typeof LineupNewRoute
+  LineupIndexRoute: typeof LineupIndexRoute
   SignInSignInSplatRoute: typeof SignInSignInSplatRoute
   SignUpSignUpSplatRoute: typeof SignUpSignUpSplatRoute
 }
@@ -196,25 +209,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/events/': {
-      id: '/events/'
-      path: '/events'
-      fullPath: '/events/'
-      preLoaderRoute: typeof EventsIndexRouteImport
+    '/lineup/': {
+      id: '/lineup/'
+      path: '/lineup'
+      fullPath: '/lineup/'
+      preLoaderRoute: typeof LineupIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/events/new': {
-      id: '/events/new'
-      path: '/events/new'
-      fullPath: '/events/new'
-      preLoaderRoute: typeof EventsNewRouteImport
+    '/lineup/new': {
+      id: '/lineup/new'
+      path: '/lineup/new'
+      fullPath: '/lineup/new'
+      preLoaderRoute: typeof LineupNewRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/events/$eventId': {
-      id: '/events/$eventId'
-      path: '/events/$eventId'
-      fullPath: '/events/$eventId'
-      preLoaderRoute: typeof EventsEventIdRouteImport
+    '/lineup/$bandId': {
+      id: '/lineup/$bandId'
+      path: '/lineup/$bandId'
+      fullPath: '/lineup/$bandId'
+      preLoaderRoute: typeof LineupBandIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_tickets/tickets': {
@@ -231,6 +244,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ImpressumImpressumRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_calendar/calendar': {
+      id: '/_calendar/calendar'
+      path: '/calendar'
+      fullPath: '/calendar'
+      preLoaderRoute: typeof CalendarCalendarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_about/about': {
       id: '/_about/about'
       path: '/about'
@@ -238,12 +258,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutAboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/events/$eventId/edit': {
-      id: '/events/$eventId/edit'
+    '/lineup/$bandId/edit': {
+      id: '/lineup/$bandId/edit'
       path: '/edit'
-      fullPath: '/events/$eventId/edit'
-      preLoaderRoute: typeof EventsEventIdEditRouteImport
-      parentRoute: typeof EventsEventIdRoute
+      fullPath: '/lineup/$bandId/edit'
+      preLoaderRoute: typeof LineupBandIdEditRouteImport
+      parentRoute: typeof LineupBandIdRoute
     }
     '/_sign-up/sign-up/$': {
       id: '/_sign-up/sign-up/$'
@@ -281,27 +301,28 @@ const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
   AuthenticatedRouteChildren,
 )
 
-interface EventsEventIdRouteChildren {
-  EventsEventIdEditRoute: typeof EventsEventIdEditRoute
+interface LineupBandIdRouteChildren {
+  LineupBandIdEditRoute: typeof LineupBandIdEditRoute
 }
 
-const EventsEventIdRouteChildren: EventsEventIdRouteChildren = {
-  EventsEventIdEditRoute: EventsEventIdEditRoute,
+const LineupBandIdRouteChildren: LineupBandIdRouteChildren = {
+  LineupBandIdEditRoute: LineupBandIdEditRoute,
 }
 
-const EventsEventIdRouteWithChildren = EventsEventIdRoute._addFileChildren(
-  EventsEventIdRouteChildren,
+const LineupBandIdRouteWithChildren = LineupBandIdRoute._addFileChildren(
+  LineupBandIdRouteChildren,
 )
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
   AboutAboutRoute: AboutAboutRoute,
+  CalendarCalendarRoute: CalendarCalendarRoute,
   ImpressumImpressumRoute: ImpressumImpressumRoute,
   TicketsTicketsRoute: TicketsTicketsRoute,
-  EventsEventIdRoute: EventsEventIdRouteWithChildren,
-  EventsNewRoute: EventsNewRoute,
-  EventsIndexRoute: EventsIndexRoute,
+  LineupBandIdRoute: LineupBandIdRouteWithChildren,
+  LineupNewRoute: LineupNewRoute,
+  LineupIndexRoute: LineupIndexRoute,
   SignInSignInSplatRoute: SignInSignInSplatRoute,
   SignUpSignUpSplatRoute: SignUpSignUpSplatRoute,
 }

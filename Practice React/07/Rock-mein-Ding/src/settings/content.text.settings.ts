@@ -1,5 +1,5 @@
 export const textContentSettings = {
   hero: {
-    text: "26.08 - 30.08 2027",
+    text: "27.08 - 29.08 2027",
   },
 };

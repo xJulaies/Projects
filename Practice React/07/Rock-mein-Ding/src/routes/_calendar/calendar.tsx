@@ -1,9 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/events/new')({
+export const Route = createFileRoute('/_calendar/calendar')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  return <div>Hello "/events/new"!</div>
+  return <div>Hello "/_calendar/calendar"!</div>
 }

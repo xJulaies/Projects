@@ -15,7 +15,8 @@ export function PublicNavbar() {
 
             <div className="absolute left-0 top-full bg-white flex min-w-40 flex-col gap-4 rounded-md border text-sm shadow-lg p-4">
               <NavbarLink url="/dashboard" label="Dashboard" />
-              <NavbarLink url="/events" label="Events" />
+              <NavbarLink url="/lineup" label="Lineup" />
+              <NavbarLink url="/calendar" label="Calendar" />
               <NavbarLink url="/tickets" label="Tickets" />
             </div>
           </details>
