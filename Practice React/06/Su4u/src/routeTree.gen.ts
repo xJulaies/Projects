@@ -9,16 +9,21 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RulesRulesRouteImport } from './routes/_rules/rules'
 import { Route as ImpressumImpressumRouteImport } from './routes/_impressum/impressum'
 import { Route as HistoryHistoryRouteImport } from './routes/_history/history'
 import { Route as GameGameRouteImport } from './routes/_game/game'
-import { Route as DashboardDashboardRouteImport } from './routes/_dashboard/dashboard'
 import { Route as AboutAboutRouteImport } from './routes/_about/about'
 import { Route as SignUpSignUpSplatRouteImport } from './routes/_sign-up/sign-up.$'
 import { Route as SignInSignInSplatRouteImport } from './routes/_sign-in/sign-in.$'
+import { Route as AuthenticatedDashboardDashboardRouteImport } from './routes/_authenticated/_dashboard/dashboard'
 
+const AuthenticatedRoute = AuthenticatedRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -44,11 +49,6 @@ const GameGameRoute = GameGameRouteImport.update({
   path: '/game',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DashboardDashboardRoute = DashboardDashboardRouteImport.update({
-  id: '/_dashboard/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AboutAboutRoute = AboutAboutRouteImport.update({
   id: '/_about/about',
   path: '/about',
@@ -64,38 +64,45 @@ const SignInSignInSplatRoute = SignInSignInSplatRouteImport.update({
   path: '/sign-in/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedDashboardDashboardRoute =
+  AuthenticatedDashboardDashboardRouteImport.update({
+    id: '/_dashboard/dashboard',
+    path: '/dashboard',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutAboutRoute
-  '/dashboard': typeof DashboardDashboardRoute
   '/game': typeof GameGameRoute
   '/history': typeof HistoryHistoryRoute
   '/impressum': typeof ImpressumImpressumRoute
   '/rules': typeof RulesRulesRoute
+  '/dashboard': typeof AuthenticatedDashboardDashboardRoute
   '/sign-in/$': typeof SignInSignInSplatRoute
   '/sign-up/$': typeof SignUpSignUpSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutAboutRoute
-  '/dashboard': typeof DashboardDashboardRoute
   '/game': typeof GameGameRoute
   '/history': typeof HistoryHistoryRoute
   '/impressum': typeof ImpressumImpressumRoute
   '/rules': typeof RulesRulesRoute
+  '/dashboard': typeof AuthenticatedDashboardDashboardRoute
   '/sign-in/$': typeof SignInSignInSplatRoute
   '/sign-up/$': typeof SignUpSignUpSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/_about/about': typeof AboutAboutRoute
-  '/_dashboard/dashboard': typeof DashboardDashboardRoute
   '/_game/game': typeof GameGameRoute
   '/_history/history': typeof HistoryHistoryRoute
   '/_impressum/impressum': typeof ImpressumImpressumRoute
   '/_rules/rules': typeof RulesRulesRoute
+  '/_authenticated/_dashboard/dashboard': typeof AuthenticatedDashboardDashboardRoute
   '/_sign-in/sign-in/$': typeof SignInSignInSplatRoute
   '/_sign-up/sign-up/$': typeof SignUpSignUpSplatRoute
 }
@@ -104,41 +111,42 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
-    | '/dashboard'
     | '/game'
     | '/history'
     | '/impressum'
     | '/rules'
+    | '/dashboard'
     | '/sign-in/$'
     | '/sign-up/$'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
-    | '/dashboard'
     | '/game'
     | '/history'
     | '/impressum'
     | '/rules'
+    | '/dashboard'
     | '/sign-in/$'
     | '/sign-up/$'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/_about/about'
-    | '/_dashboard/dashboard'
     | '/_game/game'
     | '/_history/history'
     | '/_impressum/impressum'
     | '/_rules/rules'
+    | '/_authenticated/_dashboard/dashboard'
     | '/_sign-in/sign-in/$'
     | '/_sign-up/sign-up/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   AboutAboutRoute: typeof AboutAboutRoute
-  DashboardDashboardRoute: typeof DashboardDashboardRoute
   GameGameRoute: typeof GameGameRoute
   HistoryHistoryRoute: typeof HistoryHistoryRoute
   ImpressumImpressumRoute: typeof ImpressumImpressumRoute
@@ -149,6 +157,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -184,13 +199,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GameGameRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_dashboard/dashboard': {
-      id: '/_dashboard/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof DashboardDashboardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/_about/about': {
       id: '/_about/about'
       path: '/about'
@@ -212,13 +220,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignInSignInSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/_dashboard/dashboard': {
+      id: '/_authenticated/_dashboard/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardDashboardRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
   }
 }
 
+interface AuthenticatedRouteChildren {
+  AuthenticatedDashboardDashboardRoute: typeof AuthenticatedDashboardDashboardRoute
+}
+
+const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedDashboardDashboardRoute: AuthenticatedDashboardDashboardRoute,
+}
+
+const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
+  AuthenticatedRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRoute: AuthenticatedRouteWithChildren,
   AboutAboutRoute: AboutAboutRoute,
-  DashboardDashboardRoute: DashboardDashboardRoute,
   GameGameRoute: GameGameRoute,
   HistoryHistoryRoute: HistoryHistoryRoute,
   ImpressumImpressumRoute: ImpressumImpressumRoute,
