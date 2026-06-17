@@ -14,6 +14,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as EventsIndexRouteImport } from './routes/events/index'
 import { Route as EventsNewRouteImport } from './routes/events/new'
 import { Route as EventsEventIdRouteImport } from './routes/events/$eventId'
+import { Route as TicketsTicketsRouteImport } from './routes/_tickets/tickets'
 import { Route as ImpressumImpressumRouteImport } from './routes/_impressum/impressum'
 import { Route as AboutAboutRouteImport } from './routes/_about/about'
 import { Route as EventsEventIdEditRouteImport } from './routes/events/$eventId.edit'
@@ -43,6 +44,11 @@ const EventsNewRoute = EventsNewRouteImport.update({
 const EventsEventIdRoute = EventsEventIdRouteImport.update({
   id: '/events/$eventId',
   path: '/events/$eventId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TicketsTicketsRoute = TicketsTicketsRouteImport.update({
+  id: '/_tickets/tickets',
+  path: '/tickets',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ImpressumImpressumRoute = ImpressumImpressumRouteImport.update({
@@ -81,6 +87,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutAboutRoute
   '/impressum': typeof ImpressumImpressumRoute
+  '/tickets': typeof TicketsTicketsRoute
   '/events/$eventId': typeof EventsEventIdRouteWithChildren
   '/events/new': typeof EventsNewRoute
   '/events/': typeof EventsIndexRoute
@@ -93,6 +100,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutAboutRoute
   '/impressum': typeof ImpressumImpressumRoute
+  '/tickets': typeof TicketsTicketsRoute
   '/events/$eventId': typeof EventsEventIdRouteWithChildren
   '/events/new': typeof EventsNewRoute
   '/events': typeof EventsIndexRoute
@@ -107,6 +115,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/_about/about': typeof AboutAboutRoute
   '/_impressum/impressum': typeof ImpressumImpressumRoute
+  '/_tickets/tickets': typeof TicketsTicketsRoute
   '/events/$eventId': typeof EventsEventIdRouteWithChildren
   '/events/new': typeof EventsNewRoute
   '/events/': typeof EventsIndexRoute
@@ -121,6 +130,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/impressum'
+    | '/tickets'
     | '/events/$eventId'
     | '/events/new'
     | '/events/'
@@ -133,6 +143,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/impressum'
+    | '/tickets'
     | '/events/$eventId'
     | '/events/new'
     | '/events'
@@ -146,6 +157,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/_about/about'
     | '/_impressum/impressum'
+    | '/_tickets/tickets'
     | '/events/$eventId'
     | '/events/new'
     | '/events/'
@@ -160,6 +172,7 @@ export interface RootRouteChildren {
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   AboutAboutRoute: typeof AboutAboutRoute
   ImpressumImpressumRoute: typeof ImpressumImpressumRoute
+  TicketsTicketsRoute: typeof TicketsTicketsRoute
   EventsEventIdRoute: typeof EventsEventIdRouteWithChildren
   EventsNewRoute: typeof EventsNewRoute
   EventsIndexRoute: typeof EventsIndexRoute
@@ -202,6 +215,13 @@ declare module '@tanstack/react-router' {
       path: '/events/$eventId'
       fullPath: '/events/$eventId'
       preLoaderRoute: typeof EventsEventIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_tickets/tickets': {
+      id: '/_tickets/tickets'
+      path: '/tickets'
+      fullPath: '/tickets'
+      preLoaderRoute: typeof TicketsTicketsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_impressum/impressum': {
@@ -278,6 +298,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
   AboutAboutRoute: AboutAboutRoute,
   ImpressumImpressumRoute: ImpressumImpressumRoute,
+  TicketsTicketsRoute: TicketsTicketsRoute,
   EventsEventIdRoute: EventsEventIdRouteWithChildren,
   EventsNewRoute: EventsNewRoute,
   EventsIndexRoute: EventsIndexRoute,

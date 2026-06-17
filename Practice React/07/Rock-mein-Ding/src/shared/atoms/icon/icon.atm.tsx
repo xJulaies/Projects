@@ -1,8 +1,5 @@
-import iconImage from "/public/images/icon.png";
 import type { TDisplayIconProps } from "./icon.types";
 
-export function DisplayIcon({ iconClassName }: TDisplayIconProps) {
-  return (
-    <img src={iconImage} alt="rock mein ding logo" className={iconClassName} />
-  );
+export function DisplayIcon({ iconClassName, img, alt }: TDisplayIconProps) {
+  return <img src={img} alt={alt} className={iconClassName} />;
 }

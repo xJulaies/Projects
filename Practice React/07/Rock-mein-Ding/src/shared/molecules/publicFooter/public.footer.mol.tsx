@@ -1,12 +1,17 @@
 import { FooterLink } from "../../atoms/footer/public.footerLink.atm";
 import { DisplayIcon } from "../../atoms/icon/icon.atm";
+import iconImage from "/public/images/icon.png";
 
 export function PublicFooter() {
   return (
     <footer className="p-8 md:p-16">
       <div className="grid grid-cols-2 justify-items-center">
         <div className="flex gap-4 items-center">
-          <DisplayIcon iconClassName="h-14 w-auto object-contain md:h-20" />
+          <DisplayIcon
+            alt="the logo of Rock mein Ding"
+            img={iconImage}
+            iconClassName="h-14 w-auto object-contain md:h-20"
+          />
           <span>
             (c) 2026 Rock mein Ding. A React learning project built by xJulaies.
           </span>
