@@ -11,6 +11,13 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EventsIndexRouteImport } from './routes/events/index'
+import { Route as EventsNewRouteImport } from './routes/events/new'
+import { Route as EventsEventIdRouteImport } from './routes/events/$eventId'
+import { Route as ImpressumImpressumRouteImport } from './routes/_impressum/impressum'
+import { Route as AboutAboutRouteImport } from './routes/_about/about'
+import { Route as EventsEventIdEditRouteImport } from './routes/events/$eventId.edit'
+import { Route as SignUpSignUpSplatRouteImport } from './routes/_sign-up/sign-up.$'
 import { Route as SignInSignInSplatRouteImport } from './routes/_sign-in/sign-in.$'
 import { Route as AuthenticatedDashboardDashboardRouteImport } from './routes/_authenticated/_dashboard/dashboard'
 
@@ -21,6 +28,41 @@ const AuthenticatedRoute = AuthenticatedRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsIndexRoute = EventsIndexRouteImport.update({
+  id: '/events/',
+  path: '/events/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsNewRoute = EventsNewRouteImport.update({
+  id: '/events/new',
+  path: '/events/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsEventIdRoute = EventsEventIdRouteImport.update({
+  id: '/events/$eventId',
+  path: '/events/$eventId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImpressumImpressumRoute = ImpressumImpressumRouteImport.update({
+  id: '/_impressum/impressum',
+  path: '/impressum',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutAboutRoute = AboutAboutRouteImport.update({
+  id: '/_about/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsEventIdEditRoute = EventsEventIdEditRouteImport.update({
+  id: '/edit',
+  path: '/edit',
+  getParentRoute: () => EventsEventIdRoute,
+} as any)
+const SignUpSignUpSplatRoute = SignUpSignUpSplatRouteImport.update({
+  id: '/_sign-up/sign-up/$',
+  path: '/sign-up/$',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SignInSignInSplatRoute = SignInSignInSplatRouteImport.update({
@@ -37,38 +79,92 @@ const AuthenticatedDashboardDashboardRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutAboutRoute
+  '/impressum': typeof ImpressumImpressumRoute
+  '/events/$eventId': typeof EventsEventIdRouteWithChildren
+  '/events/new': typeof EventsNewRoute
+  '/events/': typeof EventsIndexRoute
   '/dashboard': typeof AuthenticatedDashboardDashboardRoute
   '/sign-in/$': typeof SignInSignInSplatRoute
+  '/sign-up/$': typeof SignUpSignUpSplatRoute
+  '/events/$eventId/edit': typeof EventsEventIdEditRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutAboutRoute
+  '/impressum': typeof ImpressumImpressumRoute
+  '/events/$eventId': typeof EventsEventIdRouteWithChildren
+  '/events/new': typeof EventsNewRoute
+  '/events': typeof EventsIndexRoute
   '/dashboard': typeof AuthenticatedDashboardDashboardRoute
   '/sign-in/$': typeof SignInSignInSplatRoute
+  '/sign-up/$': typeof SignUpSignUpSplatRoute
+  '/events/$eventId/edit': typeof EventsEventIdEditRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteWithChildren
+  '/_about/about': typeof AboutAboutRoute
+  '/_impressum/impressum': typeof ImpressumImpressumRoute
+  '/events/$eventId': typeof EventsEventIdRouteWithChildren
+  '/events/new': typeof EventsNewRoute
+  '/events/': typeof EventsIndexRoute
   '/_authenticated/_dashboard/dashboard': typeof AuthenticatedDashboardDashboardRoute
   '/_sign-in/sign-in/$': typeof SignInSignInSplatRoute
+  '/_sign-up/sign-up/$': typeof SignUpSignUpSplatRoute
+  '/events/$eventId/edit': typeof EventsEventIdEditRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/sign-in/$'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/impressum'
+    | '/events/$eventId'
+    | '/events/new'
+    | '/events/'
+    | '/dashboard'
+    | '/sign-in/$'
+    | '/sign-up/$'
+    | '/events/$eventId/edit'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/sign-in/$'
+  to:
+    | '/'
+    | '/about'
+    | '/impressum'
+    | '/events/$eventId'
+    | '/events/new'
+    | '/events'
+    | '/dashboard'
+    | '/sign-in/$'
+    | '/sign-up/$'
+    | '/events/$eventId/edit'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
+    | '/_about/about'
+    | '/_impressum/impressum'
+    | '/events/$eventId'
+    | '/events/new'
+    | '/events/'
     | '/_authenticated/_dashboard/dashboard'
     | '/_sign-in/sign-in/$'
+    | '/_sign-up/sign-up/$'
+    | '/events/$eventId/edit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
+  AboutAboutRoute: typeof AboutAboutRoute
+  ImpressumImpressumRoute: typeof ImpressumImpressumRoute
+  EventsEventIdRoute: typeof EventsEventIdRouteWithChildren
+  EventsNewRoute: typeof EventsNewRoute
+  EventsIndexRoute: typeof EventsIndexRoute
   SignInSignInSplatRoute: typeof SignInSignInSplatRoute
+  SignUpSignUpSplatRoute: typeof SignUpSignUpSplatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -85,6 +181,55 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events/': {
+      id: '/events/'
+      path: '/events'
+      fullPath: '/events/'
+      preLoaderRoute: typeof EventsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events/new': {
+      id: '/events/new'
+      path: '/events/new'
+      fullPath: '/events/new'
+      preLoaderRoute: typeof EventsNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events/$eventId': {
+      id: '/events/$eventId'
+      path: '/events/$eventId'
+      fullPath: '/events/$eventId'
+      preLoaderRoute: typeof EventsEventIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_impressum/impressum': {
+      id: '/_impressum/impressum'
+      path: '/impressum'
+      fullPath: '/impressum'
+      preLoaderRoute: typeof ImpressumImpressumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_about/about': {
+      id: '/_about/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutAboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events/$eventId/edit': {
+      id: '/events/$eventId/edit'
+      path: '/edit'
+      fullPath: '/events/$eventId/edit'
+      preLoaderRoute: typeof EventsEventIdEditRouteImport
+      parentRoute: typeof EventsEventIdRoute
+    }
+    '/_sign-up/sign-up/$': {
+      id: '/_sign-up/sign-up/$'
+      path: '/sign-up/$'
+      fullPath: '/sign-up/$'
+      preLoaderRoute: typeof SignUpSignUpSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_sign-in/sign-in/$': {
@@ -116,10 +261,28 @@ const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
   AuthenticatedRouteChildren,
 )
 
+interface EventsEventIdRouteChildren {
+  EventsEventIdEditRoute: typeof EventsEventIdEditRoute
+}
+
+const EventsEventIdRouteChildren: EventsEventIdRouteChildren = {
+  EventsEventIdEditRoute: EventsEventIdEditRoute,
+}
+
+const EventsEventIdRouteWithChildren = EventsEventIdRoute._addFileChildren(
+  EventsEventIdRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
+  AboutAboutRoute: AboutAboutRoute,
+  ImpressumImpressumRoute: ImpressumImpressumRoute,
+  EventsEventIdRoute: EventsEventIdRouteWithChildren,
+  EventsNewRoute: EventsNewRoute,
+  EventsIndexRoute: EventsIndexRoute,
   SignInSignInSplatRoute: SignInSignInSplatRoute,
+  SignUpSignUpSplatRoute: SignUpSignUpSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
