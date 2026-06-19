@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { bandData } from "../../../../../features/bands/data/band.data";
-import { BandEditForm } from "../../../../../features/dashboard/bands/components/organisms/bandEditForm.layout";
+import { BandEditForm } from "../../../../../features/dashboard/bands/components/organisms/bandEdit.form.layout";
 
 export const Route = createFileRoute(
   "/_authenticated/dashboard/bands/$bandId/edit",
