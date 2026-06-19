@@ -1,5 +1,6 @@
 import type { TAdminBandProps } from "../../types/admin.band.types";
 import { EditLink } from "./../atoms/bandEdit.atm";
+import { BandStatusBadge } from "../atoms/bandStatusBadge.atm";
 
 export function DisplayAdminBand({ band }: TAdminBandProps) {
   return (
@@ -10,9 +11,7 @@ export function DisplayAdminBand({ band }: TAdminBandProps) {
           <p className="text-sm text-muted">{band.genre}</p>
         </div>
 
-        <span className="chip chip--success chip--soft chip--sm uppercase">
-          {band.status}
-        </span>
+        <BandStatusBadge status={band.status} />
       </div>
 
       <dl className="grid grid-cols-[auto_1fr] gap-x-6 gap-y-2 rounded-md bg-surface-tertiary p-4 text-sm">

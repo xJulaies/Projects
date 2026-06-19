@@ -4,6 +4,15 @@ export type TAdminBandProps = {
   band: IBand;
 };
 
+export type TBandStatusBadgeProps = {
+  status: IBand["status"];
+};
+
+export type TSelectFieldParams = {
+  field: "stage" | "day" | "startTime" | "endTime" | "status";
+  key: string | number | null;
+};
+
 export type TAdminNewBandForm = {
   name: string;
   genre: string;

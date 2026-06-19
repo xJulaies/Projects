@@ -1,16 +1,27 @@
 import { useState, type ChangeEvent, type SubmitEvent } from "react";
+import { Label, ListBox, Select } from "@heroui/react";
 import { z } from "zod";
 import { newBandSchema } from "../../schemas/newBand.schema";
 import { FormError } from "../atoms/formError.atm";
+import { BandStatusBadge } from "../atoms/bandStatusBadge.atm";
 import type {
   TAdminNewBandForm,
   TFormErrors,
+  TSelectFieldParams,
 } from "../../types/admin.band.types";
 import type { IBand } from "../../../../bands/types/band.types";
 
 const inputClasses =
   "rounded-md border border-border bg-field-background px-3 py-2 text-field-foreground";
 const labelClasses = "grid gap-2 text-sm font-medium";
+
+const timeOptions = Array.from({ length: 52 }, (_, index) => {
+  const totalMinutes = 11 * 60 + index * 15;
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+
+  return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
+});
 
 export function NewBandFormLayout() {
   const [formData, setFormData] = useState<TAdminNewBandForm>({
@@ -38,6 +49,17 @@ export function NewBandFormLayout() {
       [name]: value,
     }));
   }
+
+  function handleSelectChange({ field, key }: TSelectFieldParams) {
+    if (key === null) {
+      return;
+    }
+    setFormData((prev) => ({
+      ...prev,
+      [field]: String(key),
+    }));
+  }
+
   function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
     const result = newBandSchema.safeParse(formData);
@@ -124,64 +146,120 @@ export function NewBandFormLayout() {
         <FormError message={errors.members?.[0]} />
       </label>
 
-      <label className={labelClasses} htmlFor="stage">
-        Stage
-        <select
-          value={formData.stage}
-          onChange={handleChange}
-          id="stage"
-          name="stage"
-          className={inputClasses}
-        >
-          <option value="Apollo North">Apollo North</option>
-          <option value="Grand X">Grand X</option>
-          <option value="Side West">Side West</option>
-        </select>
-      </label>
+      <Select
+        fullWidth
+        value={formData.stage}
+        onChange={(key) => handleSelectChange({ field: "stage", key })}
+      >
+        <Label>Stage</Label>
+        <Select.Trigger>
+          <Select.Value />
+          <Select.Indicator />
+        </Select.Trigger>
+        <Select.Popover>
+          <ListBox>
+            {(["Apollo North", "Grand X", "Side West"] as const).map(
+              (stageOption) => (
+                <ListBox.Item
+                  key={stageOption}
+                  id={stageOption}
+                  textValue={stageOption}
+                >
+                  {stageOption}
+                  <ListBox.ItemIndicator />
+                </ListBox.Item>
+              ),
+            )}
+          </ListBox>
+        </Select.Popover>
+      </Select>
 
-      <label className={labelClasses} htmlFor="day">
-        Day
-        <select
-          value={formData.day}
-          onChange={handleChange}
-          id="day"
-          name="day"
-          className={inputClasses}
-        >
-          <option value="Friday">Friday</option>
-          <option value="Saturday">Saturday</option>
-          <option value="Sunday">Sunday</option>
-        </select>
-      </label>
+      <Select
+        fullWidth
+        value={formData.day}
+        onChange={(key) => handleSelectChange({ field: "day", key })}
+      >
+        <Label>Day</Label>
+        <Select.Trigger>
+          <Select.Value />
+          <Select.Indicator />
+        </Select.Trigger>
+        <Select.Popover>
+          <ListBox>
+            {(["Friday", "Saturday", "Sunday"] as const).map((dayOption) => (
+              <ListBox.Item
+                key={dayOption}
+                id={dayOption}
+                textValue={dayOption}
+              >
+                {dayOption}
+                <ListBox.ItemIndicator />
+              </ListBox.Item>
+            ))}
+          </ListBox>
+        </Select.Popover>
+      </Select>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <label className={labelClasses} htmlFor="startTime">
-          Start time
-          <input
-            value={formData.startTime}
-            onClick={(event) => event.currentTarget.showPicker()}
-            onChange={handleChange}
-            id="startTime"
-            name="startTime"
-            type="time"
-            className={`${inputClasses} cursor-pointer`}
-          />
+        <Select
+          fullWidth
+          name="startTime"
+          placeholder="Select a time"
+          value={formData.startTime || null}
+          onChange={(key) => handleSelectChange({ field: "startTime", key })}
+          isInvalid={Boolean(errors.startTime)}
+        >
+          <Label>Start time</Label>
+          <Select.Trigger>
+            <Select.Value />
+            <Select.Indicator />
+          </Select.Trigger>
+          <Select.Popover>
+            <ListBox>
+              {timeOptions.map((timeOption) => (
+                <ListBox.Item
+                  key={timeOption}
+                  id={timeOption}
+                  textValue={timeOption}
+                >
+                  {timeOption}
+                  <ListBox.ItemIndicator />
+                </ListBox.Item>
+              ))}
+            </ListBox>
+          </Select.Popover>
           <FormError message={errors.startTime?.[0]} />
-        </label>
+        </Select>
 
-        <label className={labelClasses} htmlFor="endTime">
-          End time
-          <input
-            value={formData.endTime}
-            onClick={(event) => event.currentTarget.showPicker()}
-            onChange={handleChange}
-            id="endTime"
-            name="endTime"
-            type="time"
-            className={`${inputClasses} cursor-pointer`}
-          />
+        <Select
+          fullWidth
+          name="endTime"
+          placeholder="Select a time"
+          value={formData.endTime || null}
+          onChange={(key) => handleSelectChange({ field: "endTime", key })}
+          isInvalid={Boolean(errors.endTime)}
+        >
+          <Label>End time</Label>
+          <Select.Trigger>
+            <Select.Value />
+            <Select.Indicator />
+          </Select.Trigger>
+          <Select.Popover>
+            <ListBox>
+              {timeOptions.map((timeOption) => (
+                <ListBox.Item
+                  key={timeOption}
+                  id={timeOption}
+                  textValue={timeOption}
+                >
+                  {timeOption}
+                  <ListBox.ItemIndicator />
+                </ListBox.Item>
+              ))}
+            </ListBox>
+          </Select.Popover>
           <FormError message={errors.endTime?.[0]} />
-        </label>
+        </Select>
       </div>
 
       <label className={labelClasses} htmlFor="description">
@@ -198,21 +276,33 @@ export function NewBandFormLayout() {
         <FormError message={errors.description?.[0]} />
       </label>
 
-      <label className={labelClasses} htmlFor="status">
-        Status
-        <select
-          value={formData.status}
-          onChange={handleChange}
-          id="status"
-          name="status"
-          className={`capitalize ${inputClasses}`}
-        >
-          <option value="confirmed">Confirmed</option>
-          <option value="pending">Pending</option>
-          <option value="rejected">Rejected</option>
-          <option value="cancelled">Cancelled</option>
-        </select>
-      </label>
+      <Select
+        fullWidth
+        value={formData.status}
+        onChange={(key) => handleSelectChange({ field: "status", key })}
+      >
+        <Label>Status</Label>
+        <Select.Trigger>
+          <Select.Value className="capitalize" />
+          <Select.Indicator />
+        </Select.Trigger>
+        <Select.Popover>
+          <ListBox>
+            {(["confirmed", "pending", "rejected", "cancelled"] as const).map(
+              (statusOption) => (
+                <ListBox.Item
+                  key={statusOption}
+                  id={statusOption}
+                  textValue={statusOption}
+                >
+                  <BandStatusBadge status={statusOption} />
+                  <ListBox.ItemIndicator />
+                </ListBox.Item>
+              ),
+            )}
+          </ListBox>
+        </Select.Popover>
+      </Select>
 
       <button
         type="submit"
