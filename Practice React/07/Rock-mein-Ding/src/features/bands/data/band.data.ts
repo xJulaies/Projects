@@ -1,4 +1,4 @@
-import type { IBand } from "./band.types";
+import type { IBand } from "../types/band.types";
 
 export const bandData: IBand[] = [
   {

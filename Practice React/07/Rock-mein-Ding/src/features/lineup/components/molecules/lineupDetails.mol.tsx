@@ -1,4 +1,4 @@
-import type { IBand } from "../../data/band.types";
+import type { IBand } from "../../../bands/types/band.types";
 import { Card } from "@heroui/react";
 
 type BandDetailsProps = {

@@ -1,5 +1,5 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
-import { bandData } from "../../features/lineup/data/band.data";
+import { bandData } from "../../features/bands/data/band.data";
 import { PublicLayout } from "../../shared/organisms/templates/public.layout";
 import { BandDetails } from "../../features/lineup/components/molecules/lineupDetails.mol";
 

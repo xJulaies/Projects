@@ -1,4 +1,4 @@
-import { bandData } from "../../data/band.data";
+import { bandData } from "../../../bands/data/band.data";
 import { DisplayBand } from "./../atoms/lineup.atm";
 
 export function Lineup() {
