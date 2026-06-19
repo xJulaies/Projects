@@ -1,6 +1,6 @@
 import type { IBand } from "./band.types";
 
-export const lineUpData: IBand[] = [
+export const bandData: IBand[] = [
   {
     id: "metallica",
     name: "Metallica",

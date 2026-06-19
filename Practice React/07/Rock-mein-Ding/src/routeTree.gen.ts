@@ -12,16 +12,18 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LineupIndexRouteImport } from './routes/lineup/index'
-import { Route as LineupNewRouteImport } from './routes/lineup/new'
 import { Route as LineupBandIdRouteImport } from './routes/lineup/$bandId'
 import { Route as TicketsTicketsRouteImport } from './routes/_tickets/tickets'
 import { Route as ImpressumImpressumRouteImport } from './routes/_impressum/impressum'
 import { Route as CalendarCalendarRouteImport } from './routes/_calendar/calendar'
 import { Route as AboutAboutRouteImport } from './routes/_about/about'
-import { Route as LineupBandIdEditRouteImport } from './routes/lineup/$bandId.edit'
 import { Route as SignUpSignUpSplatRouteImport } from './routes/_sign-up/sign-up.$'
 import { Route as SignInSignInSplatRouteImport } from './routes/_sign-in/sign-in.$'
 import { Route as AuthenticatedDashboardDashboardRouteImport } from './routes/_authenticated/_dashboard/dashboard'
+import { Route as AuthenticatedDashboardBandsNewRouteImport } from './routes/_authenticated/_dashboard/_bands/new'
+import { Route as AuthenticatedDashboardBandsBandsRouteImport } from './routes/_authenticated/_dashboard/_bands/bands'
+import { Route as AuthenticatedDashboardBandsBandIdRouteImport } from './routes/_authenticated/_dashboard/_bands/$bandId'
+import { Route as AuthenticatedDashboardBandsBandIdEditRouteImport } from './routes/_authenticated/_dashboard/_bands/$bandId.edit'
 
 const AuthenticatedRoute = AuthenticatedRouteImport.update({
   id: '/_authenticated',
@@ -35,11 +37,6 @@ const IndexRoute = IndexRouteImport.update({
 const LineupIndexRoute = LineupIndexRouteImport.update({
   id: '/lineup/',
   path: '/lineup/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LineupNewRoute = LineupNewRouteImport.update({
-  id: '/lineup/new',
-  path: '/lineup/new',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LineupBandIdRoute = LineupBandIdRouteImport.update({
@@ -67,11 +64,6 @@ const AboutAboutRoute = AboutAboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LineupBandIdEditRoute = LineupBandIdEditRouteImport.update({
-  id: '/edit',
-  path: '/edit',
-  getParentRoute: () => LineupBandIdRoute,
-} as any)
 const SignUpSignUpSplatRoute = SignUpSignUpSplatRouteImport.update({
   id: '/_sign-up/sign-up/$',
   path: '/sign-up/$',
@@ -88,6 +80,30 @@ const AuthenticatedDashboardDashboardRoute =
     path: '/dashboard',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
+const AuthenticatedDashboardBandsNewRoute =
+  AuthenticatedDashboardBandsNewRouteImport.update({
+    id: '/_dashboard/_bands/new',
+    path: '/new',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedDashboardBandsBandsRoute =
+  AuthenticatedDashboardBandsBandsRouteImport.update({
+    id: '/_dashboard/_bands/bands',
+    path: '/bands',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedDashboardBandsBandIdRoute =
+  AuthenticatedDashboardBandsBandIdRouteImport.update({
+    id: '/_dashboard/_bands/$bandId',
+    path: '/$bandId',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedDashboardBandsBandIdEditRoute =
+  AuthenticatedDashboardBandsBandIdEditRouteImport.update({
+    id: '/edit',
+    path: '/edit',
+    getParentRoute: () => AuthenticatedDashboardBandsBandIdRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -95,13 +111,15 @@ export interface FileRoutesByFullPath {
   '/calendar': typeof CalendarCalendarRoute
   '/impressum': typeof ImpressumImpressumRoute
   '/tickets': typeof TicketsTicketsRoute
-  '/lineup/$bandId': typeof LineupBandIdRouteWithChildren
-  '/lineup/new': typeof LineupNewRoute
+  '/lineup/$bandId': typeof LineupBandIdRoute
   '/lineup/': typeof LineupIndexRoute
   '/dashboard': typeof AuthenticatedDashboardDashboardRoute
   '/sign-in/$': typeof SignInSignInSplatRoute
   '/sign-up/$': typeof SignUpSignUpSplatRoute
-  '/lineup/$bandId/edit': typeof LineupBandIdEditRoute
+  '/$bandId': typeof AuthenticatedDashboardBandsBandIdRouteWithChildren
+  '/bands': typeof AuthenticatedDashboardBandsBandsRoute
+  '/new': typeof AuthenticatedDashboardBandsNewRoute
+  '/$bandId/edit': typeof AuthenticatedDashboardBandsBandIdEditRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -109,13 +127,15 @@ export interface FileRoutesByTo {
   '/calendar': typeof CalendarCalendarRoute
   '/impressum': typeof ImpressumImpressumRoute
   '/tickets': typeof TicketsTicketsRoute
-  '/lineup/$bandId': typeof LineupBandIdRouteWithChildren
-  '/lineup/new': typeof LineupNewRoute
+  '/lineup/$bandId': typeof LineupBandIdRoute
   '/lineup': typeof LineupIndexRoute
   '/dashboard': typeof AuthenticatedDashboardDashboardRoute
   '/sign-in/$': typeof SignInSignInSplatRoute
   '/sign-up/$': typeof SignUpSignUpSplatRoute
-  '/lineup/$bandId/edit': typeof LineupBandIdEditRoute
+  '/$bandId': typeof AuthenticatedDashboardBandsBandIdRouteWithChildren
+  '/bands': typeof AuthenticatedDashboardBandsBandsRoute
+  '/new': typeof AuthenticatedDashboardBandsNewRoute
+  '/$bandId/edit': typeof AuthenticatedDashboardBandsBandIdEditRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -125,13 +145,15 @@ export interface FileRoutesById {
   '/_calendar/calendar': typeof CalendarCalendarRoute
   '/_impressum/impressum': typeof ImpressumImpressumRoute
   '/_tickets/tickets': typeof TicketsTicketsRoute
-  '/lineup/$bandId': typeof LineupBandIdRouteWithChildren
-  '/lineup/new': typeof LineupNewRoute
+  '/lineup/$bandId': typeof LineupBandIdRoute
   '/lineup/': typeof LineupIndexRoute
   '/_authenticated/_dashboard/dashboard': typeof AuthenticatedDashboardDashboardRoute
   '/_sign-in/sign-in/$': typeof SignInSignInSplatRoute
   '/_sign-up/sign-up/$': typeof SignUpSignUpSplatRoute
-  '/lineup/$bandId/edit': typeof LineupBandIdEditRoute
+  '/_authenticated/_dashboard/_bands/$bandId': typeof AuthenticatedDashboardBandsBandIdRouteWithChildren
+  '/_authenticated/_dashboard/_bands/bands': typeof AuthenticatedDashboardBandsBandsRoute
+  '/_authenticated/_dashboard/_bands/new': typeof AuthenticatedDashboardBandsNewRoute
+  '/_authenticated/_dashboard/_bands/$bandId/edit': typeof AuthenticatedDashboardBandsBandIdEditRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -142,12 +164,14 @@ export interface FileRouteTypes {
     | '/impressum'
     | '/tickets'
     | '/lineup/$bandId'
-    | '/lineup/new'
     | '/lineup/'
     | '/dashboard'
     | '/sign-in/$'
     | '/sign-up/$'
-    | '/lineup/$bandId/edit'
+    | '/$bandId'
+    | '/bands'
+    | '/new'
+    | '/$bandId/edit'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -156,12 +180,14 @@ export interface FileRouteTypes {
     | '/impressum'
     | '/tickets'
     | '/lineup/$bandId'
-    | '/lineup/new'
     | '/lineup'
     | '/dashboard'
     | '/sign-in/$'
     | '/sign-up/$'
-    | '/lineup/$bandId/edit'
+    | '/$bandId'
+    | '/bands'
+    | '/new'
+    | '/$bandId/edit'
   id:
     | '__root__'
     | '/'
@@ -171,12 +197,14 @@ export interface FileRouteTypes {
     | '/_impressum/impressum'
     | '/_tickets/tickets'
     | '/lineup/$bandId'
-    | '/lineup/new'
     | '/lineup/'
     | '/_authenticated/_dashboard/dashboard'
     | '/_sign-in/sign-in/$'
     | '/_sign-up/sign-up/$'
-    | '/lineup/$bandId/edit'
+    | '/_authenticated/_dashboard/_bands/$bandId'
+    | '/_authenticated/_dashboard/_bands/bands'
+    | '/_authenticated/_dashboard/_bands/new'
+    | '/_authenticated/_dashboard/_bands/$bandId/edit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -186,8 +214,7 @@ export interface RootRouteChildren {
   CalendarCalendarRoute: typeof CalendarCalendarRoute
   ImpressumImpressumRoute: typeof ImpressumImpressumRoute
   TicketsTicketsRoute: typeof TicketsTicketsRoute
-  LineupBandIdRoute: typeof LineupBandIdRouteWithChildren
-  LineupNewRoute: typeof LineupNewRoute
+  LineupBandIdRoute: typeof LineupBandIdRoute
   LineupIndexRoute: typeof LineupIndexRoute
   SignInSignInSplatRoute: typeof SignInSignInSplatRoute
   SignUpSignUpSplatRoute: typeof SignUpSignUpSplatRoute
@@ -214,13 +241,6 @@ declare module '@tanstack/react-router' {
       path: '/lineup'
       fullPath: '/lineup/'
       preLoaderRoute: typeof LineupIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/lineup/new': {
-      id: '/lineup/new'
-      path: '/lineup/new'
-      fullPath: '/lineup/new'
-      preLoaderRoute: typeof LineupNewRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lineup/$bandId': {
@@ -258,13 +278,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutAboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/lineup/$bandId/edit': {
-      id: '/lineup/$bandId/edit'
-      path: '/edit'
-      fullPath: '/lineup/$bandId/edit'
-      preLoaderRoute: typeof LineupBandIdEditRouteImport
-      parentRoute: typeof LineupBandIdRoute
-    }
     '/_sign-up/sign-up/$': {
       id: '/_sign-up/sign-up/$'
       path: '/sign-up/$'
@@ -286,31 +299,69 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardDashboardRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/_dashboard/_bands/new': {
+      id: '/_authenticated/_dashboard/_bands/new'
+      path: '/new'
+      fullPath: '/new'
+      preLoaderRoute: typeof AuthenticatedDashboardBandsNewRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/_dashboard/_bands/bands': {
+      id: '/_authenticated/_dashboard/_bands/bands'
+      path: '/bands'
+      fullPath: '/bands'
+      preLoaderRoute: typeof AuthenticatedDashboardBandsBandsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/_dashboard/_bands/$bandId': {
+      id: '/_authenticated/_dashboard/_bands/$bandId'
+      path: '/$bandId'
+      fullPath: '/$bandId'
+      preLoaderRoute: typeof AuthenticatedDashboardBandsBandIdRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/_dashboard/_bands/$bandId/edit': {
+      id: '/_authenticated/_dashboard/_bands/$bandId/edit'
+      path: '/edit'
+      fullPath: '/$bandId/edit'
+      preLoaderRoute: typeof AuthenticatedDashboardBandsBandIdEditRouteImport
+      parentRoute: typeof AuthenticatedDashboardBandsBandIdRoute
+    }
   }
 }
 
+interface AuthenticatedDashboardBandsBandIdRouteChildren {
+  AuthenticatedDashboardBandsBandIdEditRoute: typeof AuthenticatedDashboardBandsBandIdEditRoute
+}
+
+const AuthenticatedDashboardBandsBandIdRouteChildren: AuthenticatedDashboardBandsBandIdRouteChildren =
+  {
+    AuthenticatedDashboardBandsBandIdEditRoute:
+      AuthenticatedDashboardBandsBandIdEditRoute,
+  }
+
+const AuthenticatedDashboardBandsBandIdRouteWithChildren =
+  AuthenticatedDashboardBandsBandIdRoute._addFileChildren(
+    AuthenticatedDashboardBandsBandIdRouteChildren,
+  )
+
 interface AuthenticatedRouteChildren {
   AuthenticatedDashboardDashboardRoute: typeof AuthenticatedDashboardDashboardRoute
+  AuthenticatedDashboardBandsBandIdRoute: typeof AuthenticatedDashboardBandsBandIdRouteWithChildren
+  AuthenticatedDashboardBandsBandsRoute: typeof AuthenticatedDashboardBandsBandsRoute
+  AuthenticatedDashboardBandsNewRoute: typeof AuthenticatedDashboardBandsNewRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedDashboardDashboardRoute: AuthenticatedDashboardDashboardRoute,
+  AuthenticatedDashboardBandsBandIdRoute:
+    AuthenticatedDashboardBandsBandIdRouteWithChildren,
+  AuthenticatedDashboardBandsBandsRoute: AuthenticatedDashboardBandsBandsRoute,
+  AuthenticatedDashboardBandsNewRoute: AuthenticatedDashboardBandsNewRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
   AuthenticatedRouteChildren,
-)
-
-interface LineupBandIdRouteChildren {
-  LineupBandIdEditRoute: typeof LineupBandIdEditRoute
-}
-
-const LineupBandIdRouteChildren: LineupBandIdRouteChildren = {
-  LineupBandIdEditRoute: LineupBandIdEditRoute,
-}
-
-const LineupBandIdRouteWithChildren = LineupBandIdRoute._addFileChildren(
-  LineupBandIdRouteChildren,
 )
 
 const rootRouteChildren: RootRouteChildren = {
@@ -320,8 +371,7 @@ const rootRouteChildren: RootRouteChildren = {
   CalendarCalendarRoute: CalendarCalendarRoute,
   ImpressumImpressumRoute: ImpressumImpressumRoute,
   TicketsTicketsRoute: TicketsTicketsRoute,
-  LineupBandIdRoute: LineupBandIdRouteWithChildren,
-  LineupNewRoute: LineupNewRoute,
+  LineupBandIdRoute: LineupBandIdRoute,
   LineupIndexRoute: LineupIndexRoute,
   SignInSignInSplatRoute: SignInSignInSplatRoute,
   SignUpSignUpSplatRoute: SignUpSignUpSplatRoute,

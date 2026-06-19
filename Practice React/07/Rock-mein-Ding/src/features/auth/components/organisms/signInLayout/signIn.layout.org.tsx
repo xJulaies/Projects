@@ -4,7 +4,7 @@ import { SignIn } from "@clerk/react";
 export function ClerkSignIn() {
   return (
     <PublicLayout>
-      <div className="flex flex-col justify-center items-center p-8">
+      <div className="flex flex-1 flex-col items-center justify-center p-8">
         <SignIn />
       </div>
     </PublicLayout>

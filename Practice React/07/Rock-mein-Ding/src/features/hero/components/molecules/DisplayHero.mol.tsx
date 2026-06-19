@@ -9,13 +9,13 @@ import iconImage from "/public/images/icon.text.png";
 export function DisplayHero({ backgroundImageUrl }: THeroProps) {
   return (
     <section
-      className="flex flex-1 items-center pb-28 bg-cover bg-center md:bg-[center_33%]"
+      className="flex min-h-[32rem] flex-1 items-center bg-cover bg-center px-4 py-12 md:bg-[center_33%] md:px-8 md:py-16"
       style={{
         backgroundImage: `url(${backgroundImageUrl})`,
       }}
     >
-      <div className="grid w-full grid-cols-1 justify-items-center items-center gap-12 md:gap-2 md:grid-cols-3">
-        <div className="text-3xl font-bold">
+      <div className="mx-auto grid w-full max-w-7xl -translate-y-6 grid-cols-1 items-center justify-items-center gap-8 md:translate-y-0 md:grid-cols-3 md:gap-6">
+        <div>
           <DisplayTicketsBtn url="/tickets" label="TICKETS" />
         </div>
         <div>
@@ -25,7 +25,7 @@ export function DisplayHero({ backgroundImageUrl }: THeroProps) {
             alt="the text of Rock mein Ding"
           />
         </div>
-        <div className="text-2xl font-bold">
+        <div className="text-lg font-medium md:text-xl">
           <DisplayTextContent content={textContentSettings.hero.text} />
         </div>
       </div>

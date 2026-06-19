@@ -4,7 +4,7 @@ import type { THeroBtnProps } from "../../types/hero.btn.types";
 export function DisplayTicketsBtn({ url, label }: THeroBtnProps) {
   return (
     <Link
-      className=" inline-flex items-center justify-center px-5 py-3 bg-white "
+      className="button button--primary button--lg new-rocker-regular"
       to={url}
     >
       {label}

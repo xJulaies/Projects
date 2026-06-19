@@ -14,3 +14,7 @@ export interface IBand {
   description: string;
   status: TBandStatus;
 }
+
+export type TBandProps = {
+  band: IBand;
+};
