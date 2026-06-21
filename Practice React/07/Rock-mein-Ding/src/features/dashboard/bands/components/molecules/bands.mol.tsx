@@ -1,8 +1,18 @@
 import type { TAdminBandProps } from "../../types/admin.band.types";
 import { EditLink } from "./../atoms/bandEdit.atm";
 import { BandStatusBadge } from "../atoms/bandStatusBadge.atm";
+import { DeleteBandBtn } from "./../atoms/bandDelete.atm";
+import { useBands } from "../../../../bands/context/hooks/useBands";
+import { toast } from "@heroui/react";
 
 export function DisplayAdminBand({ band }: TAdminBandProps) {
+  const { deleteBand } = useBands();
+
+  function handleConfirmDelete() {
+    deleteBand(band.id);
+    toast.success(`${band.name} was deleted successfully.`);
+  }
+
   return (
     <article className="flex flex-col gap-4 rounded-md border border-border bg-surface p-4 text-surface-foreground">
       <div className="flex items-start justify-between gap-4">
@@ -29,8 +39,13 @@ export function DisplayAdminBand({ band }: TAdminBandProps) {
         <dt className="text-muted">Members</dt>
         <dd className="font-medium">{band.members.length}</dd>
       </dl>
-
-      <EditLink bandId={band.id} />
+      <div className="flex justify-between">
+        <EditLink bandId={band.id} />
+        <DeleteBandBtn
+          bandName={band.name}
+          onConfirm={handleConfirmDelete}
+        />
+      </div>
     </article>
   );
 }

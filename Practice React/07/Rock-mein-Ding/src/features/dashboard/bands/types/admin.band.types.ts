@@ -8,6 +8,11 @@ export type TBandStatusBadgeProps = {
   status: IBand["status"];
 };
 
+export type TDeleteBandProps = {
+  bandName: string;
+  onConfirm: () => void;
+};
+
 export type TSelectFieldParams = {
   field: "stage" | "day" | "startTime" | "endTime" | "status";
   key: string | number | null;
@@ -24,4 +29,3 @@ export type TAdminNewBandForm = {
   description: string;
   status: IBand["status"];
 };
-

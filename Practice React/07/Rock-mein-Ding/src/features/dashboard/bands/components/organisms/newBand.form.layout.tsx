@@ -1,9 +1,11 @@
 import { useState, type ChangeEvent, type SubmitEvent } from "react";
-import { Label, ListBox, Select } from "@heroui/react";
+import { Label, ListBox, Select, toast } from "@heroui/react";
+import { useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
 import { newBandSchema } from "../../schemas/newBand.schema";
 import { FormError } from "../atoms/formError.atm";
 import { BandStatusBadge } from "../atoms/bandStatusBadge.atm";
+import { useBands } from "../../../../bands/context/hooks/useBands";
 import type {
   TAdminNewBandForm,
   TSelectFieldParams,
@@ -24,6 +26,7 @@ const timeOptions = Array.from({ length: 52 }, (_, index) => {
 });
 
 export function NewBandFormLayout() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<TAdminNewBandForm>({
     name: "",
     genre: "",
@@ -36,6 +39,7 @@ export function NewBandFormLayout() {
     status: "pending",
   });
 
+  const { addBand } = useBands();
   const [errors, setErrors] = useState<TFormErrors>({});
 
   function handleChange(
@@ -60,7 +64,7 @@ export function NewBandFormLayout() {
     }));
   }
 
-  function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
+  async function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
     const result = newBandSchema.safeParse(formData);
 
@@ -89,7 +93,9 @@ export function NewBandFormLayout() {
       status: result.data.status,
     };
 
-    console.log(newBand);
+    addBand(newBand);
+    await navigate({ to: "/dashboard/bands" });
+    toast.success(`${newBand.name} was added successfully.`);
   }
 
   return (
@@ -321,7 +327,7 @@ export function NewBandFormLayout() {
 
       <button
         type="submit"
-        className="w-fit rounded-md bg-accent px-4 py-2 font-medium text-accent-foreground"
+        className="w-fit cursor-pointer rounded-md bg-accent px-4 py-2 font-medium text-accent-foreground transition-opacity hover:opacity-90"
       >
         Add band
       </button>

@@ -1,10 +1,11 @@
-import { bandData } from "../../../bands/data/band.data";
+import { useBands } from "../../../bands/context/hooks/useBands";
 import { DisplayBand } from "./../atoms/lineup.atm";
 
 export function Lineup() {
+  const { bands } = useBands();
   const festivalDays = ["Friday", "Saturday", "Sunday"] as const;
 
-  const confirmedBands = bandData.filter((band) => band.status === "confirmed");
+  const confirmedBands = bands.filter((band) => band.status === "confirmed");
 
   return (
     <section className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-8 px-4 pb-10 md:grid-cols-3 md:px-6">

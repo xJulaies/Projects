@@ -1,5 +1,5 @@
 import { Header } from "../../../../../shared/atoms/headers/header.atm";
-import { bandData } from "../../../../bands/data/band.data";
+import { useBands } from "../../../../bands/context/hooks/useBands";
 import type { TStatusFilter, TStageFilter } from "../../types/filter.types";
 import { DisplayAdminBand } from "../molecules/bands.mol";
 import { SearchContainer } from "../molecules/searchContainer.mol";
@@ -10,9 +10,11 @@ export function BandLayout() {
   const [statusFilter, setStatusFilter] = useState<TStatusFilter>(null);
   const [stageFilter, setStageFilter] = useState<TStageFilter>(null);
 
+  const { bands } = useBands();
+
   const search = searchTerm.trim().toLowerCase();
 
-  const filteredBands = bandData.filter((band) => {
+  const filteredBands = bands.filter((band) => {
     const matchesSearch =
       band.name.toLowerCase().includes(search) ||
       band.genre.toLowerCase().includes(search);
@@ -21,7 +23,7 @@ export function BandLayout() {
     return matchesSearch && matchesStatus && matchesStage;
   });
 
-  if (bandData.length === 0) {
+  if (bands.length === 0) {
     return <p>No bands found.</p>;
   }
 
