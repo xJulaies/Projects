@@ -1,11 +1,11 @@
-import type { TFormErrorProps } from "../../types/admin.band.types";
+import type { TFormErrorProps } from "../../types/form.types";
 
-export function FormError({ message }: TFormErrorProps) {
+export function FormError({ id, message }: TFormErrorProps) {
   if (!message) {
     return null;
   }
   return (
-    <span className="text-sm text-danger" role="alert">
+    <span id={id} className="text-sm text-danger" role="alert">
       {message}
     </span>
   );

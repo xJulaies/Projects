@@ -13,7 +13,10 @@ export function PublicNavbar() {
   }
   return (
     <header className="relative z-50 border-b border-separator bg-surface-secondary px-4 py-3 text-surface-secondary-foreground shadow-sm">
-      <nav className="grid w-full grid-cols-[auto_1fr_auto] items-center gap-2">
+      <nav
+        className="grid w-full grid-cols-[auto_1fr_auto] items-center gap-2"
+        aria-label="Primary navigation"
+      >
         <div className="justify-self-start">
           <details className="relative">
             <summary className="button button--outline button--sm new-rocker-regular list-none">

@@ -6,10 +6,10 @@ import { FormError } from "../atoms/formError.atm";
 import { BandStatusBadge } from "../atoms/bandStatusBadge.atm";
 import type {
   TAdminNewBandForm,
-  TFormErrors,
   TSelectFieldParams,
 } from "../../types/admin.band.types";
 import type { IBand } from "../../../../bands/types/band.types";
+import type { TFormErrors } from "../../types/form.types";
 
 const inputClasses =
   "rounded-md border border-border bg-field-background px-3 py-2 text-field-foreground";
@@ -98,7 +98,7 @@ export function NewBandFormLayout() {
       className="mx-auto grid w-full max-w-xl gap-5 rounded-md border border-border bg-surface p-6 text-surface-foreground"
     >
       <div>
-        <h1 className="text-2xl font-semibold">Add new band</h1>
+        <h2 className="text-2xl font-semibold">Add new band</h2>
         <p className="mt-1 text-sm text-muted">
           Enter the information for the new band.
         </p>
@@ -114,8 +114,10 @@ export function NewBandFormLayout() {
           type="text"
           className={inputClasses}
           placeholder="Band"
+          aria-invalid={Boolean(errors.name)}
+          aria-describedby={errors.name ? "name-error" : undefined}
         />
-        <FormError message={errors.name?.[0]} />
+        <FormError id="name-error" message={errors.name?.[0]} />
       </label>
 
       <label className={labelClasses} htmlFor="genre">
@@ -128,8 +130,10 @@ export function NewBandFormLayout() {
           type="text"
           className={inputClasses}
           placeholder="Thrash Metal"
+          aria-invalid={Boolean(errors.genre)}
+          aria-describedby={errors.genre ? "genre-error" : undefined}
         />
-        <FormError message={errors.genre?.[0]} />
+        <FormError id="genre-error" message={errors.genre?.[0]} />
       </label>
 
       <label className={labelClasses} htmlFor="members">
@@ -142,8 +146,10 @@ export function NewBandFormLayout() {
           type="text"
           className={inputClasses}
           placeholder="Separate members with commas"
+          aria-invalid={Boolean(errors.members)}
+          aria-describedby={errors.members ? "members-error" : undefined}
         />
-        <FormError message={errors.members?.[0]} />
+        <FormError id="members-error" message={errors.members?.[0]} />
       </label>
 
       <Select
@@ -208,6 +214,7 @@ export function NewBandFormLayout() {
           value={formData.startTime || null}
           onChange={(key) => handleSelectChange({ field: "startTime", key })}
           isInvalid={Boolean(errors.startTime)}
+          aria-describedby={errors.startTime ? "startTime-error" : undefined}
         >
           <Label>Start time</Label>
           <Select.Trigger>
@@ -228,7 +235,7 @@ export function NewBandFormLayout() {
               ))}
             </ListBox>
           </Select.Popover>
-          <FormError message={errors.startTime?.[0]} />
+          <FormError id="startTime-error" message={errors.startTime?.[0]} />
         </Select>
 
         <Select
@@ -238,6 +245,7 @@ export function NewBandFormLayout() {
           value={formData.endTime || null}
           onChange={(key) => handleSelectChange({ field: "endTime", key })}
           isInvalid={Boolean(errors.endTime)}
+          aria-describedby={errors.endTime ? "endTime-error" : undefined}
         >
           <Label>End time</Label>
           <Select.Trigger>
@@ -258,7 +266,7 @@ export function NewBandFormLayout() {
               ))}
             </ListBox>
           </Select.Popover>
-          <FormError message={errors.endTime?.[0]} />
+          <FormError id="endTime-error" message={errors.endTime?.[0]} />
         </Select>
       </div>
 
@@ -272,8 +280,15 @@ export function NewBandFormLayout() {
           rows={4}
           className={inputClasses}
           placeholder="Short description of the band"
+          aria-invalid={Boolean(errors.description)}
+          aria-describedby={
+            errors.description ? "description-error" : undefined
+          }
         />
-        <FormError message={errors.description?.[0]} />
+        <FormError
+          id="description-error"
+          message={errors.description?.[0]}
+        />
       </label>
 
       <Select

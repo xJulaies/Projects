@@ -25,18 +25,3 @@ export type TAdminNewBandForm = {
   status: IBand["status"];
 };
 
-export type TFormErrors = {
-  name?: string[];
-  genre?: string[];
-  members?: string[];
-  stage?: string[];
-  day?: string[];
-  startTime?: string[];
-  endTime?: string[];
-  description?: string[];
-  status?: string[];
-};
-
-export type TFormErrorProps = {
-  message?: string;
-};

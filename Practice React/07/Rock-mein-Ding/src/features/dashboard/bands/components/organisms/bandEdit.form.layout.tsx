@@ -24,7 +24,7 @@ export function BandEditForm({ band }: TBandEditFormProps) {
     <article className="mx-auto flex w-full max-w-xl flex-col gap-6 rounded-md border border-border bg-surface p-6 text-surface-foreground">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold">{band.name}</h1>
+          <h2 className="text-2xl font-semibold">{band.name}</h2>
           <p className="text-sm text-muted">{band.genre}</p>
         </div>
 

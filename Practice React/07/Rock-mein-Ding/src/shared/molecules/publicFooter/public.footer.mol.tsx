@@ -16,7 +16,10 @@ export function PublicFooter() {
             (c) 2026 Rock mein Ding. A React learning project built by xJulaies.
           </span>
         </div>
-        <nav className="flex flex-col items-center gap-2 md:items-start">
+        <nav
+          className="flex flex-col items-center gap-2 md:items-start"
+          aria-label="Footer navigation"
+        >
           <FooterLink url="/impressum" label="Impressum" />
           <FooterLink url="/about" label="About" />
         </nav>

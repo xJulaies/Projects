@@ -14,6 +14,7 @@ export function DisplayHero({ backgroundImageUrl }: THeroProps) {
         backgroundImage: `url(${backgroundImageUrl})`,
       }}
     >
+      <h1 className="sr-only">Rock mein Ding Festival</h1>
       <div className="mx-auto grid w-full max-w-7xl -translate-y-6 grid-cols-1 items-center justify-items-center gap-8 md:translate-y-0 md:grid-cols-3 md:gap-6">
         <div>
           <DisplayTicketsBtn url="/tickets" label="TICKETS" />
