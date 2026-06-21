@@ -1,15 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Header } from "../../shared/atoms/headers/header.atm";
-import { PublicLayout } from "../../shared/organisms/templates/public.layout";
+import { CalendarLayout } from "../../features/calendar/components/organisms/calendar.layout.org";
 
 export const Route = createFileRoute("/_calendar/calendar")({
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  return (
-    <PublicLayout>
-      <Header title="Calendar" />
-    </PublicLayout>
-  );
+  return <CalendarLayout />;
 }
