@@ -62,6 +62,11 @@ export function NewBandFormLayout() {
       ...prev,
       [field]: String(key),
     }));
+
+    setErrors((prev) => ({
+      ...prev,
+      [field]: undefined,
+    }));
   }
 
   async function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
@@ -291,10 +296,7 @@ export function NewBandFormLayout() {
             errors.description ? "description-error" : undefined
           }
         />
-        <FormError
-          id="description-error"
-          message={errors.description?.[0]}
-        />
+        <FormError id="description-error" message={errors.description?.[0]} />
       </label>
 
       <Select
