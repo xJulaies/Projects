@@ -1,24 +1,27 @@
 # Projects
 
-Practice
+This repository contains selected projects from my learning path as a fullstack
+web development trainee.
 
-Here is my collection of Projects, which grows over time while im absolving my vocational training towards fullstack web development. The projects are for learning purpose and to develop my skills over time. I am learning clean code, deep understanding of code, OOP and agentic programming.
-My Projects include:
+The overview below only lists projects that are far enough along to be useful
+as references or portfolio pieces.
 
-Frontend
+## Frontend
 
-- DaisyUI/Tailwind
-- javascript
-- HTML5
-- CSS
+- [YoloCar24](./002_Javascript_YoloCar24)
 
-Backend
+## Backend
 
-- javascript
-- typescript
-- express
-- prisma
+- [Backend API](./002_Backend_API)
+- [Blog](./Blog)
 
-React
+## React Practice Projects
 
-coming soon
+- [YuGiOhDex](./Practice%20React/05/YuGiOhDex)
+- [Su4u](./Practice%20React/06/Su4u)
+- [Rock mein Ding](./Practice%20React/07/Rock-mein-Ding)
+
+## Current focus
+
+My current learning focus is React with TypeScript, clean component structure,
+client-side routing, authentication, form validation and fullstack architecture.
