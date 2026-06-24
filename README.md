@@ -18,7 +18,7 @@ as references or portfolio pieces.
 ## React Practice Projects
 
 - [YuGiOhDex](./Practice%20React/05/YuGiOhDex)
-- [Su4u](./Practice%20React/06/Su4u)
+- [Su4u](https://xjulaies.github.io/Su4u/)
 - [Rock mein Ding](./Practice%20React/07/Rock-mein-Ding)
 
 ## Current focus
